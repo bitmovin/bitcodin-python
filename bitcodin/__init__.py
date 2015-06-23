@@ -7,3 +7,4 @@ api_base = 'http://portal.bitcodin.com/api'
 api_version = None
 
 from bitcodin.resource import *
+from bitcodin.api import *

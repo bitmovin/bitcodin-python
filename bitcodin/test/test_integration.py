@@ -114,7 +114,6 @@ class TestUtil(unittest.TestCase):
         }
 
         snake_dict = convert_dict(d)
-        print snake_dict
         self.assertDictEqual(converted, snake_dict)
 
 if __name__ == '__main__':
