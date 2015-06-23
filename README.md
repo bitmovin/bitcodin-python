@@ -36,7 +36,7 @@ The following example demonstrates how to create a simple transcoding job:
 
 import bitcodin
 bitcodin.api_key = 'yourapikey'
-input_obj = bitcodin.Input(url='http://www.example.com/yourfolder/yourmovie.mp4')
+input_obj = bitcodin.Input(url='http://ftp.nluug.nl/pub/graphics/blender/demo/movies/Sintel.2010.720p.mkv')
 input_result = bitcodin.create_input(input_obj)
 
 video_configs = list()
@@ -57,6 +57,8 @@ encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile)
 manifests = ['mpd', 'm3u8']
 
 job = bitcodin.Job(input_result.input_id, encoding_profile_result.encoding_profile_id, manifests)
+
 job_result = bitcodin.create_job(job)
+self.assertEqual(job_result.status, 'Enqueued')
 
 ```
