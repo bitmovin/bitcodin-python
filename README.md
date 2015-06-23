@@ -34,6 +34,7 @@ The following example demonstrates how to create a simple transcoding job:
 
 import bitcodin
 
+bitcodin.api_key = 'yourapikey'
 input_obj = bitcodin.Input(url='http://www.example.com/yourfolder/yourmovie.mp4')
         input_result = bitcodin.create_input(input_obj)
 
