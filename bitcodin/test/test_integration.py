@@ -38,9 +38,9 @@ class TestEncodingProfile(unittest.TestCase):
 
         video_configs = list()
         video_config1 = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=1024000, profile='Main',
-                                                   preset='standard', height=1024, width=768)
+                                                   preset='standard', height=768, width=1024)
         video_config2 = bitcodin.VideoStreamConfig(default_stream_id=1, bitrate=512000, profile='Main',
-                                                   preset='standard', height=480, width=320)
+                                                   preset='standard', height=480, width=640)
         video_configs.append(video_config1)
         video_configs.append(video_config2)
 
@@ -71,7 +71,7 @@ class TestJob(unittest.TestCase):
 
         video_configs = list()
         video_config1 = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=1024000, profile='Main',
-                                                   preset='standard', height=1024, width=768)
+                                                   preset='standard', height=768, width=1024)
         video_config2 = bitcodin.VideoStreamConfig(default_stream_id=1, bitrate=512000, profile='Main',
                                                    preset='standard', height=480, width=640)
         video_configs.append(video_config1)
