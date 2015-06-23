@@ -1,6 +1,7 @@
 # [![bitcodin](http://www.bitcodin.com/wp-content/uploads/2014/10/bitcodin-small.gif)](http://www.bitcodin.com)
-[![Build Status](https://travis-ci.org/bitmovin/bitcodin-php.svg?branch=master)](https://travis-ci.org/bitmovin/bitcodin-php)
-[![Coverage Status](https://coveralls.io/repos/bitmovin/bitcodin-php/badge.svg?branch=master)](https://coveralls.io/r/bitmovin/bitcodin-php?branch=master)
+[![Build Status](https://travis-ci.org/bitmovin/bitcodin-python.svg?branch=master)](https://travis-ci.org/bitmovin/bitcodin-python)
+[![Coverage Status](https://coveralls.io/repos/bitmovin/bitcodin-python/badge.svg)](https://coveralls.io/r/bitmovin/bitcodin-python)
+
 The bitcodin API for PHP is a seamless integration with the [bitcodin cloud transcoding system](http://www.bitcodin.com). It enables the generation of MPEG-DASH and HLS content in just some minutes.
 
 Installation
