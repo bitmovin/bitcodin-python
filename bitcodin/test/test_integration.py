@@ -39,14 +39,15 @@ class TestEncodingProfile(unittest.TestCase):
         audio_config = bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)
         audio_configs.append(audio_config)
 
-        encoding_profile = bitcodin.create_encoding_profile('API Test Profile', video_configs, audio_configs)
+        encoding_profile = bitcodin.EncodingProfile('API Test Profile', video_configs, audio_configs)
+        encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile)
 
-        self.assertEqual(encoding_profile.video_stream_configs[0].profile, 'Main')
-        self.assertEqual(encoding_profile.name, 'bitcodin Encoding Profile')
-        self.assertEqual(encoding_profile.encoding_profile_id, 5)
-        self.assertEqual(encoding_profile.type, 'private')
+        self.assertEqual(encoding_profile_result.video_stream_configs[0].profile, 'Main')
+        self.assertEqual(encoding_profile_result.name, 'bitcodin Encoding Profile')
+        self.assertEqual(encoding_profile_result.encoding_profile_id, 5)
+        self.assertEqual(encoding_profile_result.type, 'private')
 
-        self.assertEqual(encoding_profile.audio_stream_configs[0].sample_rate, 48000)
+        self.assertEqual(encoding_profile_result.audio_stream_configs[0].sample_rate, 48000)
 
     def test_get_encoding_profile(self):
 
@@ -59,7 +60,7 @@ class TestJob(unittest.TestCase):
     def test_create_job(self):
 
         input_obj = bitcodin.Input(url='http://www.example.com/yourfolder/yourmovie.mp4')
-        input_obj = bitcodin.create_input(input_obj)
+        input_result = bitcodin.create_input(input_obj)
 
         video_configs = list()
         video_config1 = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=1024000, profile='Main',
@@ -73,11 +74,15 @@ class TestJob(unittest.TestCase):
         audio_config = bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)
         audio_configs.append(audio_config)
 
-        encoding_profile = bitcodin.create_encoding_profile('API Test Profile', video_configs, audio_configs)
+        encoding_profile = bitcodin.EncodingProfile('API Test Profile', video_configs, audio_configs)
+        encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile)
 
         manifests = ['mpd', 'm3u8']
-        job = bitcodin.create_job(input_obj.input_id, encoding_profile.encoding_profile_id, manifests)
-        self.assertEqual(job.status, 'Enqueued')
+
+        job = bitcodin.Job(input_result.input_id, encoding_profile_result.encoding_profile_id, manifests)
+
+        job_result = bitcodin.create_job(job)
+        self.assertEqual(job_result.status, 'Enqueued')
 
     def test_get_job(self):
 

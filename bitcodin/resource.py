@@ -32,17 +32,13 @@ def get_input(input_id=None):
     return input_obj
 
 
-def create_encoding_profile(name='Encoding Profile', video_stream_configs=None, audio_stream_configs=None):
+def create_encoding_profile(encoding_profile):
     """
     Create an Encoding Profile for bitcodin.
 
-    :param name: The name of the encoding profile
-    :param video_stream_configs: An list of video configurations
-    :param audio_stream_configs: An list of audio stream configurations
-    :return: EncodingProfile
+    :param encoding_profile: EncodingProfile: EncodingProfile object to create
+    :return: BitcodinObject
     """
-
-    encoding_profile = EncodingProfile(name, video_stream_configs, audio_stream_configs)
 
     res = RestClient.post(url=get_api_base()+'/encoding-profile/create', headers=create_headers(),
                           content=encoding_profile.to_json())
@@ -56,7 +52,7 @@ def get_encoding_profile(encoding_profile_id=None):
     """
     Get information of an Encoding Profile
     :param encoding_profile_id: The id of the encoding profile to retrieve information from
-    :return: EncodingProfile
+    :return: BitcodinObject
     """
 
     url = get_api_base() + '/encoding-profile/%d' % encoding_profile_id
@@ -66,15 +62,12 @@ def get_encoding_profile(encoding_profile_id=None):
     return encoding_profile
 
 
-def create_job(input_id=1, encoding_profile_id=1, manifest_types=None):
+def create_job(job):
     """
     Create a Job for bitcodin
-    :param input_id: The id of the Input
-    :param encoding_profile_id: The id of the encoding profile
-    :param manifest_types: An array of available manifest types
-    :return: Job
+    :param: Job: A Job object to create
+    :return: BitcodinObject
     """
-    job = Job(input_id, encoding_profile_id, manifest_types)
 
     res = RestClient.post(url=get_api_base()+'/job/create', headers=create_headers(), content=job.to_json())
     job = BitcodinObject(res)
