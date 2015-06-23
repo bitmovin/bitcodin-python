@@ -23,7 +23,7 @@ def get_input(input_id=None):
     """
     Get Input information
     :param input_id: The id of the Input to retrieve info from
-    :return: Input
+    :return: BitcodinObject
     """
     url = get_api_base()+'/input/%d' % input_id
     res = RestClient.get(url=url, headers=create_headers())
