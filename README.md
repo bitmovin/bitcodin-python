@@ -7,12 +7,10 @@ The bitcodin API for Python is a seamless integration with the [bitcodin cloud t
 Installation
 ------------
 
-### Install requirements ###
-
-in bitcodin-python directory execute:
+### Install with pip ###
 
 ```
-pip install -r requirements.txt
+pip install bitcodin
 ```
  
 Usage
@@ -24,76 +22,39 @@ Before you can start using the api you need to set your API key in the Bitcodin 
 
 An example how you can set the bitcodin API is shown in the following:
 
-```php
-use bitcodin\Bitcodin;
-
-Bitcodin::setApiToken('yourApiKey');
+```python
+import bitcodin
+bitcodin.api_key = 'yourapikey'
 ```
 
 Example
 -----
 The following example demonstrates how to create a simple transcoding job:
-```php
-<?php
-/**
- * Created by PhpStorm.
- * User: cwioro
- * Date: 18.06.15
- * Time: 13:59
- */
+```python
 
-use bitcodin\Bitcodin;
+import bitcodin
 
-use bitcodin\VideoStreamConfig;
-use bitcodin\AudioStreamConfig;
-use bitcodin\Job;
-use bitcodin\JobConfig;
-use bitcodin\Input;
-use bitcodin\UrlInputConfig;
-use bitcodin\EncodingProfile;
-use bitcodin\EncodingProfileConfig;
-use bitcodin\ManifestTypes;
+input_obj = bitcodin.Input(url='http://www.example.com/yourfolder/yourmovie.mp4')
+        input_result = bitcodin.create_input(input_obj)
 
-require_once __DIR__.'/vendor/autoload.php';
+        video_configs = list()
+        video_config1 = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=1024000, profile='Main',
+                                                   preset='standard', height=1024, width=768)
+        video_config2 = bitcodin.VideoStreamConfig(default_stream_id=1, bitrate=512000, profile='Main',
+                                                   preset='standard', height=480, width=320)
+        video_configs.append(video_config1)
+        video_configs.append(video_config2)
 
-/* CONFIGURATION */
-Bitcodin::setApiToken('07496117095a0d330e9b37357a5e3ae980465ff222a02e21b38df264d1614a90'); // Your can find your api key in the settings menu. Your account (right corner) -> Settings -> API
+        audio_configs = list()
+        audio_config = bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)
+        audio_configs.append(audio_config)
 
-$inputConfig = new UrlInputConfig();
-$inputConfig->url = 'http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv';
-$input = Input::create($inputConfig);
+        encoding_profile = bitcodin.EncodingProfile('API Test Profile', video_configs, audio_configs)
+        encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile)
 
+        manifests = ['mpd', 'm3u8']
 
-/* CREATE VIDEO STREAM CONFIG */
-$videoStreamConfig = new VideoStreamConfig();
-$videoStreamConfig->bitrate = 1024000;
-$videoStreamConfig->height = 480;
-$videoStreamConfig->width = 202;
-
-/* CREATE AUDIO STREAM CONFIGS */
-$audioStreamConfig = new AudioStreamConfig();
-$audioStreamConfig->bitrate = 256000;
-
-$encodingProfileConfig = new EncodingProfileConfig();
-$encodingProfileConfig->name = 'MyApiTestEncodingProfile';
-$encodingProfileConfig->videoStreamConfigs[] = $videoStreamConfig;
-$encodingProfileConfig->audioStreamConfigs[] = $audioStreamConfig;
-
-/* CREATE ENCODING PROFILE */
-$encodingProfile = EncodingProfile::create($encodingProfileConfig);
-
-$jobConfig = new JobConfig();
-$jobConfig->encodingProfile = $encodingProfile;
-$jobConfig->input = $input;
-$jobConfig->manifestTypes[] = ManifestTypes::M3U8;
-
-/* CREATE JOB */
-$job = Job::create($jobConfig);
-
-/* WAIT TIL JOB IS FINISHED */
-do{
-    $job->update();
-    sleep(1);
-} while($job->status != Job::STATUS_FINISHED);
+        job = bitcodin.Job(input_result.input_id, encoding_profile_result.encoding_profile_id, manifests)
+        job_result = bitcodin.create_job(job)
 
 ```
