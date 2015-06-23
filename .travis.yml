@@ -6,6 +6,11 @@ notifications:
   email:
   - david.moser@bitmovin.net
 
-install: "pip install -r requirements.txt"
+install:
+  - pip install -r requirements.txt
 
-script: python -m unittest bitcodin.test.test_integration
+script:
+  - python -m unittest bitcodin.test.test_integration --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing
+
+after_success:
+  - coveralls

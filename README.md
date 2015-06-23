@@ -7,23 +7,10 @@ The bitcodin API for PHP is a seamless integration with the [bitcodin cloud tran
 Installation
 ------------
 
-### Composer ###
- 
-  
-To install with composer add the following to your `composer.json` file:
-```js
-"repositories": 
-	[{
-      "type": "git",
-      "url": "ssh://git@github.com/bitmovin/bitcodin-php.git"
-    }],
-"require": 
-	{
-	  "bitmovin/bitcodin-php": "dev-master"
-	}
-```
-Then run `php composer.phar install`
+### Install requirements ###
 
+
+ 
 Usage
 -----
 
