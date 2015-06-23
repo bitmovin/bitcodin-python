@@ -8,4 +8,4 @@ notifications:
 
 install: "pip install -r requirements.txt"
 
-script: bitcodin.test.test_integrations.py
+script: python -m unittest bitcodin.test.test_integration
