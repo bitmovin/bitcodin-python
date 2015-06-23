@@ -26,6 +26,11 @@ class TestInput(unittest.TestCase):
         single_input = bitcodin.get_input(inputs[0].input_id)
         self.assertEqual(inputs[0].input_id, single_input.input_id)
 
+    def test_delete_input(self):
+        inputs = bitcodin.list_inputs()
+        self.assertGreater(len(inputs), 0)
+        self.assertTrue(bitcodin.delete_input(inputs[0].input_id))
+
 
 class TestEncodingProfile(unittest.TestCase):
 
@@ -92,6 +97,21 @@ class TestJob(unittest.TestCase):
 
         single_job = bitcodin.get_job(jobs[0].job_id)
         self.assertEqual(jobs[0].job_id, single_job.job_id)
+
+
+class TestOutput(unittest.TestCase):
+
+    def test_create_output(self):
+        #ToDo implement
+        pass
+
+    def test_get_output(self):
+        #ToDo implement
+        pass
+
+    def test_delete_output(self):
+        #ToDo implement
+        pass
 
 
 class TestUtil(unittest.TestCase):

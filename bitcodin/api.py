@@ -53,9 +53,11 @@ def delete_input(input_id=None):
     """
     Delete an input
     :param input_id: Id of the input to delete
-    :return:
+    :return: boolean
     """
-    pass
+    url = get_api_base()+'/input/%d' % input_id
+    RestClient.delete(url=url, headers=create_headers())
+    return True
 
 
 def create_encoding_profile(encoding_profile):
@@ -105,14 +107,6 @@ def list_encoding_profiles(page=None):
     return encoding_profile_res.profiles
 
 
-def delete_encoding_profile():
-    """
-    Delete an Encoding Profile
-    :return:
-    """
-    pass
-
-
 def create_job(job):
     """
     Create a Job for bitcodin
@@ -158,58 +152,61 @@ def list_jobs(page=None):
     return jobs_res.jobs
 
 
-def delete_job(job_id=None):
-    """
-    Delete a job
-    :param job_id: The id of the job to delete
-    :return:
-    """
-    pass
-
-
 def create_output(output):
     """
     Create an output for bitcodin
-    :param: Job: A Output object to create
+    :param: Output: A Output object to create
     :return: BitcodinObject
     """
 
-    res = RestClient.post(url=get_api_base()+'/output/create', headers=create_headers(), content=job.to_json())
-    job = BitcodinObject(res)
+    res = RestClient.post(url=get_api_base()+'/output/create', headers=create_headers(), content=output.to_json())
+    output_response = BitcodinObject(res)
 
-    return job
+    return output_response
 
 
 def get_output(output_id=None):
     """
-    Get information of a Job
-    :param job_id: The id of the job to retrieve information from
-    :return: Job
+    Get information of a output
+    :param output_id: The id of the job to retrieve information from
+    :return: BitcodinObject
     """
 
-    url = get_api_base()+'/job/%d' % job_id
+    url = get_api_base()+'/output/%d' % output_id
 
     res = RestClient.get(url=url, headers=create_headers())
-    job = BitcodinObject(res)
+    output_response = BitcodinObject(res)
 
-    return job
+    return output_response
 
 
-def list_outputs():
+def list_outputs(page=None):
     """
-    List all Jobs
+    List all outputs
     :return: list
     """
-    pass
+
+    if page is None:
+        url = get_api_base() + '/output'
+    else:
+        url = get_api_base()+'/output/%d' % page
+
+    res = RestClient.get(url=url, headers=create_headers())
+    output_response = BitcodinObject(res)
+
+    return output_response.outputs
 
 
 def delete_output(output_id=None):
     """
-    Delete a job
-    :param job_id: The id of the job to delete
-    :return:
+    Delete an output
+    :param output_id: The id of the job to delete
+    :return: boolean
     """
-    pass
+
+    url = get_api_base() + '/output/%d' % output_id
+    RestClient.delete(url=url, headers=create_headers())
+    return True
 
 
 def get_api_base():

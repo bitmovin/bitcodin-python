@@ -31,5 +31,12 @@ class RestClient(object):
     def put(self):
         pass
 
-    def delete(self):
-        pass
+    @staticmethod
+    def delete(url=None, headers=None):
+        result = requests.delete(url, headers=headers)
+
+        if result.status_code == 204:
+            return result.json
+
+        else:
+            raise HTTPError("\nStatus Code: %s Response: %s" % (result.status_code, result.json))
