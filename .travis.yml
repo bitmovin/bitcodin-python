@@ -10,7 +10,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python -m unittest bitcodin.test.test_integration --pep8 coveralls -v --cov coveralls --cov-report term-missing
+  - python -m unittest bitcodin.test.test_integration
 
 after_success:
   - coveralls
