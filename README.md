@@ -16,7 +16,9 @@ pip install bitcodin
 Usage
 -----
 
-Before you can start using the api you need to set your API key in the Bitcodin class. Your API key can be found in the settings of your bitcodin user account, as shown in the figure below.
+Before you can start using the api you need to **set your API key.**
+
+Your API key can be found in the **settings of your bitcodin user account**, as shown in the figure below.
 
 ![APIKey](http://www.bitcodin.com/wp-content/uploads/2015/06/api_key.png)
 
