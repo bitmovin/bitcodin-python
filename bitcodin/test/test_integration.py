@@ -2,6 +2,7 @@ __author__ = 'dmoser'
 
 import unittest
 import bitcodin
+from bitcodin.util import convert, convert_dict
 
 bitcodin.api_key = '7759e67685bcd980db1dbe49a969728e0dd024b56633c15a416d656759fa7384'
 
@@ -91,6 +92,30 @@ class TestJob(unittest.TestCase):
 
         single_job = bitcodin.get_job(jobs[0].job_id)
         self.assertEqual(jobs[0].job_id, single_job.job_id)
+
+
+class TestUtil(unittest.TestCase):
+
+    def test_convert(self):
+        camel_case = 'pythonsDontEatCamels'
+        snake_case = convert(camel_case)
+        self.assertEqual(snake_case, 'pythons_dont_eat_camels')
+
+    def test_convert_dict(self):
+        d = {
+            'camelCaseAttr': 'camelCaseContent',
+            'AnotherCamel': 'CamelContent',
+            'camelCamel': '_Camel'
+        }
+        converted = {
+            'camel_case_attr': 'camelCaseContent',
+            'another_camel': 'CamelContent',
+            'camel_camel': '_Camel'
+        }
+
+        snake_dict = convert_dict(d)
+        print snake_dict
+        self.assertDictEqual(converted, snake_dict)
 
 if __name__ == '__main__':
     unittest.main()
