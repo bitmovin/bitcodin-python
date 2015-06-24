@@ -1,24 +1,21 @@
 from distutils.core import setup
 
 setup(
-    #Application name:
     name='bitcodin',
-
-    #Version number (initial):
+    description='Python interface for bitcodin API',
     version='0.1.0',
-
     author='David Moser',
     author_email='david.moser@bitmovin.net',
-
     packages=['bitcodin'],
-
     include_package_data=True,
-
-    url='http://pypi.python.org/pypi/bitcodin_v010',
-
-    description='Python interface for bitcodin API',
-
+    url='https://github.com/bitmovin/bitcodin-python',
     install_requires=[
         'requests==2.4.3'
+    ],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Communications :: Email',
     ]
 )
