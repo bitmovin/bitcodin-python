@@ -110,19 +110,35 @@ class TestJob(unittest.TestCase):
 
 class TestOutput(unittest.TestCase):
 
-    def test_create_output(self):
-        output = bitcodin.Output('s3', 'Api Test S3 Output',
-                                 settings.aws_config['host'],
-                                 settings.aws_config['access_key'],
-                                 settings.aws_config['secret_key'],
-                                 settings.aws_config['bucket'],
-                                 settings.aws_config['prefix'],
-                                 settings.aws_config['region'],
-                                 True)
+    def test_create_s3_output(self):
+        output = bitcodin.S3Output(
+            'Api Test S3 Output',
+            settings.aws_config['host'],
+            settings.aws_config['access_key'],
+            settings.aws_config['secret_key'],
+            settings.aws_config['bucket'],
+            settings.aws_config['prefix'],
+            settings.aws_config['region'],
+            True
+        )
+
         output_result = bitcodin.create_output(output)
 
         self.assertEqual(output_result.type, 's3')
-        #self.assertTrue(output_result.make_public) Has to be corrected in API
+        self.assertTrue(output_result.make_public)
+
+    def test_create_ftp_output(self):
+        output = bitcodin.FTPOutput(
+            'API Test FTP Output',
+            settings.ftp_config['host'],
+            settings.ftp_config['username'],
+            settings.ftp_config['password'],
+            True
+        )
+
+        output_result = bitcodin.create_output(output)
+
+        self.assertEqual(output_result.type, 'ftp')
 
     def test_get_output(self):
         outputs = bitcodin.list_outputs()

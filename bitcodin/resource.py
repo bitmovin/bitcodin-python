@@ -55,7 +55,7 @@ class Input(BitcodinObject):
 
 class Job(BitcodinObject):
 
-    def __init__(self, input_id=None, encoding_profile_id=None, manifest_types=None):
+    def __init__(self, input_id, encoding_profile_id, manifest_types):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -65,7 +65,7 @@ class Job(BitcodinObject):
 
 class EncodingProfile(BitcodinObject):
 
-    def __init__(self, name='Encoding Profile', video_stream_configs=None, audio_stream_configs=None):
+    def __init__(self, name, video_stream_configs, audio_stream_configs):
 
         self.name = name
         self.videoStreamConfigs = video_stream_configs
@@ -76,7 +76,7 @@ class EncodingProfile(BitcodinObject):
 
 class VideoStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id=0, bitrate=1024000, profile='Main', preset='preset', height=480, width=640):
+    def __init__(self, default_stream_id, bitrate, profile, preset, height, width):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
         self.profile = profile
@@ -89,7 +89,7 @@ class VideoStreamConfig(BitcodinObject):
 
 class AudioStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id=0, bitrate=1024000):
+    def __init__(self, default_stream_id, bitrate):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
 
@@ -98,8 +98,18 @@ class AudioStreamConfig(BitcodinObject):
 
 class Output(BitcodinObject):
 
-    def __init__(self, type, name, host, access_key, secret_key, bucket, prefix, region, make_public):
+    def __init__(self, type, name, host):
         self.type = type
+        self.name = name
+        self.host = host
+
+        super(Output, self).__init__(self.__dict__)
+
+
+class S3Output(Output):
+
+    def __init__(self, name, host, access_key, secret_key, bucket, prefix, region, make_public):
+        self.type = 's3'
         self.name = name
         self.host = host
         self.accessKey = access_key
@@ -107,6 +117,19 @@ class Output(BitcodinObject):
         self.bucket = bucket
         self.prefix = prefix
         self.region = region
-        self.make_public = make_public
+        self.makePublic = make_public
 
-        super(Output, self).__init__(self.__dict__)
+        super(S3Output, self).__init__(self.type, self.name, self.host)
+
+
+class FTPOutput(Output):
+
+    def __init__(self, name, host, basic_auth_user, basic_auth_password, passive=True):
+        self.type = 'ftp'
+        self.name = name
+        self.host = host
+        self.username = basic_auth_user
+        self.password = basic_auth_password
+        self.passive = passive
+
+        super(FTPOutput, self).__init__(self.type, self.name, self.host)
