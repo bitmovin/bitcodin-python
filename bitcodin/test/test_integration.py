@@ -6,8 +6,7 @@ import unittest
 
 import bitcodin
 from bitcodin.util import convert, convert_dict
-from bitcodin.rest import RestClient
-
+from requests.exceptions import HTTPError
 
 bitcodin.api_key = settings.api_key
 
@@ -22,6 +21,11 @@ class TestInput(unittest.TestCase):
         self.assertEqual(input_response.url, 'http://ftp.nluug.nl/pub/graphics/blender/demo/movies/Sintel.2010.720p.mkv')
         self.assertEqual(input_response.filename, 'Sintel.2010.720p.mkv')
         self.assertEqual(input_response.input_type, 'url')
+
+    def test_create_input_wrong_parameter(self):
+        input_obj = bitcodin.Input()
+        with self.assertRaises(HTTPError):
+            bitcodin.create_input(input_obj)
 
     def test_get_input(self):
         inputs = bitcodin.list_inputs()
