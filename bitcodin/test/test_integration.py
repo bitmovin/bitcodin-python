@@ -1,10 +1,11 @@
-__author__ = 'dmoser'
+__author__ = 'David Moser <david.moser@bitmovin.net>'
 
 import unittest
 import bitcodin
+import settings
 from bitcodin.util import convert, convert_dict
 
-bitcodin.api_key = '7759e67685bcd980db1dbe49a969728e0dd024b56633c15a416d656759fa7384'
+bitcodin.api_key = settings.api_key
 
 
 class TestInput(unittest.TestCase):

@@ -1,4 +1,4 @@
-__author__ = 'dmoser'
+__author__ = 'David Moser <david.moser@bitmovin.net>'
 
 from resource import *
 from rest import RestClient
