@@ -7,7 +7,7 @@ notifications:
 install:
 - pip install -r requirements.txt
 script:
-- coverage run -m unittest bitcodin.test.test_integration
+- coverage run --source bitcodin -m bitcodin.test.test_integration
 after_success:
 - coveralls
 before_install:
