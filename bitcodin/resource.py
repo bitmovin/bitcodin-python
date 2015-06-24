@@ -105,3 +105,19 @@ class AudioStreamConfig(BitcodinObject):
         self.bitrate = bitrate
 
         super(AudioStreamConfig, self).__init__(self.__dict__)
+
+
+class Output(BitcodinObject):
+
+    def __init__(self, type, name, host, access_key, secret_key, bucket, prefix, region, make_public):
+        self.type = type
+        self.name = name
+        self.host = host
+        self.accessKey = access_key
+        self.secretKey = secret_key
+        self.bucket = bucket
+        self.prefix = prefix
+        self.region = region
+        self.make_public = make_public
+
+        super(Output, self).__init__(self.__dict__)

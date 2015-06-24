@@ -1,9 +1,12 @@
+from bitcodin.test import settings
+
 __author__ = 'David Moser <david.moser@bitmovin.net>'
 
 import unittest
+
 import bitcodin
-import settings
 from bitcodin.util import convert, convert_dict
+
 
 bitcodin.api_key = settings.api_key
 
@@ -103,16 +106,30 @@ class TestJob(unittest.TestCase):
 class TestOutput(unittest.TestCase):
 
     def test_create_output(self):
-        #ToDo implement
-        pass
+        output = bitcodin.Output('s3', 'Api Test S3 Output',
+                                 settings.aws_config['host'],
+                                 settings.aws_config['access_key'],
+                                 settings.aws_config['secret_key'],
+                                 settings.aws_config['bucket'],
+                                 settings.aws_config['prefix'],
+                                 settings.aws_config['region'],
+                                 True)
+        output_result = bitcodin.create_output(output)
+
+        self.assertEqual(output_result.type, 's3')
+        #self.assertTrue(output_result.make_public) Has to be corrected in API
 
     def test_get_output(self):
-        #ToDo implement
-        pass
+        outputs = bitcodin.list_outputs()
+        self.assertGreater(len(outputs), 0)
+
+        single_output = bitcodin.get_output(outputs[0].output_id)
+        self.assertEqual(single_output.output_id, outputs[0].output_id)
 
     def test_delete_output(self):
-        #ToDo implement
-        pass
+        outputs = bitcodin.list_outputs()
+        self.assertGreater(len(outputs), 0)
+        self.assertTrue(bitcodin.delete_output(outputs[0].output_id))
 
 
 class TestUtil(unittest.TestCase):
@@ -136,6 +153,21 @@ class TestUtil(unittest.TestCase):
 
         snake_dict = convert_dict(d)
         self.assertDictEqual(converted, snake_dict)
+
+    def test_create_headers(self):
+        headers = {
+            'Content-Type': 'application/json',
+            'bitcodin-api-key': bitcodin.api_key
+        }
+        header_created = bitcodin.create_headers()
+
+        self.assertDictEqual(headers, header_created)
+
+    def test_get_api_base(self):
+        api_base = bitcodin.api_base
+        api_base_got = bitcodin.get_api_base()
+
+        self.assertEqual(api_base, api_base_got)
 
 if __name__ == '__main__':
     unittest.main()

@@ -187,9 +187,9 @@ def list_outputs(page=None):
     """
 
     if page is None:
-        url = get_api_base() + '/output'
+        url = get_api_base() + '/outputs'
     else:
-        url = get_api_base()+'/output/%d' % page
+        url = get_api_base()+'/outputs/%d' % page
 
     res = RestClient.get(url=url, headers=create_headers())
     output_response = BitcodinObject(res)
