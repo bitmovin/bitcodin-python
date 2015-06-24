@@ -154,6 +154,9 @@ class TestUtil(unittest.TestCase):
         snake_dict = convert_dict(d)
         self.assertDictEqual(converted, snake_dict)
 
+
+class TestMethods(unittest.TestCase):
+
     def test_create_headers(self):
         headers = {
             'Content-Type': 'application/json',
@@ -168,6 +171,21 @@ class TestUtil(unittest.TestCase):
         api_base_got = bitcodin.get_api_base()
 
         self.assertEqual(api_base, api_base_got)
+
+
+class TestRestClient(unittest.TestCase):
+
+    def test_get(self):
+        #ToDo implement
+        pass
+
+    def test_post(self):
+        #ToDo implement
+        pass
+
+    def test_delete(self):
+        #ToDo implement
+        pass
 
 if __name__ == '__main__':
     unittest.main()
