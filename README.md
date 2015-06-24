@@ -10,7 +10,7 @@ Installation
 ### Install with pip ###
 
 ```
-pip install bitcodin
+sudo pip install bitcodin
 ```
  
 Usage
