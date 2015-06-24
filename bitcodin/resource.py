@@ -42,17 +42,12 @@ class BitcodinObject(dict):
 
 class Input(BitcodinObject):
 
-    def __init__(self, type="url", url=None):
+    def __init__(self, url=None):
         """
-        :param type: string: Type of the Input
         :param url: string: Url to the source
         :return: Input
         """
-        self.type = type
-
-        if url is None:
-            raise ValueError('url of Input can not be None')
-
+        self.type = 'url'
         self.url = url
 
         super(Input, self).__init__(self.__dict__)
@@ -60,7 +55,7 @@ class Input(BitcodinObject):
 
 class Job(BitcodinObject):
 
-    def __init__(self, input_id, encoding_profile_id, manifest_types):
+    def __init__(self, input_id=None, encoding_profile_id=None, manifest_types=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -73,13 +68,7 @@ class EncodingProfile(BitcodinObject):
     def __init__(self, name='Encoding Profile', video_stream_configs=None, audio_stream_configs=None):
 
         self.name = name
-
-        if video_stream_configs is None:
-            raise ValueError('videoStreamConfigs can not be None')
         self.videoStreamConfigs = video_stream_configs
-
-        if audio_stream_configs is None:
-            raise ValueError('audioStreamConfigs can not be None')
         self.audioStreamConfigs = audio_stream_configs
 
         super(EncodingProfile, self).__init__(self.__dict__)
