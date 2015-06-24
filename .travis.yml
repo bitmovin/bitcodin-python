@@ -11,5 +11,5 @@ script:
 after_success:
 - coveralls
 before_install:
-- openssl aes-256-cbc -K $encrypted_d93f36cd18e3_key -iv $encrypted_d93f36cd18e3_iv
+- openssl aes-256-cbc -K $encrypted_f74a919e735f_key -iv $encrypted_f74a919e735f_iv
   -in settings.py.enc -out bitcodin/test/settings.py -d
