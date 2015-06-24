@@ -6,6 +6,7 @@ import unittest
 
 import bitcodin
 from bitcodin.util import convert, convert_dict
+from bitcodin.rest import RestClient
 
 
 bitcodin.api_key = settings.api_key
@@ -171,21 +172,6 @@ class TestMethods(unittest.TestCase):
         api_base_got = bitcodin.get_api_base()
 
         self.assertEqual(api_base, api_base_got)
-
-
-class TestRestClient(unittest.TestCase):
-
-    def test_get(self):
-        #ToDo implement
-        pass
-
-    def test_post(self):
-        #ToDo implement
-        pass
-
-    def test_delete(self):
-        #ToDo implement
-        pass
 
 if __name__ == '__main__':
     unittest.main()
