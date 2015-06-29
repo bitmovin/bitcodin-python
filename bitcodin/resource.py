@@ -1,7 +1,7 @@
 __author__ = 'David Moser <david.moser@bitmovin.net>'
 
 import json
-from util import convert_dict
+from .util import convert_dict
 
 
 class BitcodinObject(dict):

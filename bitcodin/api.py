@@ -1,7 +1,8 @@
 __author__ = 'David Moser <david.moser@bitmovin.net>'
 
 from resource import *
-from rest import RestClient
+from .rest import RestClient
+from .resource import BitcodinObject
 
 
 def create_input(input_obj):
