@@ -7,8 +7,12 @@ from .util import convert_dict
 class BitcodinObject(dict):
 
     def __init__(self, dictionary):
-        super(BitcodinObject, self).__init__()
+        """
+        :param dictionary: Result-Dictionary got from the bitcodin API
 
+        Converts all dictionaries to BitcodinObject objects.
+        """
+        super(BitcodinObject, self).__init__()
         dictionary = convert_dict(dictionary)
         self.__dict__.update(dictionary)
         for k, v in dictionary.items():
