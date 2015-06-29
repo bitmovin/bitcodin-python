@@ -13,9 +13,7 @@ def create_input(input_obj):
     """
 
     res = RestClient.post(url=get_api_base()+'/input/create', headers=create_headers(), content=input_obj.to_json())
-
     input_obj = BitcodinObject(res)
-
     return input_obj
 
 
