@@ -59,6 +59,5 @@ manifests = ['mpd', 'm3u8']
 job = bitcodin.Job(input_result.input_id, encoding_profile_result.encoding_profile_id, manifests)
 
 job_result = bitcodin.create_job(job)
-self.assertEqual(job_result.status, 'Enqueued')
 
 ```
