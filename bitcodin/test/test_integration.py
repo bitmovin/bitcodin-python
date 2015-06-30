@@ -15,10 +15,10 @@ class TestInput(unittest.TestCase):
 
     def test_create_input(self):
 
-        input_obj = bitcodin.Input(url='http://ftp.nluug.nl/pub/graphics/blender/demo/movies/Sintel.2010.720p.mkv')
+        input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
         input_response = bitcodin.create_input(input_obj)
 
-        self.assertEqual(input_response.url, 'http://ftp.nluug.nl/pub/graphics/blender/demo/movies/Sintel.2010.720p.mkv')
+        self.assertEqual(input_response.url, 'http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
         self.assertEqual(input_response.filename, 'Sintel.2010.720p.mkv')
         self.assertEqual(input_response.input_type, 'url')
 
@@ -75,7 +75,7 @@ class TestJob(unittest.TestCase):
 
     def test_create_job(self):
 
-        input_obj = bitcodin.Input(url='http://ftp.nluug.nl/pub/graphics/blender/demo/movies/Sintel.2010.720p.mkv')
+        input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
         input_result = bitcodin.create_input(input_obj)
 
         video_configs = list()
