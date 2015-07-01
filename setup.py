@@ -16,6 +16,7 @@ setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 2.7',
-        'Topic :: Communications :: Email',
+        'Programming Language :: Python :: 3.4',
     ]
 )
+
