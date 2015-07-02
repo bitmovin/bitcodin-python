@@ -29,6 +29,12 @@ import bitcodin
 bitcodin.api_key = 'yourapikey'
 ```
 
+**NOTE: The property names of the results returned from the api functions (e.g.: create_job()) are the same as defined in the api documentation, but are converted from camel case to snake case.**
+
+For example:
+
+```encoding_profile.encodingProfileId``` will be converted to ```encoding_profile.encoding_profile_id```
+
 Example
 -----
 The following example demonstrates how to create a simple transcoding job:
