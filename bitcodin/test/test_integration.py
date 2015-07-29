@@ -74,7 +74,6 @@ class TestEncodingProfile(unittest.TestCase):
 class TestJob(unittest.TestCase):
 
     def test_create_job(self):
-
         input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
         input_result = bitcodin.create_input(input_obj)
 
@@ -99,6 +98,50 @@ class TestJob(unittest.TestCase):
 
         job_result = bitcodin.create_job(job)
         self.assertEqual(job_result.status, 'Enqueued')
+
+
+    def test_create_drm_job(self):
+        input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
+        input_result = bitcodin.create_input(input_obj)
+
+        video_configs = list()
+        video_config1 = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=1024000, profile='Main',
+                                                   preset='standard', height=768, width=1024)
+        video_config2 = bitcodin.VideoStreamConfig(default_stream_id=1, bitrate=512000, profile='Main',
+                                                   preset='standard', height=480, width=640)
+        video_configs.append(video_config1)
+        video_configs.append(video_config2)
+
+        audio_configs = list()
+        audio_config = bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)
+        audio_configs.append(audio_config)
+
+        encoding_profile = bitcodin.EncodingProfile('API Test Profile', video_configs, audio_configs)
+        encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile)
+
+        manifests = ['mpd', 'm3u8']
+
+        drm_config = bitcodin.DrmConfig(
+            system='widevine',
+            provider='widevine_test',
+            signing_key='1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9',
+            signing_iv='d58ce954203b7c9a9a9d467f59839249',
+            request_url='http://license.uat.widevine.com/cenc/getcontentkey',
+            content_id='746573745f69645f4639465043304e4f',
+            method='mpeg_cenc'
+        )
+
+        job = bitcodin.Job(
+            input_id=input_result.input_id,
+            encoding_profile_id=encoding_profile_result.encoding_profile_id,
+            manifest_types=manifests,
+            speed='standard',
+            drm_config=drm_config
+        )
+
+        job_result = bitcodin.create_job(job)
+        self.assertEqual(job_result.status, 'Enqueued')
+
 
     def test_get_job(self):
         jobs = bitcodin.list_jobs()
