@@ -59,13 +59,29 @@ class Input(BitcodinObject):
 
 class Job(BitcodinObject):
 
-    def __init__(self, input_id, encoding_profile_id, manifest_types):
+    def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
+        if(speed != None):
+            self.speed = speed
+        if(drm_config != None):
+            self.drmConfig = drm_config
 
         super(Job, self).__init__(self.__dict__)
 
+class DrmConfig(BitcodinObject):
+
+    def __init__(self, system, provider, signing_key, signing_iv, request_url, content_id, method):
+        self.system = system
+        self.provider = provider
+        self.signingKey = signing_key
+        self.signingIV = signing_iv
+        self.requestUrl = request_url
+        self.contentId = content_id
+        self.method = method
+
+        super(DrmConfig, self).__init__(self.__dict__)
 
 class EncodingProfile(BitcodinObject):
 
