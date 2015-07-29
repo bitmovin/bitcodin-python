@@ -16,6 +16,9 @@ class RestClient(object):
         if result.status_code == 201 or result.status_code == 200:
             return result.json()
 
+        elif result.status_code == 500:
+            raise HTTPError("\nStatus Code: %s Response: %s" % (result.status_code, result.text))
+
         else:
             raise HTTPError("\nStatus Code: %s Response: %s" % (result.status_code, result.json()))
 
