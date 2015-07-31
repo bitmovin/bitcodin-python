@@ -5,6 +5,8 @@ python:
 notifications:
   email:
   - david.moser@bitmovin.net
+  - dominic.miglar@bitmovin.net
+  - bitcodin-python@bitmovin.net
 install:
 - pip install -r requirements.txt
 script:
