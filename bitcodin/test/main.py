@@ -23,10 +23,14 @@ def _run_tests(test_suite):
 
 def main():
     test_suites = _collect_test_suites()
+    main_test_suite = TestSuite()
 
     test_suite_results = []
     for test_suite in test_suites:
-        test_suite_results.append(_run_tests(test_suite))
+        main_test_suite.addTests(test_suite)
+        #test_suite_results.append(_run_tests(test_suite))
+
+    test_suite_results.append(_run_tests(main_test_suite))
 
 if __name__ == '__main__':
     main()
