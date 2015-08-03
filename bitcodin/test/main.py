@@ -6,6 +6,7 @@ from . import core
 from . import http
 from . import encodingprofile
 from . import input
+from . import output
 
 VERBOSITY_LEVEL = 2
 
@@ -15,6 +16,7 @@ def _collect_test_suites():
     test_suites.append(http.get_test_suite())
     test_suites.append(encodingprofile.get_test_suite())
     test_suites.append(input.get_test_suite())
+    test_suites.append(output.get_test_suite())
     return test_suites
 
 def _run_tests(test_suite):
