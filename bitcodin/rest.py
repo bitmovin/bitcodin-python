@@ -72,6 +72,14 @@ class RestClient(object):
     def put(self):
         pass
 
+    def patch(url=None, headers=None, content=None):
+        result = requests.patch(url, data=content, headers=headers)
+
+        if result.status_code != 200:
+            RestClient._raise_error(result)
+
+        return result.json()
+
 
     @staticmethod
     def delete(url=None, headers=None):
