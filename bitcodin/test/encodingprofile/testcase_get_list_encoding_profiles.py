@@ -1,7 +1,6 @@
 __author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
 
 import unittest
-from bitcodin import get_encoding_profile
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
@@ -24,7 +23,7 @@ class GetEncodingProfileListTestCase(BitcodinTestCase):
         encoding_profiles = list_encoding_profiles()
         encoding_profile_found = False
         for encoding_profile in encoding_profiles:
-            if encoding_profile.encoding_profile_id == encoding_profile.encoding_profile_id:
+            if self.encoding_profile.encoding_profile_id == encoding_profile.encoding_profile_id:
                 encoding_profile_found = True
                 break
         self.assertEquals(encoding_profile_found, True)
