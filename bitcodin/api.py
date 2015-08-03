@@ -59,6 +59,20 @@ def delete_input(input_id=None):
     RestClient.delete(url=url, headers=create_headers())
     return True
 
+
+def analyze_input(input_id=None):
+    """
+    Re-Analyze an existing Input
+    :param input_id: Id of the input to re-analyze
+    :return: BitcodinObject
+    """
+    url = get_api_base()+'/input/%d/analyze' % input_id
+    res = RestClient.patch(url=url, headers=create_headers())
+    input_obj = BitcodinObject(res)
+
+    return input_obj
+
+
 def delete_encoding_profile(encoding_profile_id=None):
     """
     Delete an Encoding Profile
