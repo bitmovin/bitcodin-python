@@ -6,7 +6,7 @@ import unittest
 
 import bitcodin
 from bitcodin.util import convert, convert_dict
-from requests.exceptions import HTTPError
+from bitcodin.exceptions import BitcodinBadRequestError
 
 bitcodin.api_key = settings.api_key
 
@@ -24,7 +24,7 @@ class TestInput(unittest.TestCase):
 
     def test_create_input_wrong_parameter(self):
         input_obj = bitcodin.Input()
-        with self.assertRaises(HTTPError):
+        with self.assertRaises(BitcodinBadRequestError):
             bitcodin.create_input(input_obj)
 
     def test_get_input(self):

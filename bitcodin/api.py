@@ -3,6 +3,7 @@ __author__ = 'David Moser <david.moser@bitmovin.net>'
 from resource import *
 from .rest import RestClient
 from .resource import BitcodinObject
+from .exceptions import BitcodinApiKeyNotSetError
 
 
 def create_input(input_obj):
@@ -58,6 +59,15 @@ def delete_input(input_id=None):
     RestClient.delete(url=url, headers=create_headers())
     return True
 
+def delete_encoding_profile(encoding_profile_id=None):
+    """
+    Delete an Encoding Profile
+    :param encoding_profile_id: Id of the Encoding Profile to delete
+    :return: boolean
+    """
+    url = get_api_base() + '/encoding-profile/%d' % encoding_profile_id
+    RestClient.delete(url=url, headers=create_headers())
+    return True
 
 def create_encoding_profile(encoding_profile):
     """
@@ -225,7 +235,7 @@ def create_headers():
     from bitcodin import api_key
 
     if api_key is None:
-        raise ValueError("api_key not set. Make sure you have set bitcodin.api_key")
+        raise BitcodinApiKeyNotSetError("bitcodin.api_key is not set!", None)
 
     headers = {
         'Content-Type': 'application/json',
