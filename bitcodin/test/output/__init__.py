@@ -10,6 +10,10 @@ from .testcase_create_ftp_output_incomplete import CreateFTPOutputIncompleteData
 from .testcase_create_ftp_output_invalid import CreateFTPOutputInvalidDataTestCase
 from .testcase_create_ftp_output import CreateFTPOutputTestCase
 from .testcase_get_ftp_output import GetFTPOutputTestCase
+from .testcase_get_non_existent_output import GetNonExistentOutputTestCase
+from .testcase_delete_s3_output import DeleteS3OutputTestCase
+from .testcase_delete_ftp_output import DeleteFTPOutputTestCase
+
 
 def get_test_suite():
     test_suite = TestSuite()
@@ -21,5 +25,8 @@ def get_test_suite():
     test_suite.addTest(CreateFTPOutputInvalidDataTestCase())
     test_suite.addTest(CreateFTPOutputTestCase())
     test_suite.addTest(GetFTPOutputTestCase())
+    test_suite.addTest(GetNonExistentOutputTestCase())
+    test_suite.addTest(DeleteS3OutputTestCase())
+    test_suite.addTest(DeleteFTPOutputTestCase())
 
     return test_suite

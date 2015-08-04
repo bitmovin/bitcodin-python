@@ -52,9 +52,9 @@ class RestClient(object):
         result = requests.post(url, data=content, headers=headers)
 
         if result.status_code == 201 or result.status_code == 200:
+            if(result.text == ''):
+                return result.text
             return result.json()
-        elif result.status_code == 500:
-            RestClient._raise_error(result)
         else:
             RestClient._raise_error(result)
 

@@ -27,7 +27,6 @@ class AnalyzeInputTestCase(BitcodinTestCase):
         self.assertEquals(self.created_input.updated_at.date, input.created_at.date)
         self.assertEquals(self.created_input.updated_at.timezone.timezone_type, input.created_at.timezone.timezone_type)
         self.assertEquals(self.created_input.updated_at.timezone.timezone, input.created_at.timezone.timezone)
-        self.assertEquals(self.created_input.thumbnail_url, input.thumbnail_url)
         self.assertEquals(self.created_input.input_type, input.input_type)
         self.assertEquals(self.created_input.url, input.url)
         self.assertEquals(self.created_input.basic_auth_user, input.basic_auth_user)
