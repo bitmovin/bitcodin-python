@@ -1,6 +1,6 @@
 __author__ = 'David Moser <david.moser@bitmovin.net>'
 
-from resource import *
+from .resource import *
 from .rest import RestClient
 from .resource import BitcodinObject
 from .exceptions import BitcodinApiKeyNotSetError
@@ -158,6 +158,21 @@ def get_job(job_id=None):
     return job
 
 
+def get_job_status(job_id=None):
+    """
+    Get status information about a job with the given job_id
+    :param job_id: The id of the job to retrieve information from
+    :return: BitcodinObject
+    """
+
+    url = get_api_base()+'/job/%d/status' % job_id
+
+    res = RestClient.get(url=url, headers=create_headers())
+    job_status = BitcodinObject(res)
+
+    return job_status
+
+
 def list_jobs(page=None):
     """
     List all Jobs
@@ -173,6 +188,14 @@ def list_jobs(page=None):
     jobs_res = BitcodinObject(res)
 
     return jobs_res.jobs
+
+
+def transfer_job(job_id, output_id):
+    url = get_api_base() + '/job/transfer'
+    transfer_config = TransferConfig(job_id, output_id)
+    res = RestClient.post(url=url, headers=create_headers(), content=transfer_config.to_json())
+    #transfer = BitcodinObject(res)
+    return True
 
 
 def create_output(output):
