@@ -70,6 +70,7 @@ class Job(BitcodinObject):
 
         super(Job, self).__init__(self.__dict__)
 
+
 class DrmConfig(BitcodinObject):
 
     def __init__(self, system, provider, signing_key, signing_iv, request_url, content_id, method):
@@ -82,6 +83,7 @@ class DrmConfig(BitcodinObject):
         self.method = method
 
         super(DrmConfig, self).__init__(self.__dict__)
+
 
 class EncodingProfile(BitcodinObject):
 
@@ -114,6 +116,15 @@ class AudioStreamConfig(BitcodinObject):
         self.bitrate = bitrate
 
         super(AudioStreamConfig, self).__init__(self.__dict__)
+
+
+class TransferConfig(BitcodinObject):
+
+    def __init__(self, job_id, output_id):
+        self.jobId = job_id
+        self.outputId = output_id
+
+        super(TransferConfig, self).__init__(self.__dict__)
 
 
 class Output(BitcodinObject):
@@ -153,3 +164,4 @@ class FTPOutput(Output):
         self.passive = passive
 
         super(FTPOutput, self).__init__(self.type, self.name, self.host)
+
