@@ -31,7 +31,6 @@ class CreateJobPlayreadyDrmInvalidConfigTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        # TODO write playready drm_config (invalid)
         self.drm_config = PlayreadyDrmConfig(
             k_id=None,
             key=None,

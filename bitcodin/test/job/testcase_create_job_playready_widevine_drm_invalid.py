@@ -29,7 +29,6 @@ class CreateJobPlayreadyWidevineDrmInvalidConfigTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        # TODO write playready_widevine drm_config (invalid)
         self.drm_config = PlayreadyWidevineCombinedDrmConfig(
             key=None,
             pssh=None,
