@@ -69,9 +69,12 @@ class RestClient(object):
         return result.json()
 
 
+    @staticmethod
     def put(self):
         pass
 
+
+    @staticmethod
     def patch(url=None, headers=None, content=None):
         result = requests.patch(url, data=content, headers=headers)
 
