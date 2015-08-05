@@ -1,7 +1,5 @@
 __author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
 
-# TODO!
-
 import unittest
 from bitcodin import create_job
 from bitcodin import create_input
