@@ -59,7 +59,7 @@ class Input(BitcodinObject):
 
 class Job(BitcodinObject):
 
-    def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None):
+    def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None, hls_encryption_config=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -67,6 +67,8 @@ class Job(BitcodinObject):
             self.speed = speed
         if(drm_config != None):
             self.drmConfig = drm_config
+        if(hls_encryption_config != None):
+            self.hlsEncryptionConfig = hls_encryption_config
 
         super(Job, self).__init__(self.__dict__)
 
@@ -132,6 +134,16 @@ class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
             self.customAttributes = custom_attributes
 
         super(PlayreadyWidevineCombinedDrmConfig, self).__init__(system=system, method=method)
+
+
+class HLSEncrpytionConfig(BitcodinObject):
+
+    def __init__(self, key, method, iv=None):
+        self.key = key
+        self.method = method
+        if(iv != None):
+            self.iv = iv
+        super(HLSEncrpytionConfig, self).__init__(self.__dict__)
 
 
 class EncodingProfile(BitcodinObject):
