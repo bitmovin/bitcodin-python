@@ -31,12 +31,12 @@ def main():
     test_suites = _collect_test_suites()
     main_test_suite = TestSuite()
 
-    test_suite_results = []
     for test_suite in test_suites:
         main_test_suite.addTests(test_suite)
-        #test_suite_results.append(_run_tests(test_suite))
 
-    test_suite_results.append(_run_tests(main_test_suite))
+    test_suite_result = _run_tests(main_test_suite)
+    if not test_suite_result.wasSuccessful():
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()
