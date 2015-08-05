@@ -73,16 +73,65 @@ class Job(BitcodinObject):
 
 class DrmConfig(BitcodinObject):
 
-    def __init__(self, system, provider, signing_key, signing_iv, request_url, content_id, method):
+    def __init__(self, system, method):
         self.system = system
+        self.method = method
+
+        super(DrmConfig, self).__init__(self.__dict__)
+
+
+class WidevineDrmConfig(DrmConfig):
+
+    def __init__(self, provider, signing_key, signing_iv, request_url, content_id, method):
+        system = 'widevine'
         self.provider = provider
         self.signingKey = signing_key
         self.signingIV = signing_iv
         self.requestUrl = request_url
         self.contentId = content_id
-        self.method = method
 
-        super(DrmConfig, self).__init__(self.__dict__)
+        super(WidevineDrmConfig, self).__init__(system=system, method=method)
+
+
+class PlayreadyDrmConfig(DrmConfig):
+
+    def __init__(self, method, k_id, key=None, key_seed=None, la_url=None, lui_url=None, ds_id=None, custom_attributes=None):
+        system = 'playready'
+        self.kid = k_id
+        if(key != None):
+            self.key = key
+        if(key_seed != None):
+            self.keySeed = key_seed
+        if(la_url != None):
+            self.laUrl = la_url
+        if(lui_url != None):
+            self.luiUrl = lui_url
+        if(ds_id != None):
+            self.dsId = ds_id
+        if(custom_attributes != None):
+            self.customAttributes = custom_attributes
+
+        super(PlayreadyDrmConfig, self).__init__(system=system, method=method)
+
+
+class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
+
+    def __init__(self, method, key, pssh, kid, la_url=None, lui_url=None, ds_id=None, custom_attributes=None):
+        system = 'widevine_playready'
+
+        self.key = key
+        self.pssh = pssh
+        self.kid = kid
+        if(la_url != None):
+            self.laUrl = la_url
+        if(lui_url != None):
+            self.luiUrl = lui_url
+        if(ds_id != None):
+            self.dsId = ds_id
+        if(custom_attributes != None):
+            self.customAttributes = custom_attributes
+
+        super(PlayreadyWidevineCombinedDrmConfig, self).__init__(system=system, method=method)
 
 
 class EncodingProfile(BitcodinObject):

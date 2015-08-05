@@ -20,8 +20,7 @@ encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile_obj)
 
 manifests = ['mpd', 'm3u8']
 
-drm_config = bitcodin.DrmConfig(
-    system='widevine',
+drm_config = bitcodin.WidevineDrmConfig(
     provider='widevine_test',
     signing_key='1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9',
     signing_iv='d58ce954203b7c9a9a9d467f59839249',
