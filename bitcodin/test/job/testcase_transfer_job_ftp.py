@@ -19,6 +19,7 @@ from bitcodin import EncodingProfile
 from bitcodin import FTPOutput
 from bitcodin.exceptions import BitcodinError
 from bitcodin.test.settings import ftp_config
+from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
@@ -27,7 +28,7 @@ class TransferJobToFTPTestCase(BitcodinTestCase):
         super(TransferJobToFTPTestCase, self).setUp()
         self.maxDiff = None
 
-        inputUrl = 'http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv'
+        inputUrl = test_video_url
         input = Input(inputUrl)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)

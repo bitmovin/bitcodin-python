@@ -10,13 +10,14 @@ from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
 from bitcodin.exceptions import BitcodinBadRequestError
+from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
 class CreateJobInvalidDataTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateJobInvalidDataTestCase, self).setUp()
-        inputUrl = 'http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv'
+        inputUrl = test_video_url
         input = Input(inputUrl)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)

@@ -12,14 +12,17 @@ from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
 from bitcodin import DrmConfig
+from bitcodin import WidevineDrmConfig
+from bitcodin import PlayreadyDrmConfig
 from bitcodin.exceptions import BitcodinBadRequestError
+from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class CreateJobDrmInvalidConfigTestCase(BitcodinTestCase):
+class CreateJobWidevineDrmTestCase(BitcodinTestCase):
     def setUp(self):
-        super(CreateJobDrmInvalidConfigTestCase, self).setUp()
-        inputUrl = 'http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv'
+        super(CreateJobWidevineDrmTestCase, self).setUp()
+        inputUrl = test_video_url
         input = Input(inputUrl)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
@@ -28,8 +31,7 @@ class CreateJobDrmInvalidConfigTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        self.drm_config = DrmConfig(
-            system='invalidsystem',
+        self.drm_config = WidevineDrmConfig(
             provider='widevine_test',
             signing_key='1ae8ccd0e7985cc0b6203a55855a1034afc252980e970ca90e5202689f947ab9',
             signing_iv='d58ce954203b7c9a9a9d467f59839249',
@@ -41,14 +43,16 @@ class CreateJobDrmInvalidConfigTestCase(BitcodinTestCase):
 
     def runTest(self):
         job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests, 'standard', self.drm_config)
-        with self.assertRaises(BitcodinBadRequestError):
-            self.job = create_job(job)
+        self.job = create_job(job)
+        self.assertEquals(self.job.input.input_id, job.inputId)
+        self.assertEquals(self.job.input.url, self.input.url)
+        self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
 
 
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(CreateJobDrmInvalidConfigTestCase, self).tearDown()
+        super(CreateJobWidevineDrmTestCase, self).tearDown()
 
 
 if __name__ == '__main__':

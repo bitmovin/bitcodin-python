@@ -6,21 +6,22 @@ from bitcodin import create_input
 from bitcodin import create_encoding_profile
 from bitcodin import delete_input
 from bitcodin import delete_encoding_profile
-from bitcodin import get_job
 from bitcodin import Job
 from bitcodin import Input
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
+from bitcodin import DrmConfig
+from bitcodin import WidevineDrmConfig
+from bitcodin import PlayreadyDrmConfig
+from bitcodin.exceptions import BitcodinBadRequestError
 from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class GetJobTestCase(BitcodinTestCase):
+class CreateJobPlayreadyDrmTestCase(BitcodinTestCase):
     def setUp(self):
-        super(GetJobTestCase, self).setUp()
-        self.maxDiff = None
-
+        super(CreateJobPlayreadyDrmTestCase, self).setUp()
         inputUrl = test_video_url
         input = Input(inputUrl)
         self.input = create_input(input)
@@ -30,23 +31,31 @@ class GetJobTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests)
-        self.job = create_job(job)
+        # TODO write playready drm_config (invalid)
+        self.drm_config = PlayreadyDrmConfig(
+            k_id='746573745f69645f4639465043304e4f',
+            key=None,
+            key_seed='XVBovsmzhP9gRIZxWfFta3VVRPzVEWmJsazEJ46I',
+            la_url='http://playready.directtaps.net/pr/svc/rightsmanager.asmx',
+            lui_url=None,
+            ds_id=None,
+            custom_attributes=None,
+            method='mpeg_cenc'
+        )
 
 
     def runTest(self):
-        job = get_job(self.job.job_id)
-        self.assertEquals(self.job.job_id, job.job_id)
-        self.assertEquals(self.job.created_at.date, self.job.created_at.date)
-        self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encoding_profiles[0].encoding_profile_id)
-        self.assertEquals(self.job.manifest_urls.m3u8_url.strip('?')[0], job.manifest_urls.m3u8_url.strip('?')[0])
-        self.assertEquals(self.job.manifest_urls.mpd_url.strip('?')[0], job.manifest_urls.mpd_url.strip('?')[0])
+        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests, 'standard', self.drm_config)
+        self.job = create_job(job)
+        self.assertEquals(self.job.input.input_id, job.inputId)
+        self.assertEquals(self.job.input.url, self.input.url)
+        self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
 
 
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(GetJobTestCase, self).tearDown()
+        super(CreateJobPlayreadyDrmTestCase, self).tearDown()
 
 
 if __name__ == '__main__':

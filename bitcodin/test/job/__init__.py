@@ -12,16 +12,24 @@ from .testcase_get_job_status import GetJobStatusTestCase
 from .testcase_transfer_job_to_non_existent_output import TransferJobToNonExistentOutputTestCase
 from .testcase_transfer_job_ftp import TransferJobToFTPTestCase
 from .testcase_transfer_job_s3 import TransferJobToS3TestCase
-from .testcase_create_job_drm_invalid_config import CreateJobDrmInvalidConfigTestCase
-from .testcase_create_job_drm import CreateJobDrmTestCase
+from .testcase_create_job_widevine_drm_invalid_config import CreateJobWidevineDrmInvalidConfigTestCase
+from .testcase_create_job_widevine_drm import CreateJobWidevineDrmTestCase
+from .testcase_create_job_playready_drm_invalid import CreateJobPlayreadyDrmInvalidConfigTestCase
+from .testcase_create_job_playready_drm import CreateJobPlayreadyDrmTestCase
+from .testcase_create_job_playready_widevine_drm_invalid import CreateJobPlayreadyWidevineDrmInvalidConfigTestCase
+from .testcase_create_job_playready_widevine_drm import CreateJobPlayreadyWidevineDrmTestCase
 
 def get_test_suite():
     test_suite = TestSuite()
     test_suite.addTest(CreateJobInvalidDataTestCase())
     test_suite.addTest(CreateJobIncompleteDataTestCase())
     test_suite.addTest(CreateJobTestCase())
-    test_suite.addTest(CreateJobDrmInvalidConfigTestCase())
-    test_suite.addTest(CreateJobDrmTestCase())
+    test_suite.addTest(CreateJobWidevineDrmInvalidConfigTestCase())
+    test_suite.addTest(CreateJobWidevineDrmTestCase())
+    test_suite.addTest(CreateJobPlayreadyDrmInvalidConfigTestCase())
+    test_suite.addTest(CreateJobPlayreadyDrmTestCase())
+    test_suite.addTest(CreateJobPlayreadyWidevineDrmInvalidConfigTestCase())
+    test_suite.addTest(CreateJobPlayreadyWidevineDrmTestCase())
     test_suite.addTest(GetNonExistentJobTestCase())
     test_suite.addTest(GetJobTestCase())
     test_suite.addTest(GetJobListTestCase())
