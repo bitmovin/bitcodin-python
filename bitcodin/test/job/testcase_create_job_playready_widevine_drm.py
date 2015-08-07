@@ -31,7 +31,7 @@ class CreateJobPlayreadyWidevineDrmTestCase(BitcodinTestCase):
         self.manifests = ['m3u8', 'mpd']
         self.drm_config = PlayreadyWidevineCombinedDrmConfig(
             key='100b6c20940f779a4589152b57d2dacb',
-            pssh='#CAESEOtnarvLNF6Wu89hZjDxo9oaDXdpZGV2aW5lX3Rlc3QiEGZrajNsamFTZGZhbGtyM2oqAkhEMgA=',
+            pssh='CAESEOtnarvLNF6Wu89hZjDxo9oaDXdpZGV2aW5lX3Rlc3QiEGZrajNsamFTZGZhbGtyM2oqAkhEMgA=',
             kid='eb676abbcb345e96bbcf616630f1a3da',
             la_url='http://playready.directtaps.net/pr/svc/rightsmanager.asmx?PlayRight=1&ContentKey=EAtsIJQPd5pFiRUrV9Layw==',
             lui_url=None,
