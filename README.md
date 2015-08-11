@@ -10,7 +10,7 @@ Installation
 ### Install with pip ###
 
 ```
-sudo pip install bitcodin
+sudo pip install git+https://github.com/bitmovin/bitcodin-python.git
 ```
  
 Usage
