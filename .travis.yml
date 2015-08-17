@@ -7,6 +7,9 @@ notifications:
   - david.moser@bitmovin.net
   - dominic.miglar@bitmovin.net
   - bitcodin-python@bitmovin.net
+branches:
+  only:
+    - master
 install:
 - pip install -r requirements.txt
 script:
