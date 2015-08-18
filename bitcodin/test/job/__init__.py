@@ -19,13 +19,15 @@ from .testcase_create_job_playready_drm import CreateJobPlayreadyDrmTestCase
 from .testcase_create_job_playready_widevine_drm_invalid import CreateJobPlayreadyWidevineDrmInvalidConfigTestCase
 from .testcase_create_job_playready_widevine_drm import CreateJobPlayreadyWidevineDrmTestCase
 from .testcase_create_job_hls_encryption import CreateJobHLSEncryptionTestCase
+from .testcase_create_job_multiple_audio_streams import CreateJobWithMultipleAudioStreamsTestCase
 
 def get_test_suite():
     test_suite = TestSuite()
     test_suite.addTest(CreateJobInvalidDataTestCase())
     test_suite.addTest(CreateJobIncompleteDataTestCase())
     test_suite.addTest(CreateJobTestCase())
-    #test_suite.addTest(CreateJobHLSEncryptionTestCase())
+    test_suite.addTest(CreateJobWithMultipleAudioStreamsTestCase())
+    test_suite.addTest(CreateJobHLSEncryptionTestCase())
     test_suite.addTest(CreateJobWidevineDrmInvalidConfigTestCase())
     test_suite.addTest(CreateJobWidevineDrmTestCase())
     test_suite.addTest(CreateJobPlayreadyDrmInvalidConfigTestCase())
