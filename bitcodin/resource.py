@@ -59,7 +59,8 @@ class Input(BitcodinObject):
 
 class Job(BitcodinObject):
 
-    def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None, hls_encryption_config=None, audio_meta_data=None ):
+    def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
+                 hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -69,8 +70,10 @@ class Job(BitcodinObject):
             self.drmConfig = drm_config
         if hls_encryption_config is not None:
             self.hlsEncryptionConfig = hls_encryption_config
-        if(audio_meta_data != None):
+        if audio_meta_data is not None:
             self.audioMetaData = audio_meta_data
+        if video_meta_data is not None:
+            self.videoMetaData = video_meta_data
 
         super(Job, self).__init__(self.__dict__)
 
@@ -85,6 +88,16 @@ class DrmConfig(BitcodinObject):
 
 
 class AudioMetaData(BitcodinObject):
+
+    def __init__(self, default_stream_id, language, label):
+        self.defaultStreamId = default_stream_id
+        self.language = language
+        self.label = label
+
+        super(BitcodinObject, self).__init__(self.__dict__)
+
+
+class VideoMetaData(BitcodinObject):
 
     def __init__(self, default_stream_id, language, label):
         self.defaultStreamId = default_stream_id
