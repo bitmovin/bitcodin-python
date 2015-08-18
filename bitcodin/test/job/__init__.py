@@ -27,7 +27,7 @@ def get_test_suite():
     test_suite.addTest(CreateJobIncompleteDataTestCase())
     test_suite.addTest(CreateJobTestCase())
     test_suite.addTest(CreateJobWithMultipleAudioStreamsTestCase())
-    #test_suite.addTest(CreateJobHLSEncryptionTestCase())
+    test_suite.addTest(CreateJobHLSEncryptionTestCase())
     test_suite.addTest(CreateJobWidevineDrmInvalidConfigTestCase())
     test_suite.addTest(CreateJobWidevineDrmTestCase())
     test_suite.addTest(CreateJobPlayreadyDrmInvalidConfigTestCase())
