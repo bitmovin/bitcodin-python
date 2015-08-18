@@ -63,11 +63,11 @@ class Job(BitcodinObject):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
-        if(speed != None):
+        if speed is not None:
             self.speed = speed
-        if(drm_config != None):
+        if drm_config is not None:
             self.drmConfig = drm_config
-        if(hls_encryption_config != None):
+        if hls_encryption_config is not None:
             self.hlsEncryptionConfig = hls_encryption_config
 
         super(Job, self).__init__(self.__dict__)
@@ -85,14 +85,13 @@ class DrmConfig(BitcodinObject):
 class WidevineDrmConfig(DrmConfig):
 
     def __init__(self, provider, signing_key, signing_iv, request_url, content_id, method):
-        system = 'widevine'
         self.provider = provider
         self.signingKey = signing_key
         self.signingIV = signing_iv
         self.requestUrl = request_url
         self.contentId = content_id
 
-        super(WidevineDrmConfig, self).__init__(system=system, method=method)
+        super(WidevineDrmConfig, self).__init__('widevine', method=method)
 
 
 class PlayreadyDrmConfig(DrmConfig):
@@ -100,17 +99,17 @@ class PlayreadyDrmConfig(DrmConfig):
     def __init__(self, method, k_id, key=None, key_seed=None, la_url=None, lui_url=None, ds_id=None, custom_attributes=None):
         system = 'playready'
         self.kid = k_id
-        if(key != None):
+        if key is not None:
             self.key = key
-        if(key_seed != None):
+        if key_seed is not None:
             self.keySeed = key_seed
-        if(la_url != None):
+        if la_url is not None:
             self.laUrl = la_url
-        if(lui_url != None):
+        if lui_url is not None:
             self.luiUrl = lui_url
-        if(ds_id != None):
+        if ds_id is not None:
             self.dsId = ds_id
-        if(custom_attributes != None):
+        if custom_attributes is not None:
             self.customAttributes = custom_attributes
 
         super(PlayreadyDrmConfig, self).__init__(system=system, method=method)
@@ -124,13 +123,13 @@ class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
         self.key = key
         self.pssh = pssh
         self.kid = kid
-        if(la_url != None):
+        if la_url is not None:
             self.laUrl = la_url
-        if(lui_url != None):
+        if lui_url is not None:
             self.luiUrl = lui_url
-        if(ds_id != None):
+        if ds_id is not None:
             self.dsId = ds_id
-        if(custom_attributes != None):
+        if custom_attributes is not None:
             self.customAttributes = custom_attributes
 
         super(PlayreadyWidevineCombinedDrmConfig, self).__init__(system=system, method=method)
@@ -141,8 +140,9 @@ class HLSEncrpytionConfig(BitcodinObject):
     def __init__(self, key, method, iv=None):
         self.key = key
         self.method = method
-        if(iv != None):
+        if iv is not None:
             self.iv = iv
+
         super(HLSEncrpytionConfig, self).__init__(self.__dict__)
 
 
@@ -159,7 +159,7 @@ class EncodingProfile(BitcodinObject):
 
 class VideoStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, profile, preset, height, width):
+    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, frame_rate=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
         self.profile = profile
@@ -167,14 +167,20 @@ class VideoStreamConfig(BitcodinObject):
         self.height = height
         self.width = width
 
+        if frame_rate is not None:
+            self.fps = frame_rate
+
         super(VideoStreamConfig, self).__init__(self.__dict__)
 
 
 class AudioStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate):
+    def __init__(self, default_stream_id, bitrate, sample_rate=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
+
+        if sample_rate is not None:
+            self.sampleRate = sample_rate
 
         super(AudioStreamConfig, self).__init__(self.__dict__)
 
