@@ -19,9 +19,9 @@ from bitcodin.test.config import test_video_url_multiple_audio_streams
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class CreateJobWithMultipleAudioStreams(BitcodinTestCase):
+class CreateJobWithMultipleAudioStreamsTestCase(BitcodinTestCase):
     def setUp(self):
-        super(CreateJobWithMultipleAudioStreams, self).setUp()
+        super(CreateJobWithMultipleAudioStreamsTestCase, self).setUp()
         inputUrl = test_video_url_multiple_audio_streams
         input = Input(inputUrl)
         self.input = create_input(input)
@@ -51,7 +51,7 @@ class CreateJobWithMultipleAudioStreams(BitcodinTestCase):
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(CreateJobWithMultipleAudioStreams, self).tearDown()
+        super(CreateJobWithMultipleAudioStreamsTestCase, self).tearDown()
 
 
 if __name__ == '__main__':
