@@ -60,10 +60,13 @@ class Input(BitcodinObject):
 class Job(BitcodinObject):
 
     def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
-                 hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None):
+                 hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None,
+                 location=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
+        self.extract_closed_captions = extract_closed_captions
+
         if speed is not None:
             self.speed = speed
         if drm_config is not None:
@@ -74,6 +77,8 @@ class Job(BitcodinObject):
             self.audioMetaData = audio_meta_data
         if video_meta_data is not None:
             self.videoMetaData = video_meta_data
+        if location is not None:
+            self.location = location
 
         super(Job, self).__init__(self.__dict__)
 
