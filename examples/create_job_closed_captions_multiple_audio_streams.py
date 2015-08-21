@@ -35,6 +35,14 @@ video_meta_data = [
     bitcodin.VideoMetaData(0, 'Spanish', 'es')
 ]
 
-job = bitcodin.Job(input_result.input_id, encoding_profile_result.encoding_profile_id, manifests, None, None, None,
-                   True, audio_meta_data, video_meta_data)
+job = bitcodin.Job(
+    input_id=input_result.input_id,
+    encoding_profile_id=encoding_profile_result.encoding_profile_id,
+    manifest_types=manifests,
+    speed='standard',
+    extract_closed_captions=True,
+    audio_meta_data=audio_meta_data,
+    video_meta_data=video_meta_data
+)
+
 job_result = bitcodin.create_job(job)

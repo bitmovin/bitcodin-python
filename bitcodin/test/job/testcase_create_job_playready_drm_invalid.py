@@ -44,7 +44,13 @@ class CreateJobPlayreadyDrmInvalidConfigTestCase(BitcodinTestCase):
 
 
     def runTest(self):
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests, 'standard', self.drm_config)
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=self.manifests,
+            speed='standard',
+            drm_config=self.drm_config
+        )
         with self.assertRaises(BitcodinBadRequestError):
             self.job = create_job(job)
 

@@ -41,7 +41,13 @@ class CreateJobWithMultipleAudioStreamsTestCase(BitcodinTestCase):
 
 
     def runTest(self):
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests, 'standard', None, None, self.audio_meta_data)
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=self.manifests,
+            speed='standard',
+            audio_meta_data=self.audio_meta_data
+        )
         self.job = create_job(job)
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)

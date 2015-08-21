@@ -30,7 +30,11 @@ class CreateJobTestCase(BitcodinTestCase):
 
 
     def runTest(self):
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests)
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=self.manifests
+        )
         self.job = create_job(job)
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)
