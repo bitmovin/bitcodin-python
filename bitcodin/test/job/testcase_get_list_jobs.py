@@ -28,7 +28,11 @@ class GetJobListTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests)
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=self.manifests
+        )
         self.job = create_job(job)
 
 

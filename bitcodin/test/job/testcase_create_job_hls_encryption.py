@@ -36,7 +36,13 @@ class CreateJobHLSEncryptionTestCase(BitcodinTestCase):
 
 
     def runTest(self):
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, self.manifests, 'standard', hls_encryption_config=self.hls_encryption_config)
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=self.manifests,
+            speed='standard',
+            hls_encryption_config=self.hls_encryption_config
+        )
         self.job = create_job(job)
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)

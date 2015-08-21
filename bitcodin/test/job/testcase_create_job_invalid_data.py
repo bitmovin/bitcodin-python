@@ -28,7 +28,11 @@ class CreateJobInvalidDataTestCase(BitcodinTestCase):
 
 
     def runTest(self):
-        job = Job(self.input.input_id, self.encoding_profile.encoding_profile_id, ['m3u8', 'invalid'])
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=['m3u8', 'invalid']
+        )
         with self.assertRaises(BitcodinBadRequestError):
             result = create_job(job)
 

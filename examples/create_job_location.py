@@ -21,6 +21,12 @@ encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile_obj)
 
 manifests = ['mpd', 'm3u8']
 
-job = bitcodin.Job(input_result.input_id, encoding_profile_result.encoding_profile_id, manifests,
-                   speed='standard', location='europe')
+job = bitcodin.Job(
+    input_id=input_result.input_id,
+    encoding_profile_id=encoding_profile_result.encoding_profile_id,
+    manifest_types=manifests,
+    speed='standard',
+    location='europe'
+)
+
 job_result = bitcodin.create_job(job)
