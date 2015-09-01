@@ -1,11 +1,25 @@
 #!/usr/bin/env python
 import bitcodin
 import pprint
-
-bitcodin.api_key = 'de93f6610ef1e8f5389b038f74946e2d0bda5d79f54d2e36b6af57618e696681'
+import sys
 
 live_instance = bitcodin.LiveInstance("test live stream")
 
-live_instance_result = bitcodin.create_live_instance(live_instance)
+live_instance = bitcodin.create_live_instance(live_instance)
 
-pprint.pprint(live_instance_result)
+pprint.pprint(live_instance)
+
+while live_instance.status != 'RUNNING':
+    live_instance = bitcodin.get_live_instance(live_instance.id)
+    if live_instance.status == 'ERROR':
+        print "Error occurred during live stream creation!"
+        sys.exit(-1)
+
+
+bitcodin.delete_live_instance(live_instance.id)
+
+while live_instance.status != 'TERMINATED':
+    live_instance = bitcodin.get_live_instance(live_instance.id)
+    if live_instance.status == 'ERROR':
+        print "Error occurred during live stream deletion!"
+        sys.exit(-1)
