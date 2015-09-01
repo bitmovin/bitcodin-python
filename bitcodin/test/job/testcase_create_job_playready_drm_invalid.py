@@ -22,8 +22,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class CreateJobPlayreadyDrmInvalidConfigTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateJobPlayreadyDrmInvalidConfigTestCase, self).setUp()
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -42,7 +42,6 @@ class CreateJobPlayreadyDrmInvalidConfigTestCase(BitcodinTestCase):
             method='mpeg_cenc'
         )
 
-
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
@@ -53,7 +52,6 @@ class CreateJobPlayreadyDrmInvalidConfigTestCase(BitcodinTestCase):
         )
         with self.assertRaises(BitcodinBadRequestError):
             self.job = create_job(job)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

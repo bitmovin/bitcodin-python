@@ -22,8 +22,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class CreateJobPlayreadyDrmTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateJobPlayreadyDrmTestCase, self).setUp()
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -42,7 +42,6 @@ class CreateJobPlayreadyDrmTestCase(BitcodinTestCase):
             method='mpeg_cenc'
         )
 
-
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
@@ -55,7 +54,6 @@ class CreateJobPlayreadyDrmTestCase(BitcodinTestCase):
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

@@ -21,6 +21,7 @@ from .testcase_create_job_playready_widevine_drm import CreateJobPlayreadyWidevi
 from .testcase_create_job_hls_encryption import CreateJobHLSEncryptionTestCase
 from .testcase_create_job_multiple_audio_streams import CreateJobWithMultipleAudioStreamsTestCase
 
+
 def get_test_suite():
     test_suite = TestSuite()
     test_suite.addTest(CreateJobInvalidDataTestCase())
