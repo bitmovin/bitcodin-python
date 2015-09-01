@@ -83,7 +83,7 @@ class RestClient(object):
     def delete(url=None, headers=None):
         result = requests.delete(url, headers=headers)
 
-        if result.status_code == 204:
+        if result.status_code == 204 or result.status_code == 200:
             return result.json
         else:
             RestClient._raise_error(result)

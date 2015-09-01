@@ -277,8 +277,11 @@ def delete_live_instance(live_instance_id=None):
     """
 
     url = get_api_base() + '/live-instance/%d' % live_instance_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    res = RestClient.delete(url=url, headers=create_headers())
+
+    live_instance_response = BitcodinObject(res)
+
+    return live_instance_response
 
 
 def get_live_instance(live_instance_id=None):
