@@ -18,7 +18,6 @@ class HttpGetUndefinedTestCase(BitcodinTestCase):
         with self.assertRaises(BitcodinUnknownApiRequestUrlError):
             response = RestClient.get(url=url, headers=headers)
 
-
     def tearDown(self):
         super(HttpGetUndefinedTestCase, self).tearDown()
 
