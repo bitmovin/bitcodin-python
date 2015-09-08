@@ -18,7 +18,6 @@ class HttpDeleteUndefinedTestCase(BitcodinTestCase):
         with self.assertRaises(BitcodinUnknownApiRequestUrlError):
             response = RestClient.delete(url=url, headers=headers)
 
-
     def tearDown(self):
         super(HttpDeleteUndefinedTestCase, self).tearDown()
 
