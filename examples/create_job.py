@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from time import sleep
 
 import bitcodin
 
@@ -39,3 +40,11 @@ job = bitcodin.Job(
     manifest_types=manifests
 )
 job_result = bitcodin.create_job(job)
+
+while job_result.status != 'Finished' or job_result.status != 'Error':
+    job_result = bitcodin.get_job(job_result.job_id)
+    print vars(job_result)
+    sleep(5)
+
+print vars(job_result)
+print "Job Finished!"
