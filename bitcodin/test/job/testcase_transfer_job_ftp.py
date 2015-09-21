@@ -69,7 +69,7 @@ class TransferJobToFTPTestCase(BitcodinTestCase):
                 break
             elif(job_status.status.lower() == 'error'):
                 raise BitcodinError('An error occured while waiting for job to be FINISHED', 'Job status changed to ERROR!')
-            elif(time.time() - start_time > time_limit):
+            elif(time() - start_time > time_limit):
                 raise BitcodinError('Timeout of job duration exceeded!', 'Job took too long!')
             sleep(2)
         transfer = transfer_job(self.job.job_id, self.output.output_id)
