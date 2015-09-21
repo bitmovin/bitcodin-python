@@ -4,7 +4,7 @@ import bitcodin
 
 bitcodin.api_key = 'YOUR API KEY'
 
-input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
+input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv')
 input_result = bitcodin.create_input(input_obj)
 
 video_configs = []

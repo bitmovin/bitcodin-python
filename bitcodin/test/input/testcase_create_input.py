@@ -10,7 +10,7 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class CreateInputTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateInputTestCase, self).setUp()
-        self.inputUrl = 'http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv'
+        self.inputUrl = 'http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv'
 
     def runTest(self):
         input = Input(self.inputUrl)
