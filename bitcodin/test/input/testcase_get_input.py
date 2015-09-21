@@ -30,8 +30,6 @@ class GetInputTestCase(BitcodinTestCase):
         self.assertEquals(self.created_input.thumbnail_url, input.thumbnail_url)
         self.assertEquals(self.created_input.input_type, input.input_type)
         self.assertEquals(self.created_input.url, input.url)
-        self.assertEquals(self.created_input.basic_auth_user, input.basic_auth_user)
-        self.assertEquals(self.created_input.basic_auth_password, input.basic_auth_password)
         self.assertEquals(self.created_input.media_configurations[0].width, input.media_configurations[0].width)
         self.assertEquals(self.created_input.media_configurations[0].sample_aspect_ratio_num, input.media_configurations[0].sample_aspect_ratio_num)
         self.assertEquals(self.created_input.media_configurations[0].rate, input.media_configurations[0].rate)
