@@ -47,24 +47,35 @@ def callback(arg):
 
 
 def main():
-
     test_suites = _collect_test_suites()
     main_test_suite = TestSuite()
 
     for test_suite in test_suites:
         main_test_suite.addTests(test_suite)
 
-    concurrent_suite = ConcurrentStreamTestSuite(lambda: ((case, None) for case in main_test_suite))
-
-    result = StreamToDict(callback)
-    result.startTestRun()
-    try:
-        concurrent_suite.run(result)
-    finally:
-        result.stopTestRun()
-
-    if 'FAILED' in globals() and FAILED:
+    test_suite_result = _run_tests(main_test_suite)
+    if not test_suite_result.wasSuccessful():
         sys.exit(1)
+
+# def main():
+#
+#     test_suites = _collect_test_suites()
+#     main_test_suite = TestSuite()
+#
+#     for test_suite in test_suites:
+#         main_test_suite.addTests(test_suite)
+#
+#     concurrent_suite = ConcurrentStreamTestSuite(lambda: ((case, None) for case in main_test_suite))
+#
+#     result = StreamToDict(callback)
+#     result.startTestRun()
+#     try:
+#         concurrent_suite.run(result)
+#     finally:
+#         result.stopTestRun()
+#
+#     if 'FAILED' in globals() and FAILED:
+#         sys.exit(1)
 
 
 if __name__ == '__main__':
