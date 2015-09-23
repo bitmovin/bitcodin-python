@@ -18,7 +18,6 @@ class RestClient(object):
     def __init__(self):
         pass
 
-
     @staticmethod
     def _raise_error(result):
         if(result.status_code == 500):
@@ -40,7 +39,6 @@ class RestClient(object):
                 json_result
             )
         elif result.status_code == 400:
-            print(json_result)
             raise BitcodinBadRequestError('The API received a invalid request.', json_result)
         elif result.status_code == 404:
             raise BitcodinNotFoundError('The API did not find a resource you requested.', json_result)

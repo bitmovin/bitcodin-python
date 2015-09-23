@@ -1,19 +1,19 @@
-import pprint
-from testtools import ConcurrentStreamTestSuite, StreamResult, TextTestResult, StreamFailFast, TestResult, StreamToDict, \
-    StreamToExtendedDecorator, StreamSummary, CopyStreamResult
-import time
-import bitcodin
+import os
+
+from testtools import ConcurrentStreamTestSuite, StreamToDict
+from bitcodin.test import output
+
+from bitcodin.test.settings import api_key
 
 __author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
 
 import sys
 from unittest import TestSuite, TextTestRunner
 from . import core
+from . import job
 from . import http
 from . import encodingprofile
 from . import input
-from . import output
-from . import job
 from . import statistics
 
 VERBOSITY_LEVEL = 2
@@ -38,6 +38,8 @@ def _run_tests(test_suite):
 def callback(arg):
     global SUCCESS
     global FAILS
+
+
     if "FAILS" not in globals():
         FAILS = 0
     if "SUCCESS" not in globals():
@@ -68,6 +70,7 @@ def callback(arg):
 #         sys.exit(1)
 
 def main():
+    os.environ["PYTHON_API_KEY"] = api_key
 
     test_suites = _collect_test_suites()
     main_test_suite = TestSuite()
