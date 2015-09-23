@@ -40,7 +40,6 @@ class CreateJobPlayreadyWidevineDrmInvalidConfigTestCase(BitcodinTestCase):
             method=None
         )
 
-
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
@@ -51,7 +50,6 @@ class CreateJobPlayreadyWidevineDrmInvalidConfigTestCase(BitcodinTestCase):
         )
         with self.assertRaises(BitcodinBadRequestError):
             self.job = create_job(job)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

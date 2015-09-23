@@ -40,7 +40,6 @@ class CreateJobPlayreadyWidevineDrmTestCase(BitcodinTestCase):
             method='mpeg_cenc'
         )
 
-
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
@@ -53,7 +52,6 @@ class CreateJobPlayreadyWidevineDrmTestCase(BitcodinTestCase):
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

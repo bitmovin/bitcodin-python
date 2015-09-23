@@ -26,7 +26,6 @@ class CreateJobInvalidDataTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
 
-
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
