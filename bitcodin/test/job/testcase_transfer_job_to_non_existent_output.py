@@ -38,11 +38,9 @@ class TransferJobToNonExistentOutputTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
 
-
     def runTest(self):
         with self.assertRaises(BitcodinNotFoundError):
             transfer = transfer_job(self.job.job_id, 0)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

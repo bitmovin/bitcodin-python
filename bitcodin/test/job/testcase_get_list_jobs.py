@@ -35,7 +35,6 @@ class GetJobListTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
 
-
     def runTest(self):
         jobs = list_jobs()
         job_found = False
@@ -45,7 +44,6 @@ class GetJobListTestCase(BitcodinTestCase):
                 break
 
         self.assertEquals(job_found, True)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)
