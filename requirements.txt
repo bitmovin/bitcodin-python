@@ -1,3 +1,4 @@
 requests==2.4.3
 coveralls==0.5
 coverage==3.7.1
+testtools
