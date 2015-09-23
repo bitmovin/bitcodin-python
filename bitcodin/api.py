@@ -4,7 +4,7 @@ from .resource import *
 from .rest import RestClient
 from .resource import BitcodinObject
 from .exceptions import BitcodinApiKeyNotSetError
-
+from bitcodin import api_key
 
 def create_input(input_obj):
     """
@@ -269,7 +269,6 @@ def create_headers():
     Create standard headers to communicate with bitcodin-api
     :return:
     """
-    from bitcodin import api_key
 
     if api_key is None:
         raise BitcodinApiKeyNotSetError("bitcodin.api_key is not set!", None)
