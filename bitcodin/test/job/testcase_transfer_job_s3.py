@@ -65,7 +65,6 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         )
         self.output = create_output(output)
 
-
     def runTest(self):
         start_time = time()
         time_limit = 600
@@ -79,7 +78,6 @@ class TransferJobToS3TestCase(BitcodinTestCase):
                 raise BitcodinError('Timeout of job duration exceeded!', 'Job took too long!')
             sleep(2)
         transfer = transfer_job(self.job.job_id, self.output.output_id)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)
