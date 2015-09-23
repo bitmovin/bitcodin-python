@@ -10,7 +10,8 @@ setup(
     include_package_data=True,
     url='https://github.com/bitmovin/bitcodin-python',
     install_requires=[
-        'requests>=2.4.3'
+        'requests>=2.4.3',
+        'testtools'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
