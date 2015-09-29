@@ -8,6 +8,8 @@ from bitcodin.test.settings import ftp_config
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 class CreateFTPOutputTestCase(BitcodinTestCase):
+
+    output = None
     def setUp(self):
         super(CreateFTPOutputTestCase, self).setUp()
         self.ftp_configuration = {

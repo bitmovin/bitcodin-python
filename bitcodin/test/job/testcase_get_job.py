@@ -37,7 +37,6 @@ class GetJobTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
 
-
     def runTest(self):
         job = get_job(self.job.job_id)
         self.assertEquals(self.job.job_id, job.job_id)
@@ -45,7 +44,6 @@ class GetJobTestCase(BitcodinTestCase):
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encoding_profiles[0].encoding_profile_id)
         self.assertEquals(self.job.manifest_urls.m3u8_url.strip('?')[0], job.manifest_urls.m3u8_url.strip('?')[0])
         self.assertEquals(self.job.manifest_urls.mpd_url.strip('?')[0], job.manifest_urls.mpd_url.strip('?')[0])
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
+from time import sleep
 
 import bitcodin
 
 bitcodin.api_key = 'YOUR API KEY'
 
-input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
+input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv')
 input_result = bitcodin.create_input(input_obj)
 
 video_configs = list()
@@ -39,3 +40,11 @@ job = bitcodin.Job(
     manifest_types=manifests
 )
 job_result = bitcodin.create_job(job)
+
+while job_result.status != 'Finished' and job_result.status != 'Error':
+    job_result = bitcodin.get_job(job_result.job_id)
+    print vars(job_result)
+    sleep(5)
+
+print vars(job_result)
+print "Job Finished!"

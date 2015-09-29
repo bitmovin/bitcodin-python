@@ -37,12 +37,10 @@ class GetJobStatusTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
 
-
     def runTest(self):
         job_status = get_job_status(self.job.job_id)
         self.assertEquals(job_status.job_id, self.job.job_id)
         self.assertEquals(job_status.status, 'Enqueued')
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

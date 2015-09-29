@@ -18,7 +18,6 @@ class RestClient(object):
     def __init__(self):
         pass
 
-
     @staticmethod
     def _raise_error(result):
         if(result.status_code == 500):

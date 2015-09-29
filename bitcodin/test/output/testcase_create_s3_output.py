@@ -10,6 +10,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 class CreateS3OutputTestCase(BitcodinTestCase):
 
+    output = None
+
     def setUp(self):
         super(CreateS3OutputTestCase, self).setUp()
         self.s3_configuration = {
@@ -22,6 +24,16 @@ class CreateS3OutputTestCase(BitcodinTestCase):
             'region': aws_config.get('region', None),
             'make_public': False
         }
+        self.output = S3Output(
+            name=self.s3_configuration.get('name'),
+            host=self.s3_configuration.get('host'),
+            access_key=self.s3_configuration.get('access_key'),
+            secret_key=self.s3_configuration.get('secret_key'),
+            bucket=self.s3_configuration.get('bucket'),
+            prefix=self.s3_configuration.get('prefix'),
+            region=self.s3_configuration.get('region'),
+            make_public=self.s3_configuration.get('make_public')
+        )
 
     def runTest(self):
         output = S3Output(
