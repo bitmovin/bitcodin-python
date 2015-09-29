@@ -265,7 +265,10 @@ class FTPOutput(Output):
 
 class LiveInstance(BitcodinObject):
 
-    def __init__(self, label="live stream"):
+    def __init__(self, label, stream_key, encoding_profile_id, timeshift):
         self.label = label
+        self.stream_key = stream_key
+        self.encoding_profile_id = encoding_profile_id
+        self.timeshift = timeshift
 
         super(LiveInstance, self).__init__(self.__dict__)

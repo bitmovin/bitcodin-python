@@ -14,7 +14,9 @@ class CreateLiveInstanceTestCase(BitcodinTestCase):
 
     def runTest(self):
 
-        live_instance = bitcodin.LiveInstance("test live stream")
+        encoding_profiles = bitcodin.list_encoding_profiles()
+        live_instance = bitcodin.LiveInstance("test-live-stream", "stream",
+                                              encoding_profiles[0].encoding_profile_id, 30)
 
         live_instance = bitcodin.create_live_instance(live_instance)
         self.assertIsNotNone(live_instance.id)
