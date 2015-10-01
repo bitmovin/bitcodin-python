@@ -26,6 +26,7 @@ from .testcase_transfer_job_gcs import TransferJobToGCSTestCase
 from .testcase_autotransfer_job_gcs import AutoTransferJobToGCSTestCase
 from .testcase_autotransfer_job_ftp import AutoTransferJobToFTPTestCase
 from .testcase_autotransfer_job_s3 import AutoTransferJobToS3TestCase
+from .testcase_create_job_rotation import CreateJobWithRotationTestCase
 
 
 def get_test_suite():
@@ -54,5 +55,6 @@ def get_test_suite():
     test_suite.addTest(AutoTransferJobToGCSTestCase())
     test_suite.addTest(AutoTransferJobToFTPTestCase())
     test_suite.addTest(AutoTransferJobToS3TestCase())
+    test_suite.addTest(CreateJobWithRotationTestCase())
 
     return test_suite

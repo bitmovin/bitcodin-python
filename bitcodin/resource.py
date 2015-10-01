@@ -227,11 +227,14 @@ class HLSEncrpytionConfig(BitcodinObject):
 
 class EncodingProfile(BitcodinObject):
 
-    def __init__(self, name, video_stream_configs, audio_stream_configs):
+    def __init__(self, name, video_stream_configs, audio_stream_configs, rotation=0, segment_length=None):
 
         self.name = name
         self.videoStreamConfigs = video_stream_configs
         self.audioStreamConfigs = audio_stream_configs
+        self.rotation = rotation
+        if segment_length is not None:
+            self.segment_length = segment_length
 
         super(EncodingProfile, self).__init__(self.__dict__)
 
