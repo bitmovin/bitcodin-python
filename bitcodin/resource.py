@@ -57,6 +57,53 @@ class Input(BitcodinObject):
         super(Input, self).__init__(self.__dict__)
 
 
+class S3Input(BitcodinObject):
+
+    def __init__(self, access_key, secret_key, bucket, region, object_key, host=None):
+        """
+
+        :param access_key: AWS Access Key ID
+        :param secret_key: AWS Secret Key
+        :param bucket: AWS Bucket Name
+        :param region: AWS Region
+        :param object_key: Path to object/file
+        :param host: AWS Host (optional)
+        :return: S3Input
+        """
+
+        self.type = 's3'
+
+        if host is not None:
+            self.host = host
+        self.accessKey = access_key
+        self.secretKey = secret_key
+        self.bucket = bucket
+        self.region = region
+        self.objectKey = object_key
+
+        super(S3Input, self).__init__(self.__dict__)
+
+class AzureInput(BitcodinObject):
+
+    def __init__(self, account_name, account_key, container, url):
+        """
+
+        :param account_name: Azure Account Name
+        :param account_key: Azure Account Key
+        :param container: Container Name
+        :param url: URL to file/object
+        :return: AzureInput
+        """
+
+        self.type = 'abs'
+        self.accountName = account_name
+        self.accountKey = account_key
+        self.container = container
+        self.url = url
+
+        super(AzureInput, self).__init__(self.__dict__)
+
+
 class Job(BitcodinObject):
 
     def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
