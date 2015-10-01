@@ -13,6 +13,9 @@ from .testcase_get_ftp_output import GetFTPOutputTestCase
 from .testcase_get_non_existent_output import GetNonExistentOutputTestCase
 from .testcase_delete_s3_output import DeleteS3OutputTestCase
 from .testcase_delete_ftp_output import DeleteFTPOutputTestCase
+from .testcase_create_gcs_output import CreateGCSOutputTestCase
+from .testcase_delete_gcs_output import DeleteGCSOutputTestCase
+from .testcase_get_gcs_output import GetGCSOutputTestCase
 
 
 def get_test_suite():
@@ -28,5 +31,8 @@ def get_test_suite():
     test_suite.addTest(GetNonExistentOutputTestCase())
     test_suite.addTest(DeleteS3OutputTestCase())
     test_suite.addTest(DeleteFTPOutputTestCase())
+    test_suite.addTest(CreateGCSOutputTestCase())
+    test_suite.addTest(DeleteGCSOutputTestCase())
+    test_suite.addTest(GetGCSOutputTestCase())
 
     return test_suite
