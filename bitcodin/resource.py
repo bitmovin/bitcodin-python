@@ -227,7 +227,7 @@ class HLSEncrpytionConfig(BitcodinObject):
 
 class EncodingProfile(BitcodinObject):
 
-    def __init__(self, name, video_stream_configs, audio_stream_configs, rotation=0, segment_length=None, watermark_config=None):
+    def __init__(self, name, video_stream_configs, audio_stream_configs, rotation=0, segment_length=None, watermark_config=None, cropping_config=None):
 
         self.name = name
         self.videoStreamConfigs = video_stream_configs
@@ -237,6 +237,8 @@ class EncodingProfile(BitcodinObject):
             self.segmentLength = segment_length
         if watermark_config is not None:
             self.watermarkConfig = watermark_config
+        if cropping_config is not None:
+            self.croppingConfig = cropping_config
 
         super(EncodingProfile, self).__init__(self.__dict__)
 
@@ -283,6 +285,21 @@ class WatermarkConfig(BitcodinObject):
             self.right = right
 
         super(WatermarkConfig, self).__init__(self.__dict__)
+
+
+class CroppingConfig(BitcodinObject):
+
+    def __init__(self, top=None, bottom=None, left=None, right=None):
+        if top is not None:
+            self.top = top
+        if bottom is not None:
+            self.bottom = bottom
+        if left is not None:
+            self.left = left
+        if right is not None:
+            self.right = right
+
+        super(CroppingConfig, self).__init__(self.__dict__)
 
 
 class TransferConfig(BitcodinObject):

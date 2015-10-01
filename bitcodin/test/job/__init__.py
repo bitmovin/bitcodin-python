@@ -30,6 +30,7 @@ from .testcase_create_job_rotation import CreateJobWithRotationTestCase
 from .testcase_create_job_specific_segment_length import CreateJobWithSpecificSegmentLengthTestCase
 from .testcase_create_job_specific_video_audio_sample_rates import CreateJobWithSpecificVideoAndAudioSampleRatesTestCase
 from .testcase_create_job_watermarked import CreateJobWithWatermarkTestCase
+from .testcase_create_job_cropping_video import CreateJobWithVideoCroppingTestCase
 
 
 def get_test_suite():
@@ -62,5 +63,6 @@ def get_test_suite():
     test_suite.addTest(CreateJobWithSpecificSegmentLengthTestCase())
     test_suite.addTest(CreateJobWithSpecificVideoAndAudioSampleRatesTestCase())
     test_suite.addTest(CreateJobWithWatermarkTestCase())
+    test_suite.addTest(CreateJobWithVideoCroppingTestCase())
 
     return test_suite
