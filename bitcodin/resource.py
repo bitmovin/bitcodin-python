@@ -273,10 +273,9 @@ class TransferConfig(BitcodinObject):
 
 class Output(BitcodinObject):
 
-    def __init__(self, type, name, host):
+    def __init__(self, type, name):
         self.type = type
         self.name = name
-        self.host = host
 
         super(Output, self).__init__(self.__dict__)
 
@@ -294,7 +293,7 @@ class S3Output(Output):
         self.region = region
         self.makePublic = make_public
 
-        super(S3Output, self).__init__(self.type, self.name, self.host)
+        super(S3Output, self).__init__(self.type, self.name)
 
 
 class FTPOutput(Output):
@@ -307,5 +306,19 @@ class FTPOutput(Output):
         self.password = basic_auth_password
         self.passive = passive
 
-        super(FTPOutput, self).__init__(self.type, self.name, self.host)
+        super(FTPOutput, self).__init__(self.type, self.name)
+
+
+class GCSOutput(Output):
+
+    def __init__(self, name, access_key, secret_key, bucket, prefix, make_public=False):
+        self.type = 'gcs'
+        self.name = name
+        self.accessKey = access_key
+        self.secretKey = secret_key
+        self.bucket = bucket
+        self.prefix = prefix
+        self.makePublic = make_public
+
+        super(GCSOutput, self).__init__(self.type, self.name)
 
