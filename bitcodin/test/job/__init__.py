@@ -28,6 +28,7 @@ from .testcase_autotransfer_job_ftp import AutoTransferJobToFTPTestCase
 from .testcase_autotransfer_job_s3 import AutoTransferJobToS3TestCase
 from .testcase_create_job_rotation import CreateJobWithRotationTestCase
 from .testcase_create_job_specific_segment_length import CreateJobWithSpecificSegmentLengthTestCase
+from .testcase_create_job_specific_video_audio_sample_rates import CreateJobWithSpecificVideoAndAudioSampleRatesTestCase
 
 
 def get_test_suite():
@@ -58,5 +59,6 @@ def get_test_suite():
     test_suite.addTest(AutoTransferJobToS3TestCase())
     test_suite.addTest(CreateJobWithRotationTestCase())
     test_suite.addTest(CreateJobWithSpecificSegmentLengthTestCase())
+    test_suite.addTest(CreateJobWithSpecificVideoAndAudioSampleRatesTestCase())
 
     return test_suite

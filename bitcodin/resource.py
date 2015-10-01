@@ -241,7 +241,7 @@ class EncodingProfile(BitcodinObject):
 
 class VideoStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, frame_rate=None):
+    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, rate=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
         self.profile = profile
@@ -249,20 +249,20 @@ class VideoStreamConfig(BitcodinObject):
         self.height = height
         self.width = width
 
-        if frame_rate is not None:
-            self.fps = frame_rate
+        if rate is not None:
+            self.rate = rate
 
         super(VideoStreamConfig, self).__init__(self.__dict__)
 
 
 class AudioStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, sample_rate=None):
+    def __init__(self, default_stream_id, bitrate, rate=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
 
-        if sample_rate is not None:
-            self.sampleRate = sample_rate
+        if rate is not None:
+            self.rate = rate
 
         super(AudioStreamConfig, self).__init__(self.__dict__)
 
