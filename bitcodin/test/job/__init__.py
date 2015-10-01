@@ -22,6 +22,7 @@ from .testcase_create_job_hls_encryption import CreateJobHLSEncryptionTestCase
 from .testcase_create_job_multiple_audio_streams import CreateJobWithMultipleAudioStreamsTestCase
 from .testcase_create_job_azure_input import CreateJobAzureInputTestCase
 from .testcase_create_job_s3_input import CreateJobS3InputTestCase
+from .testcase_transfer_job_gcs import TransferJobToGCSTestCase
 
 
 def get_test_suite():
@@ -46,5 +47,6 @@ def get_test_suite():
     test_suite.addTest(TransferJobToS3TestCase())
     test_suite.addTest(CreateJobAzureInputTestCase())
     test_suite.addTest(CreateJobS3InputTestCase())
+    test_suite.addTest(TransferJobToGCSTestCase())
 
     return test_suite
