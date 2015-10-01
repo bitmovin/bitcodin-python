@@ -16,6 +16,7 @@ class CreateInputTestCase(BitcodinTestCase):
         input = Input(self.inputUrl)
         self.input = create_input(input)
         self.assertEquals(self.input.url, input.url)
+        self.assertEquals(self.input.status, 'CREATED')
 
     def tearDown(self):
         delete_input(self.input.input_id)
