@@ -23,6 +23,9 @@ from .testcase_create_job_multiple_audio_streams import CreateJobWithMultipleAud
 from .testcase_create_job_azure_input import CreateJobAzureInputTestCase
 from .testcase_create_job_s3_input import CreateJobS3InputTestCase
 from .testcase_transfer_job_gcs import TransferJobToGCSTestCase
+from .testcase_autotransfer_job_gcs import AutoTransferJobToGCSTestCase
+from .testcase_autotransfer_job_ftp import AutoTransferJobToFTPTestCase
+from .testcase_autotransfer_job_s3 import AutoTransferJobToS3TestCase
 
 
 def get_test_suite():
@@ -48,5 +51,8 @@ def get_test_suite():
     test_suite.addTest(CreateJobAzureInputTestCase())
     test_suite.addTest(CreateJobS3InputTestCase())
     test_suite.addTest(TransferJobToGCSTestCase())
+    test_suite.addTest(AutoTransferJobToGCSTestCase())
+    test_suite.addTest(AutoTransferJobToFTPTestCase())
+    test_suite.addTest(AutoTransferJobToS3TestCase())
 
     return test_suite
