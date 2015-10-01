@@ -13,6 +13,8 @@ from .testcase_get_list_encoding_profiles import GetEncodingProfileListTestCase
 from .testcase_create_encoding_profile_rotation import CreateEncodingProfileWithRotationTestCase
 from .testcase_create_encoding_profile_segment_length import CreateEncodingProfileWithSpecificSegmentLengthTestCase
 from .testcase_create_encoding_profile_sample_rate import CreateEncodingProfileWithSpecificSampleRatesTestCase
+from .testcase_create_encoding_profile_watermarked import CreateEncodingProfileWithWatermarkTestCase
+
 
 def get_test_suite():
     test_suite = TestSuite()
@@ -27,4 +29,5 @@ def get_test_suite():
     test_suite.addTest(CreateEncodingProfileWithRotationTestCase())
     test_suite.addTest(CreateEncodingProfileWithSpecificSegmentLengthTestCase())
     test_suite.addTest(CreateEncodingProfileWithSpecificSampleRatesTestCase())
+    test_suite.addTest(CreateEncodingProfileWithWatermarkTestCase())
     return test_suite
