@@ -11,6 +11,7 @@ from .testcase_delete_encoding_profile import DeleteEncodingProfileTestCase
 from .testcase_delete_non_existent_encoding_profile import DeleteNonExistentEncodingProfileTestCase
 from .testcase_get_list_encoding_profiles import GetEncodingProfileListTestCase
 from .testcase_create_encoding_profile_rotation import CreateEncodingProfileWithRotationTestCase
+from .testcase_create_encoding_profile_segment_length import CreateEncodingProfileWithSpecificSegmentLengthTestCase
 
 def get_test_suite():
     test_suite = TestSuite()
@@ -23,4 +24,5 @@ def get_test_suite():
     test_suite.addTest(DeleteNonExistentEncodingProfileTestCase())
     test_suite.addTest(GetEncodingProfileListTestCase())
     test_suite.addTest(CreateEncodingProfileWithRotationTestCase())
+    test_suite.addTest(CreateEncodingProfileWithSpecificSegmentLengthTestCase())
     return test_suite

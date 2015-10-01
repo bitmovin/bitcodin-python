@@ -234,7 +234,7 @@ class EncodingProfile(BitcodinObject):
         self.audioStreamConfigs = audio_stream_configs
         self.rotation = rotation
         if segment_length is not None:
-            self.segment_length = segment_length
+            self.segmentLength = segment_length
 
         super(EncodingProfile, self).__init__(self.__dict__)
 
