@@ -108,7 +108,7 @@ class Job(BitcodinObject):
 
     def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
                  hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None,
-                 location=None):
+                 location=None, output_id=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -126,6 +126,8 @@ class Job(BitcodinObject):
             self.videoMetaData = video_meta_data
         if location is not None:
             self.location = location
+        if output_id is not None:
+            self.outputId = output_id
 
         super(Job, self).__init__(self.__dict__)
 
