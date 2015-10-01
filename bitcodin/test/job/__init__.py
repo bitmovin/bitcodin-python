@@ -20,6 +20,9 @@ from .testcase_create_job_playready_widevine_drm_invalid import CreateJobPlayrea
 from .testcase_create_job_playready_widevine_drm import CreateJobPlayreadyWidevineDrmTestCase
 from .testcase_create_job_hls_encryption import CreateJobHLSEncryptionTestCase
 from .testcase_create_job_multiple_audio_streams import CreateJobWithMultipleAudioStreamsTestCase
+from .testcase_create_job_azure_input import CreateJobAzureInputTestCase
+from .testcase_create_job_s3_input import CreateJobS3InputTestCase
+
 
 def get_test_suite():
     test_suite = TestSuite()
@@ -41,5 +44,7 @@ def get_test_suite():
     test_suite.addTest(TransferJobToNonExistentOutputTestCase())
     test_suite.addTest(TransferJobToFTPTestCase())
     test_suite.addTest(TransferJobToS3TestCase())
+    test_suite.addTest(CreateJobAzureInputTestCase())
+    test_suite.addTest(CreateJobS3InputTestCase())
 
     return test_suite
