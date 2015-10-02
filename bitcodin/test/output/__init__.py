@@ -16,6 +16,7 @@ from .testcase_delete_ftp_output import DeleteFTPOutputTestCase
 from .testcase_create_gcs_output import CreateGCSOutputTestCase
 from .testcase_delete_gcs_output import DeleteGCSOutputTestCase
 from .testcase_get_gcs_output import GetGCSOutputTestCase
+from .testcase_create_azure_output import CreateAzureOutputTestCase
 
 
 def get_test_suite():
@@ -34,5 +35,6 @@ def get_test_suite():
     test_suite.addTest(CreateGCSOutputTestCase())
     test_suite.addTest(DeleteGCSOutputTestCase())
     test_suite.addTest(GetGCSOutputTestCase())
+    test_suite.addTest(CreateAzureOutputTestCase())
 
     return test_suite
