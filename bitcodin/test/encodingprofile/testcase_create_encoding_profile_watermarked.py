@@ -48,7 +48,6 @@ class CreateEncodingProfileWithWatermarkTestCase(BitcodinTestCase):
         self.assertEquals(result.watermark_config.right, 100)
 
     def tearDown(self):
-        print(vars(self.encoding_profile.watermark_config))
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
         super(CreateEncodingProfileWithWatermarkTestCase, self).tearDown()
 
