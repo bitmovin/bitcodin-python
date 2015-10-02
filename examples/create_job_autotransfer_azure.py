@@ -35,7 +35,7 @@ encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile_obj)
 manifests = ['mpd', 'm3u8']
 
 output_obj = bitcodin.AzureOutput(
-    name='Azure Test Output PHP',
+    name='Azure Test Output Python',
     account_name='yourAzureAccountName',
     account_key='yourAzureAccountKey',
     container='yourAzureContainer',

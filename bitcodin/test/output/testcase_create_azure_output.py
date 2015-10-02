@@ -17,7 +17,7 @@ class CreateAzureOutputTestCase(BitcodinTestCase):
 
     def runTest(self):
         output = AzureOutput(
-            name='Azure Test Output PHP',
+            name='Azure Test Output Python',
             account_name=azure_output_config.get('accountName'),
             account_key=azure_output_config.get('accountKey'),
             container=azure_output_config.get('container'),

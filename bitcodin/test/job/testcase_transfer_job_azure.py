@@ -44,7 +44,7 @@ class TransferJobToAzureTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
         output = AzureOutput(
-            name='Azure Test Output PHP',
+            name='Azure Test Output Python',
             account_name=azure_output_config.get('accountName'),
             account_key=azure_output_config.get('accountKey'),
             container=azure_output_config.get('container'),

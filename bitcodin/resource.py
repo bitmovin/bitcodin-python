@@ -368,7 +368,6 @@ class AzureOutput(Output):
     def __init__(self, name, account_name, account_key, container, prefix):
 
         self.type = 'azure'
-        self.passive = True
         self.name = name
         self.accountName = account_name
         self.accountKey = account_key
