@@ -38,6 +38,7 @@ def _run_tests(test_suite):
 def callback(arg):
     global SUCCESS
     global FAILS
+    global FAILED
 
 
     if "FAILS" not in globals():
@@ -56,8 +57,6 @@ def callback(arg):
         print("Success[" + str(SUCCESS) + "]")
 
 
-
-
 # def main():
 #     test_suites = _collect_test_suites()
 #     main_test_suite = TestSuite()
@@ -68,6 +67,7 @@ def callback(arg):
 #     test_suite_result = _run_tests(main_test_suite)
 #     if not test_suite_result.wasSuccessful():
 #         sys.exit(1)
+
 
 def main():
     os.environ["PYTHON_API_KEY"] = api_key
