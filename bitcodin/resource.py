@@ -57,11 +57,58 @@ class Input(BitcodinObject):
         super(Input, self).__init__(self.__dict__)
 
 
+class S3Input(BitcodinObject):
+
+    def __init__(self, access_key, secret_key, bucket, region, object_key, host=None):
+        """
+
+        :param access_key: AWS Access Key ID
+        :param secret_key: AWS Secret Key
+        :param bucket: AWS Bucket Name
+        :param region: AWS Region
+        :param object_key: Path to object/file
+        :param host: AWS Host (optional)
+        :return: S3Input
+        """
+
+        self.type = 's3'
+
+        if host is not None:
+            self.host = host
+        self.accessKey = access_key
+        self.secretKey = secret_key
+        self.bucket = bucket
+        self.region = region
+        self.objectKey = object_key
+
+        super(S3Input, self).__init__(self.__dict__)
+
+class AzureInput(BitcodinObject):
+
+    def __init__(self, account_name, account_key, container, url):
+        """
+
+        :param account_name: Azure Account Name
+        :param account_key: Azure Account Key
+        :param container: Container Name
+        :param url: URL to file/object
+        :return: AzureInput
+        """
+
+        self.type = 'abs'
+        self.accountName = account_name
+        self.accountKey = account_key
+        self.container = container
+        self.url = url
+
+        super(AzureInput, self).__init__(self.__dict__)
+
+
 class Job(BitcodinObject):
 
     def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
                  hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None,
-                 location=None):
+                 location=None, output_id=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -79,6 +126,8 @@ class Job(BitcodinObject):
             self.videoMetaData = video_meta_data
         if location is not None:
             self.location = location
+        if output_id is not None:
+            self.outputId = output_id
 
         super(Job, self).__init__(self.__dict__)
 
@@ -165,7 +214,7 @@ class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
         super(PlayreadyWidevineCombinedDrmConfig, self).__init__(system=system, method=method)
 
 
-class HLSEncryptionConfig(BitcodinObject):
+class HLSEncrpytionConfig(BitcodinObject):
 
     def __init__(self, key, method, iv=None):
         self.key = key
@@ -173,23 +222,30 @@ class HLSEncryptionConfig(BitcodinObject):
         if iv is not None:
             self.iv = iv
 
-        super(HLSEncryptionConfig, self).__init__(self.__dict__)
+        super(HLSEncrpytionConfig, self).__init__(self.__dict__)
 
 
 class EncodingProfile(BitcodinObject):
 
-    def __init__(self, name, video_stream_configs, audio_stream_configs):
+    def __init__(self, name, video_stream_configs, audio_stream_configs, rotation=0, segment_length=None, watermark_config=None, cropping_config=None):
 
         self.name = name
         self.videoStreamConfigs = video_stream_configs
         self.audioStreamConfigs = audio_stream_configs
+        self.rotation = rotation
+        if segment_length is not None:
+            self.segmentLength = segment_length
+        if watermark_config is not None:
+            self.watermarkConfig = watermark_config
+        if cropping_config is not None:
+            self.croppingConfig = cropping_config
 
         super(EncodingProfile, self).__init__(self.__dict__)
 
 
 class VideoStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, frame_rate=None):
+    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, rate=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
         self.profile = profile
@@ -197,22 +253,53 @@ class VideoStreamConfig(BitcodinObject):
         self.height = height
         self.width = width
 
-        if frame_rate is not None:
-            self.fps = frame_rate
+        if rate is not None:
+            self.rate = rate
 
         super(VideoStreamConfig, self).__init__(self.__dict__)
 
 
 class AudioStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, sample_rate=None):
+    def __init__(self, default_stream_id, bitrate, rate=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
 
-        if sample_rate is not None:
-            self.sampleRate = sample_rate
+        if rate is not None:
+            self.rate = rate
 
         super(AudioStreamConfig, self).__init__(self.__dict__)
+
+
+class WatermarkConfig(BitcodinObject):
+
+    def __init__(self, image_url, top=None, bottom=None, left=None, right=None):
+        self.image = image_url
+        if top is not None:
+            self.top = top
+        if bottom is not None:
+            self.bottom = bottom
+        if left is not None:
+            self.left = left
+        if right is not None:
+            self.right = right
+
+        super(WatermarkConfig, self).__init__(self.__dict__)
+
+
+class CroppingConfig(BitcodinObject):
+
+    def __init__(self, top=None, bottom=None, left=None, right=None):
+        if top is not None:
+            self.top = top
+        if bottom is not None:
+            self.bottom = bottom
+        if left is not None:
+            self.left = left
+        if right is not None:
+            self.right = right
+
+        super(CroppingConfig, self).__init__(self.__dict__)
 
 
 class TransferConfig(BitcodinObject):
@@ -226,10 +313,9 @@ class TransferConfig(BitcodinObject):
 
 class Output(BitcodinObject):
 
-    def __init__(self, type, name, host):
+    def __init__(self, type, name):
         self.type = type
         self.name = name
-        self.host = host
 
         super(Output, self).__init__(self.__dict__)
 
@@ -247,7 +333,7 @@ class S3Output(Output):
         self.region = region
         self.makePublic = make_public
 
-        super(S3Output, self).__init__(self.type, self.name, self.host)
+        super(S3Output, self).__init__(self.type, self.name)
 
 
 class FTPOutput(Output):
@@ -260,7 +346,7 @@ class FTPOutput(Output):
         self.password = basic_auth_password
         self.passive = passive
 
-        super(FTPOutput, self).__init__(self.type, self.name, self.host)
+        super(FTPOutput, self).__init__(self.type, self.name)
 
 
 class LiveInstance(BitcodinObject):
@@ -273,3 +359,31 @@ class LiveInstance(BitcodinObject):
         self.outputId = output_id
 
         super(LiveInstance, self).__init__(self.__dict__)
+        
+        
+class GCSOutput(Output):
+
+    def __init__(self, name, access_key, secret_key, bucket, prefix, make_public=False):
+        self.type = 'gcs'
+        self.name = name
+        self.accessKey = access_key
+        self.secretKey = secret_key
+        self.bucket = bucket
+        self.prefix = prefix
+        self.makePublic = make_public
+
+        super(GCSOutput, self).__init__(self.type, self.name)
+
+
+class AzureOutput(Output):
+
+    def __init__(self, name, account_name, account_key, container, prefix):
+
+        self.type = 'azure'
+        self.name = name
+        self.accountName = account_name
+        self.accountKey = account_key
+        self.container = container
+        self.prefix = prefix
+
+        super(AzureOutput, self).__init__(self.type, self.name)

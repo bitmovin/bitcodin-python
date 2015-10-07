@@ -4,7 +4,7 @@ import unittest
 from bitcodin import create_output
 from bitcodin import delete_output
 from bitcodin import FTPOutput
-from bitcodin.test.settings import ftp_config
+from bitcodin.test.settings import ftp_output_config
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 class CreateFTPOutputTestCase(BitcodinTestCase):
@@ -14,9 +14,9 @@ class CreateFTPOutputTestCase(BitcodinTestCase):
         super(CreateFTPOutputTestCase, self).setUp()
         self.ftp_configuration = {
             'name': 'Python API Test FTP Output',
-            'host': ftp_config.get('host', None),
-            'username': ftp_config.get('username', None),
-            'password': ftp_config.get('password', None),
+            'host': ftp_output_config.get('host', None),
+            'username': ftp_output_config.get('username', None),
+            'password': ftp_output_config.get('password', None),
             'passive': True
         }
 

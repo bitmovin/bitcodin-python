@@ -16,20 +16,20 @@ from bitcodin import Input
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
-from bitcodin import S3Output
+from bitcodin import GCSOutput
 from bitcodin.exceptions import BitcodinError
-from bitcodin.test.settings import s3_output_config
+from bitcodin.test.settings import gcs_output_config
 from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class TransferJobToS3TestCase(BitcodinTestCase):
+class TransferJobToGCSTestCase(BitcodinTestCase):
     def setUp(self):
-        super(TransferJobToS3TestCase, self).setUp()
+        super(TransferJobToGCSTestCase, self).setUp()
         self.maxDiff = None
 
-        input_url = test_video_url
-        input = Input(input_url)
+        inputUrl = test_video_url
+        input = Input(inputUrl)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -43,25 +43,13 @@ class TransferJobToS3TestCase(BitcodinTestCase):
             manifest_types=self.manifests
         )
         self.job = create_job(job)
-        self.s3_configuration = {
-            'name': 'Python API Test Output',
-            'host': s3_output_config.get('host', None),
-            'access_key': s3_output_config.get('access_key', None),
-            'secret_key': s3_output_config.get('secret_key', None),
-            'bucket': s3_output_config.get('bucket', None),
-            'prefix': s3_output_config.get('prefix', None),
-            'region': s3_output_config.get('region', None),
-            'make_public': False
-        }
-        output = S3Output(
-            name=self.s3_configuration.get('name'),
-            host=self.s3_configuration.get('host'),
-            access_key=self.s3_configuration.get('access_key'),
-            secret_key=self.s3_configuration.get('secret_key'),
-            bucket=self.s3_configuration.get('bucket'),
-            prefix=self.s3_configuration.get('prefix'),
-            region=self.s3_configuration.get('region'),
-            make_public=self.s3_configuration.get('make_public')
+        output = GCSOutput(
+            name='Python Test Output',
+            access_key=gcs_output_config.get('accessKey'),
+            secret_key=gcs_output_config.get('secretKey'),
+            bucket=gcs_output_config.get('bucket'),
+            prefix=gcs_output_config.get('prefix'),
+            make_public=False
         )
         self.output = create_output(output)
 
@@ -83,7 +71,7 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
         delete_output(self.output.output_id)
-        super(TransferJobToS3TestCase, self).tearDown()
+        super(TransferJobToGCSTestCase, self).tearDown()
 
 
 if __name__ == '__main__':

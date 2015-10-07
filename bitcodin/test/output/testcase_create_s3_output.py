@@ -4,7 +4,7 @@ import unittest
 from bitcodin import create_output
 from bitcodin import delete_output
 from bitcodin import S3Output
-from bitcodin.test.settings import aws_config
+from bitcodin.test.settings import s3_output_config
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
@@ -16,12 +16,12 @@ class CreateS3OutputTestCase(BitcodinTestCase):
         super(CreateS3OutputTestCase, self).setUp()
         self.s3_configuration = {
             'name': 'Python API Test Output',
-            'host': aws_config.get('host', None),
-            'access_key': aws_config.get('access_key', None),
-            'secret_key': aws_config.get('secret_key', None),
-            'bucket': aws_config.get('bucket', None),
-            'prefix': aws_config.get('prefix', None),
-            'region': aws_config.get('region', None),
+            'host': s3_output_config.get('host', None),
+            'access_key': s3_output_config.get('access_key', None),
+            'secret_key': s3_output_config.get('secret_key', None),
+            'bucket': s3_output_config.get('bucket', None),
+            'prefix': s3_output_config.get('prefix', None),
+            'region': s3_output_config.get('region', None),
             'make_public': False
         }
         self.output = S3Output(

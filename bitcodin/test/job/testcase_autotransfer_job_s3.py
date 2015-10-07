@@ -23,13 +23,13 @@ from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class TransferJobToS3TestCase(BitcodinTestCase):
+class AutoTransferJobToS3TestCase(BitcodinTestCase):
     def setUp(self):
-        super(TransferJobToS3TestCase, self).setUp()
+        super(AutoTransferJobToS3TestCase, self).setUp()
         self.maxDiff = None
 
-        input_url = test_video_url
-        input = Input(input_url)
+        inputUrl = test_video_url
+        input = Input(inputUrl)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -37,12 +37,6 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        job = Job(
-            input_id=self.input.input_id,
-            encoding_profile_id=self.encoding_profile.encoding_profile_id,
-            manifest_types=self.manifests
-        )
-        self.job = create_job(job)
         self.s3_configuration = {
             'name': 'Python API Test Output',
             'host': s3_output_config.get('host', None),
@@ -66,24 +60,18 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         self.output = create_output(output)
 
     def runTest(self):
-        start_time = time()
-        time_limit = 600
-        while(True):
-            job_status = get_job_status(self.job.job_id)
-            if(job_status.status.lower() == 'finished'):
-                break
-            elif(job_status.status.lower() == 'error'):
-                raise BitcodinError('An error occured while waiting for job to be FINISHED', 'Job status changed to ERROR!')
-            elif(time() - start_time > time_limit):
-                raise BitcodinError('Timeout of job duration exceeded!', 'Job took too long!')
-            sleep(2)
-        transfer = transfer_job(self.job.job_id, self.output.output_id)
+        job = Job(
+            input_id=self.input.input_id,
+            encoding_profile_id=self.encoding_profile.encoding_profile_id,
+            manifest_types=self.manifests,
+            output_id=self.output.output_id
+        )
+        self.job = create_job(job)
 
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        delete_output(self.output.output_id)
-        super(TransferJobToS3TestCase, self).tearDown()
+        super(AutoTransferJobToS3TestCase, self).tearDown()
 
 
 if __name__ == '__main__':

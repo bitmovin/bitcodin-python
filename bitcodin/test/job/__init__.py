@@ -20,6 +20,19 @@ from .testcase_create_job_playready_widevine_drm_invalid import CreateJobPlayrea
 from .testcase_create_job_playready_widevine_drm import CreateJobPlayreadyWidevineDrmTestCase
 from .testcase_create_job_hls_encryption import CreateJobHLSEncryptionTestCase
 from .testcase_create_job_multiple_audio_streams import CreateJobWithMultipleAudioStreamsTestCase
+from .testcase_create_job_azure_input import CreateJobAzureInputTestCase
+from .testcase_create_job_s3_input import CreateJobS3InputTestCase
+from .testcase_transfer_job_gcs import TransferJobToGCSTestCase
+from .testcase_autotransfer_job_gcs import AutoTransferJobToGCSTestCase
+from .testcase_autotransfer_job_ftp import AutoTransferJobToFTPTestCase
+from .testcase_autotransfer_job_s3 import AutoTransferJobToS3TestCase
+from .testcase_create_job_rotation import CreateJobWithRotationTestCase
+from .testcase_create_job_specific_segment_length import CreateJobWithSpecificSegmentLengthTestCase
+from .testcase_create_job_specific_video_audio_sample_rates import CreateJobWithSpecificVideoAndAudioSampleRatesTestCase
+from .testcase_create_job_watermarked import CreateJobWithWatermarkTestCase
+from .testcase_create_job_cropping_video import CreateJobWithVideoCroppingTestCase
+from .testcase_transfer_job_azure import TransferJobToAzureTestCase
+
 
 
 def get_test_suite():
@@ -42,5 +55,17 @@ def get_test_suite():
     test_suite.addTest(TransferJobToNonExistentOutputTestCase())
     test_suite.addTest(TransferJobToFTPTestCase())
     test_suite.addTest(TransferJobToS3TestCase())
+    test_suite.addTest(CreateJobAzureInputTestCase())
+    test_suite.addTest(CreateJobS3InputTestCase())
+    test_suite.addTest(TransferJobToGCSTestCase())
+    test_suite.addTest(AutoTransferJobToGCSTestCase())
+    test_suite.addTest(AutoTransferJobToFTPTestCase())
+    test_suite.addTest(AutoTransferJobToS3TestCase())
+    test_suite.addTest(CreateJobWithRotationTestCase())
+    test_suite.addTest(CreateJobWithSpecificSegmentLengthTestCase())
+    test_suite.addTest(CreateJobWithSpecificVideoAndAudioSampleRatesTestCase())
+    test_suite.addTest(CreateJobWithWatermarkTestCase())
+    test_suite.addTest(CreateJobWithVideoCroppingTestCase())
+    test_suite.addTest(TransferJobToAzureTestCase())
 
     return test_suite

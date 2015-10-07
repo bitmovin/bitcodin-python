@@ -16,20 +16,20 @@ from bitcodin import Input
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
-from bitcodin import S3Output
+from bitcodin import AzureOutput
 from bitcodin.exceptions import BitcodinError
-from bitcodin.test.settings import s3_output_config
+from bitcodin.test.settings import azure_output_config
 from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class TransferJobToS3TestCase(BitcodinTestCase):
+class TransferJobToAzureTestCase(BitcodinTestCase):
     def setUp(self):
-        super(TransferJobToS3TestCase, self).setUp()
+        super(TransferJobToAzureTestCase, self).setUp()
         self.maxDiff = None
 
-        input_url = test_video_url
-        input = Input(input_url)
+        inputUrl = test_video_url
+        input = Input(inputUrl)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -43,32 +43,19 @@ class TransferJobToS3TestCase(BitcodinTestCase):
             manifest_types=self.manifests
         )
         self.job = create_job(job)
-        self.s3_configuration = {
-            'name': 'Python API Test Output',
-            'host': s3_output_config.get('host', None),
-            'access_key': s3_output_config.get('access_key', None),
-            'secret_key': s3_output_config.get('secret_key', None),
-            'bucket': s3_output_config.get('bucket', None),
-            'prefix': s3_output_config.get('prefix', None),
-            'region': s3_output_config.get('region', None),
-            'make_public': False
-        }
-        output = S3Output(
-            name=self.s3_configuration.get('name'),
-            host=self.s3_configuration.get('host'),
-            access_key=self.s3_configuration.get('access_key'),
-            secret_key=self.s3_configuration.get('secret_key'),
-            bucket=self.s3_configuration.get('bucket'),
-            prefix=self.s3_configuration.get('prefix'),
-            region=self.s3_configuration.get('region'),
-            make_public=self.s3_configuration.get('make_public')
+        output = AzureOutput(
+            name='Azure Test Output Python',
+            account_name=azure_output_config.get('accountName'),
+            account_key=azure_output_config.get('accountKey'),
+            container=azure_output_config.get('container'),
+            prefix=azure_output_config.get('prefix')
         )
         self.output = create_output(output)
 
     def runTest(self):
         start_time = time()
         time_limit = 600
-        while(True):
+        while True:
             job_status = get_job_status(self.job.job_id)
             if(job_status.status.lower() == 'finished'):
                 break
@@ -83,7 +70,7 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
         delete_output(self.output.output_id)
-        super(TransferJobToS3TestCase, self).tearDown()
+        super(TransferJobToAzureTestCase, self).tearDown()
 
 
 if __name__ == '__main__':

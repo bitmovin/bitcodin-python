@@ -10,6 +10,12 @@ from .testcase_get_encoding_profile import GetEncodingProfileTestCase
 from .testcase_delete_encoding_profile import DeleteEncodingProfileTestCase
 from .testcase_delete_non_existent_encoding_profile import DeleteNonExistentEncodingProfileTestCase
 from .testcase_get_list_encoding_profiles import GetEncodingProfileListTestCase
+from .testcase_create_encoding_profile_rotation import CreateEncodingProfileWithRotationTestCase
+from .testcase_create_encoding_profile_segment_length import CreateEncodingProfileWithSpecificSegmentLengthTestCase
+from .testcase_create_encoding_profile_sample_rate import CreateEncodingProfileWithSpecificSampleRatesTestCase
+from .testcase_create_encoding_profile_watermarked import CreateEncodingProfileWithWatermarkTestCase
+from .testcase_create_encoding_profile_cropping_config import CreateEncodingProfileWithCroppingConfigTestCase
+
 
 def get_test_suite():
     test_suite = TestSuite()
@@ -21,4 +27,9 @@ def get_test_suite():
     test_suite.addTest(DeleteEncodingProfileTestCase())
     test_suite.addTest(DeleteNonExistentEncodingProfileTestCase())
     test_suite.addTest(GetEncodingProfileListTestCase())
+    test_suite.addTest(CreateEncodingProfileWithRotationTestCase())
+    test_suite.addTest(CreateEncodingProfileWithSpecificSegmentLengthTestCase())
+    test_suite.addTest(CreateEncodingProfileWithSpecificSampleRatesTestCase())
+    test_suite.addTest(CreateEncodingProfileWithWatermarkTestCase())
+    test_suite.addTest(CreateEncodingProfileWithCroppingConfigTestCase())
     return test_suite
