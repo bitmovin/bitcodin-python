@@ -21,13 +21,20 @@ class CreateLiveInstanceTestCase(BitcodinTestCase):
         self.assertIsNotNone(outputs)
         self.assertGreaterEqual(len(encoding_profiles), 1)
         self.assertGreaterEqual(len(outputs), 1)
-        self.assertEqual(outputs[0].type, 'gcs')
+
+        output = None
+
+        for o in outputs:
+            if o.type == 'gcs':
+                output = o
+
+        self.assertIsNotNone(output, 'No GCS output was found!')
 
         live_instance = bitcodin.LiveInstance("test-live-stream",
                                               "stream",
                                               encoding_profiles[0].encoding_profile_id,
                                               30,
-                                              outputs[0].output_id)
+                                              output.output_id)
 
         live_instance = bitcodin.create_live_instance(live_instance)
 
