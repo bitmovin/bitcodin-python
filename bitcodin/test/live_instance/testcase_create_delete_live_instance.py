@@ -27,6 +27,7 @@ class CreateLiveInstanceTestCase(BitcodinTestCase):
         for o in outputs:
             if o.type == 'gcs':
                 output = o
+                break
 
         self.assertIsNotNone(output, 'No GCS output was found!')
 
