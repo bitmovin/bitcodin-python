@@ -6,8 +6,17 @@ import sys
 bitcodin.api_key = 'INSERT YOUR API KEY'
 
 encoding_profiles = bitcodin.list_encoding_profiles()
+outputs = bitcodin.list_outputs()
 
-live_instance = bitcodin.LiveInstance("test live stream", "stream", encoding_profiles[0].encoding_profile_id, 30)
+if len(outputs) <= 0:
+    print "No outputs found!"
+    sys.exit(-1)
+
+live_instance = bitcodin.LiveInstance("test live stream",
+                                      "stream",
+                                      encoding_profiles[0].encoding_profile_id,
+                                      30,
+                                      outputs[0].output_id)
 
 live_instance = bitcodin.create_live_instance(live_instance)
 

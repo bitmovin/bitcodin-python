@@ -262,7 +262,7 @@ def create_live_instance(live_instance_obj):
     :return: LiveInstance
     """
 
-    res = RestClient.post(url=get_api_base() + '/live-instance', headers=create_headers(),
+    res = RestClient.post(url=get_api_base() + '/livestream', headers=create_headers(),
                           content=live_instance_obj.to_json())
     live_instance_response = BitcodinObject(res)
 
@@ -276,7 +276,7 @@ def delete_live_instance(live_instance_id=None):
     :return: boolean
     """
 
-    url = get_api_base() + '/live-instance/%d' % live_instance_id
+    url = get_api_base() + '/livestream/%d' % live_instance_id
     res = RestClient.delete(url=url, headers=create_headers())
 
     live_instance_response = BitcodinObject(res)
@@ -291,7 +291,7 @@ def get_live_instance(live_instance_id=None):
     :return: LiveInstance
     """
 
-    url = get_api_base() + '/live-instance/%d' % live_instance_id
+    url = get_api_base() + '/livestream/%d' % live_instance_id
     res = RestClient.get(url=url, headers=create_headers())
 
     live_instance_response = BitcodinObject(res)
