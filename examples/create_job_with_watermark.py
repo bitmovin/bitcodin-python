@@ -4,7 +4,7 @@ from time import sleep
 import bitcodin
 import sys
 
-bitcodin.api_key = '0a609aa814e73e7b0470524dc5ecb5a393b2fe60d064c7bcb69db1cd7e719af8'
+bitcodin.api_key = '<YOUR_API_KEY>'
 
 input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv')
 input_result = bitcodin.create_input(input_obj)
@@ -49,7 +49,8 @@ manifests = ['mpd', 'm3u8']
 job = bitcodin.Job(
     input_id=input_result.input_id,
     encoding_profile_id=encoding_profile_result.encoding_profile_id,
-    manifest_types=manifests
+    manifest_types=manifests,
+    speed='standard'
 )
 
 try:
