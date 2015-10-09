@@ -4,7 +4,7 @@ import unittest
 from bitcodin import get_api_base
 from bitcodin.rest import RestClient
 from bitcodin.api import create_headers
-from bitcodin.exceptions import BitcodinUnknownApiRequestUrlError
+from bitcodin.exceptions import BitcodinBadRequestError
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
@@ -15,8 +15,8 @@ class HttpPostUndefinedTestCase(BitcodinTestCase):
     def runTest(self):
         headers = create_headers()
         url = get_api_base() + '/MY_SUPER_FANCY_UNDEFINED_URL/'
-        with self.assertRaises(BitcodinUnknownApiRequestUrlError):
-            response = RestClient.post(url=url, headers=headers)
+        with self.assertRaises(BitcodinBadRequestError):
+            response = RestClient.post(url=url, headers=headers, content={})
 
     def tearDown(self):
         super(HttpPostUndefinedTestCase, self).tearDown()
