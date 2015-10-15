@@ -28,13 +28,11 @@ class GetFTPOutputTestCase(BitcodinTestCase):
         )
         self.output = create_output(output)
 
-
     def runTest(self):
         output = get_output(self.output.output_id)
         self.assertEquals(self.output.name, output.name)
         self.assertEquals(self.output.host, output.host.split('/')[0])
         self.assertEquals(self.output.passive, output.passive)
-
 
     def tearDown(self):
         delete_output(self.output.output_id)
