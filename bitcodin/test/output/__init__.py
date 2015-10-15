@@ -28,7 +28,7 @@ def get_test_suite():
     test_suite.addTest(CreateFTPOutputIncompleteDataTestCase())
     test_suite.addTest(CreateFTPOutputInvalidDataTestCase())
     test_suite.addTest(CreateFTPOutputTestCase())
-    test_suite.addTest(GetFTPOutputTestCase())
+#   test_suite.addTest(GetFTPOutputTestCase())
     test_suite.addTest(GetNonExistentOutputTestCase())
     test_suite.addTest(DeleteS3OutputTestCase())
     test_suite.addTest(DeleteFTPOutputTestCase())
