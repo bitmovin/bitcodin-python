@@ -6,6 +6,10 @@ class BitcodinError(Exception):
         self.message = message
         self.error = error
 
+    def __str__(self):
+        error_string = super(BitcodinError, self).__str__()
+        return '%s\nError Message: %s\nAPI Response: %s' % (error_string, self.message, self.error)
+
 
 class BitcodinInternalServerError(BitcodinError):
     pass

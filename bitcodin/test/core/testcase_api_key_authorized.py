@@ -4,7 +4,7 @@ import unittest
 
 import bitcodin
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
-from bitcodin.exceptions import BitcodinNotFoundError
+from bitcodin.exceptions import BitcodinUnknownApiRequestUrlError
 from bitcodin.rest import RestClient
 
 
@@ -13,7 +13,7 @@ class ApiKeyAuthorizedTestCase(BitcodinTestCase):
         super(ApiKeyAuthorizedTestCase, self).setUp()
 
     def runTest(self):
-        with self.assertRaises(BitcodinNotFoundError):
+        with self.assertRaises(BitcodinUnknownApiRequestUrlError):
             response = RestClient.get(url=bitcodin.get_api_base(), headers=bitcodin.create_headers())
 
     def tearDown(self):
