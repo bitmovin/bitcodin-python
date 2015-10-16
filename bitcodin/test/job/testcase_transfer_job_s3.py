@@ -28,8 +28,8 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         super(TransferJobToS3TestCase, self).setUp()
         self.maxDiff = None
 
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,

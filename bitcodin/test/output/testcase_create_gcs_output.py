@@ -7,9 +7,10 @@ from bitcodin import GCSOutput
 from bitcodin.test.settings import gcs_output_config
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
-class CreateGCSOutputTestCase(BitcodinTestCase):
 
+class CreateGCSOutputTestCase(BitcodinTestCase):
     output = None
+
     def setUp(self):
         super(CreateGCSOutputTestCase, self).setUp()
 
