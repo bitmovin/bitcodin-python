@@ -4,6 +4,8 @@ import unittest
 from bitcodin import FTPOutput
 from bitcodin import create_output
 from bitcodin import delete_output
+from bitcodin import get_output
+from bitcodin.exceptions import BitcodinNotFoundError
 from bitcodin.test.settings import ftp_output_config
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
@@ -18,6 +20,8 @@ class DeleteFTPOutputTestCase(BitcodinTestCase):
             'password': ftp_output_config.get('password', None),
             'passive': True
         }
+
+    def runTest(self):
         output = FTPOutput(
             name=self.ftp_configuration.get('name'),
             host=self.ftp_configuration.get('host'),
@@ -26,9 +30,11 @@ class DeleteFTPOutputTestCase(BitcodinTestCase):
             passive=self.ftp_configuration.get('passive')
         )
         self.output = create_output(output)
+        self.assertIsNotNone(self.output.output_id)
 
-    def runTest(self):
         delete_output(self.output.output_id)
+        with self.assertRaises(BitcodinNotFoundError):
+            get_output(self.output.output_id)
 
     def tearDown(self):
         super(DeleteFTPOutputTestCase, self).tearDown()

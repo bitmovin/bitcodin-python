@@ -1,5 +1,7 @@
 __author__ = 'Dominic Miglar'
 
+import datetime
+
 
 class BitcodinError(Exception):
     def __init__(self, message, error):
@@ -8,7 +10,8 @@ class BitcodinError(Exception):
 
     def __str__(self):
         error_string = super(BitcodinError, self).__str__()
-        return '%s\nError Message: %s\nAPI Response: %s' % (error_string, self.message, self.error)
+        return '%s\nError Message: %s\nAPI Response: %s\n%s' % (error_string, self.message, self.error,
+                                                                datetime.datetime.now().time())
 
 
 class BitcodinInternalServerError(BitcodinError):
