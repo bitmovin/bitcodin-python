@@ -10,7 +10,7 @@ class BitcodinError(Exception):
 
     def __str__(self):
         error_string = super(BitcodinError, self).__str__()
-        return '%s\nError Message: %s\nAPI Response: %s\n%s' % (error_string, self.message, self.error,
+        return '%s\nError Message: %s\nAPI Response: %s\nOccurred at: %s' % (error_string, self.message, self.error,
                                                                 datetime.datetime.now().time())
 
 
