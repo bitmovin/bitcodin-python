@@ -4,7 +4,7 @@ from .resource import *
 from .rest import RestClient
 from .resource import BitcodinObject
 from .exceptions import BitcodinApiKeyNotSetError
-
+import os
 
 def create_input(input_obj):
     """
@@ -255,6 +255,50 @@ def delete_output(output_id=None):
     return True
 
 
+def create_live_instance(live_instance_obj):
+    """
+    Create a new live streaming instance
+    :param live_instance_obj: An bitcodin.LiveInstance object
+    :return: LiveInstance
+    """
+
+    res = RestClient.post(url=get_api_base() + '/livestream', headers=create_headers(),
+                          content=live_instance_obj.to_json())
+    live_instance_response = BitcodinObject(res)
+
+    return live_instance_response
+
+
+def delete_live_instance(live_instance_id=None):
+    """
+    Delete a live streaming instance
+    :param live_instance_id:
+    :return: boolean
+    """
+
+    url = get_api_base() + '/livestream/%d' % live_instance_id
+    res = RestClient.delete(url=url, headers=create_headers())
+
+    live_instance_response = BitcodinObject(res)
+
+    return live_instance_response
+
+
+def get_live_instance(live_instance_id=None):
+    """
+    Get LiveInstance object
+    :param live_instance_id:
+    :return: LiveInstance
+    """
+
+    url = get_api_base() + '/livestream/%d' % live_instance_id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    live_instance_response = BitcodinObject(res)
+
+    return live_instance_response
+
+
 def get_api_base():
     """
     Get the api base url
@@ -270,9 +314,11 @@ def create_headers():
     :return:
     """
     from bitcodin import api_key
-
     if api_key is None:
-        raise BitcodinApiKeyNotSetError("bitcodin.api_key is not set!", None)
+        if os.getenv('PYTHON_API_KEY', None) is None:
+            raise BitcodinApiKeyNotSetError("bitcodin.api_key is not set!", None)
+        else:
+             api_key = os.getenv('PYTHON_API_KEY')
 
     headers = {
         'Content-Type': 'application/json',

@@ -19,8 +19,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class GetJobListTestCase(BitcodinTestCase):
     def setUp(self):
         super(GetJobListTestCase, self).setUp()
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -35,7 +35,6 @@ class GetJobListTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
 
-
     def runTest(self):
         jobs = list_jobs()
         job_found = False
@@ -45,7 +44,6 @@ class GetJobListTestCase(BitcodinTestCase):
                 break
 
         self.assertEquals(job_found, True)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

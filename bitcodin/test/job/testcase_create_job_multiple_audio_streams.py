@@ -22,8 +22,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class CreateJobWithMultipleAudioStreamsTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateJobWithMultipleAudioStreamsTestCase, self).setUp()
-        inputUrl = test_video_url_multiple_audio_streams
-        input = Input(inputUrl)
+        input_url = test_video_url_multiple_audio_streams
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config_0 = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         audio_stream_config_1 = AudioStreamConfig(default_stream_id=1, bitrate=192000)
@@ -39,7 +39,6 @@ class CreateJobWithMultipleAudioStreamsTestCase(BitcodinTestCase):
 
         self.audio_meta_data = [audio_stream_config_0_meta_data, audio_stream_config_1_meta_data]
 
-
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
@@ -52,7 +51,6 @@ class CreateJobWithMultipleAudioStreamsTestCase(BitcodinTestCase):
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
-
 
     def tearDown(self):
         delete_input(self.input.input_id)

@@ -4,7 +4,7 @@ import bitcodin
 
 bitcodin.api_key = 'YOUR API KEY'
 
-input_obj = bitcodin.Input(url='http://eu-storage.bitcodin.com/inputs/Sintel.2010.720p.mkv')
+input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv')
 input_result = bitcodin.create_input(input_obj)
 
 video_configs = []
@@ -26,7 +26,7 @@ drm_config = bitcodin.PlayreadyWidevineCombinedDrmConfig(
     method='mpeg_cenc'
 )
 
-hls_encryption_config = bitcodin.HLSEncrpytionConfig(
+hls_encryption_config = bitcodin.HLSEncryptionConfig(
     key='cab5b529ae28d5cc5e3e7bc3fd4a544d',
     method='SAMPLE-AES',
     iv='08eecef4b026deec395234d94218273d'

@@ -21,8 +21,8 @@ class GetJobStatusTestCase(BitcodinTestCase):
         super(GetJobStatusTestCase, self).setUp()
         self.maxDiff = None
 
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -37,12 +37,10 @@ class GetJobStatusTestCase(BitcodinTestCase):
         )
         self.job = create_job(job)
 
-
     def runTest(self):
         job_status = get_job_status(self.job.job_id)
         self.assertEquals(job_status.job_id, self.job.job_id)
         self.assertEquals(job_status.status, 'Enqueued')
-
 
     def tearDown(self):
         delete_input(self.input.input_id)
