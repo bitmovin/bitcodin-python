@@ -40,7 +40,6 @@ def callback(arg):
     global FAILS
     global FAILED
 
-
     if "FAILS" not in globals():
         FAILS = 0
     if "SUCCESS" not in globals():
