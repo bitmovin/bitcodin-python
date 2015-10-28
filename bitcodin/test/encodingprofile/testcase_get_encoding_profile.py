@@ -19,7 +19,6 @@ class GetEncodingProfileTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.created_encoding_profile = create_encoding_profile(encoding_profile)
 
-
     def runTest(self):
         id = self.created_encoding_profile.encoding_profile_id
         encoding_profile = get_encoding_profile(id)
@@ -33,7 +32,6 @@ class GetEncodingProfileTestCase(BitcodinTestCase):
         self.assertEquals(self.created_encoding_profile.video_stream_configs[0].width, encoding_profile.video_stream_configs[0].width)
         self.assertEquals(self.created_encoding_profile.audio_stream_configs[0].default_stream_id, encoding_profile.audio_stream_configs[0].default_stream_id)
         self.assertEquals(self.created_encoding_profile.audio_stream_configs[0].bitrate, encoding_profile.audio_stream_configs[0].bitrate)
-
 
     def tearDown(self):
         delete_encoding_profile(self.created_encoding_profile.encoding_profile_id)

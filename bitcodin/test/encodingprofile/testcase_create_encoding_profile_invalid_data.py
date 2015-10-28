@@ -16,7 +16,7 @@ class CreateEncodingProfileInvalidDataTestCase(BitcodinTestCase):
     def runTest(self):
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=1, bitrate=512000,
-            profile='Mainerr', preset='nonexpreset', height=480, width=640)
+                                                profile='Mainerr', preset='nonexpreset', height=480, width=640)
 
         encoding_profile = EncodingProfile('API Test Profile X', [video_stream_config], [audio_stream_config])
         with self.assertRaises(BitcodinBadRequestError):

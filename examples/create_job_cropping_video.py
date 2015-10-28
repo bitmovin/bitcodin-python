@@ -2,6 +2,7 @@
 from time import sleep
 
 import bitcodin
+import sys
 
 bitcodin.api_key = 'YOUR API KEY'
 

@@ -1,6 +1,5 @@
-__author__ = 'David Moser - david.moser@bitmovin.net'
-
 #!/usr/bin/env python
+__author__ = 'David Moser - david.moser@bitmovin.net'
 
 import bitcodin
 

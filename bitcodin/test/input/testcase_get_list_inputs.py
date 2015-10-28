@@ -11,8 +11,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class GetInputListTestCase(BitcodinTestCase):
     def setUp(self):
         super(GetInputListTestCase, self).setUp()
-        inputUrl = 'http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv'
-        input = Input(inputUrl)
+        input_url = 'http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv'
+        input = Input(input_url)
         self.input = create_input(input)
 
     def runTest(self):

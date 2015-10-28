@@ -13,3 +13,6 @@
 * added examples for DASH and HLS encryption
 * added additional error informations
 
+## 1.0.1
+* PEP8 style guide cosmetics
+
