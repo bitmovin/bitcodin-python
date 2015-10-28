@@ -18,8 +18,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class CreateJobTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateJobTestCase, self).setUp()
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,

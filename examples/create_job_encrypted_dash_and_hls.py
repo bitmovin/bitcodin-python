@@ -26,7 +26,7 @@ drm_config = bitcodin.PlayreadyWidevineCombinedDrmConfig(
     method='mpeg_cenc'
 )
 
-hls_encryption_config = bitcodin.HLSEncrpytionConfig(
+hls_encryption_config = bitcodin.HLSEncryptionConfig(
     key='cab5b529ae28d5cc5e3e7bc3fd4a544d',
     method='SAMPLE-AES',
     iv='08eecef4b026deec395234d94218273d'

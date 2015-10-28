@@ -6,6 +6,7 @@ from .resource import BitcodinObject
 from .exceptions import BitcodinApiKeyNotSetError
 import os
 
+
 def create_input(input_obj):
     """
     Create an Input for bitcodin
@@ -56,8 +57,7 @@ def delete_input(input_id=None):
     :return: boolean
     """
     url = get_api_base()+'/input/%d' % input_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    return RestClient.delete(url=url, headers=create_headers())
 
 
 def analyze_input(input_id=None):
@@ -80,8 +80,8 @@ def delete_encoding_profile(encoding_profile_id=None):
     :return: boolean
     """
     url = get_api_base() + '/encoding-profile/%d' % encoding_profile_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    return RestClient.delete(url=url, headers=create_headers())
+
 
 def create_encoding_profile(encoding_profile):
     """
@@ -251,8 +251,47 @@ def delete_output(output_id=None):
     """
 
     url = get_api_base() + '/output/%d' % output_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    return RestClient.delete(url=url, headers=create_headers())
+
+
+def create_live_instance(live_instance_obj):
+    """
+    Create a new live streaming instance
+    :param live_instance_obj: An bitcodin.LiveInstance object
+    :return: LiveInstance
+    """
+
+    res = RestClient.post(url=get_api_base() + '/livestream', headers=create_headers(),
+                          content=live_instance_obj.to_json())
+    live_instance_response = BitcodinObject(res)
+
+    return live_instance_response
+
+
+def delete_live_instance(live_instance_id=None):
+    """
+    Delete a live streaming instance
+    :param live_instance_id:
+    :return: boolean
+    """
+
+    url = get_api_base() + '/livestream/%d' % live_instance_id
+    return RestClient.delete(url=url, headers=create_headers())
+
+
+def get_live_instance(live_instance_id=None):
+    """
+    Get LiveInstance object
+    :param live_instance_id:
+    :return: LiveInstance
+    """
+
+    url = get_api_base() + '/livestream/%d' % live_instance_id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    live_instance_response = BitcodinObject(res)
+
+    return live_instance_response
 
 
 def get_api_base():

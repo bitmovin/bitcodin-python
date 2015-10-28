@@ -11,7 +11,7 @@ from bitcodin import Input
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
-from bitcodin import HLSEncrpytionConfig
+from bitcodin import HLSEncryptionConfig
 from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
@@ -28,7 +28,7 @@ class CreateJobHLSEncryptionTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        self.hls_encryption_config = HLSEncrpytionConfig(
+        self.hls_encryption_config = HLSEncryptionConfig(
             key='cab5b529ae28d5cc5e3e7bc3fd4a544d',
             method='SAMPLE-AES',
             iv='08eecef4b026deec395234d94218273d'

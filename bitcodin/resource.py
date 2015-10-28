@@ -214,7 +214,7 @@ class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
         super(PlayreadyWidevineCombinedDrmConfig, self).__init__(system=system, method=method)
 
 
-class HLSEncrpytionConfig(BitcodinObject):
+class HLSEncryptionConfig(BitcodinObject):
 
     def __init__(self, key, method, iv=None):
         self.key = key
@@ -222,7 +222,7 @@ class HLSEncrpytionConfig(BitcodinObject):
         if iv is not None:
             self.iv = iv
 
-        super(HLSEncrpytionConfig, self).__init__(self.__dict__)
+        super(HLSEncryptionConfig, self).__init__(self.__dict__)
 
 
 class EncodingProfile(BitcodinObject):
@@ -349,6 +349,18 @@ class FTPOutput(Output):
         super(FTPOutput, self).__init__(self.type, self.name)
 
 
+class LiveStream(BitcodinObject):
+
+    def __init__(self, label, stream_key, encoding_profile_id, timeshift, output_id):
+        self.label = label
+        self.streamKey = stream_key
+        self.encodingProfileId = encoding_profile_id
+        self.timeshift = timeshift
+        self.outputId = output_id
+
+        super(LiveStream, self).__init__(self.__dict__)
+        
+        
 class GCSOutput(Output):
 
     def __init__(self, name, access_key, secret_key, bucket, prefix, make_public=False):

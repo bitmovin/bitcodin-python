@@ -15,6 +15,7 @@ from . import http
 from . import encodingprofile
 from . import input
 from . import statistics
+from . import live_stream
 
 VERBOSITY_LEVEL = 2
 
@@ -28,6 +29,7 @@ def _collect_test_suites():
     test_suites.append(job.get_test_suite())
     test_suites.append(statistics.get_test_suite())
     test_suites.append(output.get_test_suite())
+    test_suites.append(live_stream.get_test_suite())
     return test_suites
 
 
@@ -39,7 +41,6 @@ def callback(arg):
     global SUCCESS
     global FAILS
     global FAILED
-
 
     if "FAILS" not in globals():
         FAILS = 0

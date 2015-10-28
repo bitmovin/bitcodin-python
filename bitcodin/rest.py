@@ -45,18 +45,16 @@ class RestClient(object):
         else:
             raise BitcodinError('An error occured while communicating with the bitcodin API', json_result)
 
-
     @staticmethod
     def post(url=None, headers=None, content=None):
         result = requests.post(url, data=content, headers=headers)
 
         if result.status_code == 201 or result.status_code == 200:
-            if(result.text == ''):
+            if result.text == '':
                 return result.text
             return result.json()
         else:
             RestClient._raise_error(result)
-
 
     @staticmethod
     def get(url=None, headers=None):
@@ -67,11 +65,9 @@ class RestClient(object):
 
         return result.json()
 
-
     @staticmethod
     def put(self):
         pass
-
 
     @staticmethod
     def patch(url=None, headers=None, content=None):
@@ -82,12 +78,13 @@ class RestClient(object):
 
         return result.json()
 
-
     @staticmethod
     def delete(url=None, headers=None):
         result = requests.delete(url, headers=headers)
 
         if result.status_code == 204:
-            return result.json
+            return True
+        elif result.status_code == 200:
+            return result.json()
         else:
             RestClient._raise_error(result)
