@@ -57,8 +57,7 @@ def delete_input(input_id=None):
     :return: boolean
     """
     url = get_api_base()+'/input/%d' % input_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    return RestClient.delete(url=url, headers=create_headers())
 
 
 def analyze_input(input_id=None):
@@ -81,8 +80,8 @@ def delete_encoding_profile(encoding_profile_id=None):
     :return: boolean
     """
     url = get_api_base() + '/encoding-profile/%d' % encoding_profile_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    return RestClient.delete(url=url, headers=create_headers())
+
 
 def create_encoding_profile(encoding_profile):
     """
@@ -252,8 +251,7 @@ def delete_output(output_id=None):
     """
 
     url = get_api_base() + '/output/%d' % output_id
-    RestClient.delete(url=url, headers=create_headers())
-    return True
+    return RestClient.delete(url=url, headers=create_headers())
 
 
 def create_live_instance(live_instance_obj):
@@ -278,11 +276,7 @@ def delete_live_instance(live_instance_id=None):
     """
 
     url = get_api_base() + '/livestream/%d' % live_instance_id
-    res = RestClient.delete(url=url, headers=create_headers())
-
-    live_instance_response = BitcodinObject(res)
-
-    return live_instance_response
+    return RestClient.delete(url=url, headers=create_headers())
 
 
 def get_live_instance(live_instance_id=None):

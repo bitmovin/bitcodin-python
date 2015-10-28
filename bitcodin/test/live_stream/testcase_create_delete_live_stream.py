@@ -32,10 +32,10 @@ class CreateLiveStreamTestCase(BitcodinTestCase):
         self.assertIsNotNone(output, 'No GCS output was found!')
 
         live_stream = bitcodin.LiveStream("test-live-stream",
-                                            "stream",
-                                            encoding_profiles[0].encoding_profile_id,
-                                            120,
-                                            output.output_id)
+                                          "stream",
+                                          encoding_profiles[0].encoding_profile_id,
+                                          120,
+                                          output.output_id)
 
         live_stream = bitcodin.create_live_instance(live_stream)
 

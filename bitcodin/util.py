@@ -8,6 +8,9 @@ def convert_dict(d):
     Converts all camelCase styles attributes in the dictionary d to snake_case attributes.
     Returns the new dictionary which contains the snake_case attributes.
     """
+    if d is None:
+        return
+
     new_d = {}
     for k, v in d.items():
         new_d[convert(k)] = convert_dict(v) if isinstance(v, dict) else v
