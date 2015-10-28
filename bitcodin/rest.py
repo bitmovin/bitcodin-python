@@ -20,7 +20,7 @@ class RestClient(object):
 
     @staticmethod
     def _raise_error(result):
-        if(result.status_code == 500):
+        if result.status_code == 500:
             raise BitcodinInternalServerError('An HTTP 500 Internal Server Error occured', result.text)
 
         try:

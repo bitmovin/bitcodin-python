@@ -34,7 +34,6 @@ class GetS3OutputTestCase(BitcodinTestCase):
         )
         self.output = create_output(output)
 
-
     def runTest(self):
         output = get_output(self.output.output_id)
 
@@ -43,7 +42,6 @@ class GetS3OutputTestCase(BitcodinTestCase):
         self.assertEquals(self.output.prefix, output.prefix)
         self.assertEquals(self.output.region, output.region)
         self.assertEquals(self.output.make_public, output.make_public)
-
 
     def tearDown(self):
         delete_output(self.output.output_id)

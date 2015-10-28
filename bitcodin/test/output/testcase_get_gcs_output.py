@@ -22,13 +22,11 @@ class GetGCSOutputTestCase(BitcodinTestCase):
         )
         self.output = create_output(output)
 
-
     def runTest(self):
         output = get_output(self.output.output_id)
         self.assertEquals(self.output.name, output.name)
         self.assertEquals(self.output.bucket, output.bucket)
         self.assertEquals(self.output.prefix, output.prefix)
-
 
     def tearDown(self):
         delete_output(self.output.output_id)

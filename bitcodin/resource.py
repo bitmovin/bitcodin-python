@@ -83,6 +83,7 @@ class S3Input(BitcodinObject):
 
         super(S3Input, self).__init__(self.__dict__)
 
+
 class AzureInput(BitcodinObject):
 
     def __init__(self, account_name, account_key, container, url):

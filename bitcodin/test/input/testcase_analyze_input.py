@@ -11,10 +11,9 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class AnalyzeInputTestCase(BitcodinTestCase):
     def setUp(self):
         super(AnalyzeInputTestCase, self).setUp()
-        inputUrl = 'http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv'
-        input = Input(inputUrl)
+        input_url = 'http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv'
+        input = Input(input_url)
         self.created_input = create_input(input)
-
 
     def runTest(self):
         id = self.created_input.input_id
@@ -50,7 +49,6 @@ class AnalyzeInputTestCase(BitcodinTestCase):
         self.assertEquals(self.created_input.media_configurations[1].bitrate, input.media_configurations[1].bitrate)
         self.assertEquals(self.created_input.media_configurations[1].sample_format, input.media_configurations[1].sample_format)
         self.assertEquals(self.created_input.media_configurations[1].channel_format, input.media_configurations[1].channel_format)
-
 
     def tearDown(self):
         delete_input(self.created_input.input_id)

@@ -17,7 +17,7 @@ class CreateEncodingProfileWithWatermarkTestCase(BitcodinTestCase):
     def runTest(self):
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=1, bitrate=512000,
-            profile='Main', preset='standard', height=480, width=640)
+                                                profile='Main', preset='standard', height=480, width=640)
 
         watermark_config = WatermarkConfig(
             image_url='http://bitdash-a.akamaihd.net/webpages/bitcodin/images/bitcodin-bitmovin-logo-small.png',
@@ -43,7 +43,8 @@ class CreateEncodingProfileWithWatermarkTestCase(BitcodinTestCase):
         self.assertEquals(result.video_stream_configs[0].width, 640)
         self.assertEquals(result.audio_stream_configs[0].default_stream_id, 0)
         self.assertEquals(result.audio_stream_configs[0].bitrate, 192000)
-        self.assertEquals(result.watermark_config.image, 'http://bitdash-a.akamaihd.net/webpages/bitcodin/images/bitcodin-bitmovin-logo-small.png')
+        self.assertEquals(result.watermark_config.image,
+                          'http://bitdash-a.akamaihd.net/webpages/bitcodin/images/bitcodin-bitmovin-logo-small.png')
         self.assertEquals(result.watermark_config.bottom, 200)
         self.assertEquals(result.watermark_config.right, 100)
 
