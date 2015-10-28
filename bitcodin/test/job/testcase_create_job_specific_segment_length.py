@@ -18,8 +18,8 @@ from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 class CreateJobWithSpecificSegmentLengthTestCase(BitcodinTestCase):
     def setUp(self):
         super(CreateJobWithSpecificSegmentLengthTestCase, self).setUp()
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(
             default_stream_id=0,

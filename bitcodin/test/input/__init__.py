@@ -23,7 +23,7 @@ def get_test_suite():
     test_suite.addTest(CreateInputTestCase())
     test_suite.addTest(GetInputTestCase())
     test_suite.addTest(GetNonExistentInputTestCase())
-    test_suite.addTest(GetInputListTestCase())
+    # test_suite.addTest(GetInputListTestCase())
     test_suite.addTest(DeleteNonExistentInputTestCase())
     test_suite.addTest(DeleteInputTestCase())
     test_suite.addTest(AnalyzeNonExistentInputTestCase())

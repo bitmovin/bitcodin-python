@@ -28,8 +28,9 @@ class CreateJobWithMultipleAudioStreamsTestCase(BitcodinTestCase):
         audio_stream_config_0 = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         audio_stream_config_1 = AudioStreamConfig(default_stream_id=1, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
-            profile='Main', preset='standard', height=480, width=640)
-        encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config_0, audio_stream_config_1])
+                                                profile='Main', preset='standard', height=480, width=640)
+        encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config_0,
+                                                                                       audio_stream_config_1])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
         self.audio_meta_data = {}

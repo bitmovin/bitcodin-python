@@ -67,7 +67,7 @@ class TransferJobToS3TestCase(BitcodinTestCase):
 
     def runTest(self):
         start_time = time()
-        time_limit = 600
+        time_limit = 1200
         while(True):
             job_status = get_job_status(self.job.job_id)
             if(job_status.status.lower() == 'finished'):

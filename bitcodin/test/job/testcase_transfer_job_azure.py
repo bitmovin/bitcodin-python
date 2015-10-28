@@ -28,8 +28,8 @@ class TransferJobToAzureTestCase(BitcodinTestCase):
         super(TransferJobToAzureTestCase, self).setUp()
         self.maxDiff = None
 
-        inputUrl = test_video_url
-        input = Input(inputUrl)
+        input_url = test_video_url
+        input = Input(input_url)
         self.input = create_input(input)
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=0, bitrate=512000,
@@ -54,7 +54,7 @@ class TransferJobToAzureTestCase(BitcodinTestCase):
 
     def runTest(self):
         start_time = time()
-        time_limit = 600
+        time_limit = 1200
         while True:
             job_status = get_job_status(self.job.job_id)
             if(job_status.status.lower() == 'finished'):
