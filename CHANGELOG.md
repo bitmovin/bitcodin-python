@@ -7,3 +7,9 @@
 * implemented support for HLS Encryption
 * added test for Multiple Audio Streams feature
 
+## 1.0.0
+* implemented live stream support
+* added video_meta_data and extract_closed_captions functionality to job
+* added examples for DASH and HLS encryption
+* added additional error informations
+
