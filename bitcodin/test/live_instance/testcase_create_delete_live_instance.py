@@ -34,7 +34,7 @@ class CreateLiveInstanceTestCase(BitcodinTestCase):
         live_instance = bitcodin.LiveInstance("test-live-stream",
                                               "stream",
                                               encoding_profiles[0].encoding_profile_id,
-                                              30,
+                                              120,
                                               output.output_id)
 
         live_instance = bitcodin.create_live_instance(live_instance)
