@@ -6,6 +6,7 @@ from .resource import BitcodinObject
 from .exceptions import BitcodinApiKeyNotSetError
 import os
 
+
 def create_input(input_obj):
     """
     Create an Input for bitcodin

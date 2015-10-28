@@ -34,7 +34,6 @@ from .testcase_create_job_cropping_video import CreateJobWithVideoCroppingTestCa
 from .testcase_transfer_job_azure import TransferJobToAzureTestCase
 
 
-
 def get_test_suite():
     test_suite = TestSuite()
     test_suite.addTest(CreateJobInvalidDataTestCase())

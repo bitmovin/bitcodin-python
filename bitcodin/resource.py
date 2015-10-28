@@ -214,7 +214,7 @@ class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
         super(PlayreadyWidevineCombinedDrmConfig, self).__init__(system=system, method=method)
 
 
-class HLSEncrpytionConfig(BitcodinObject):
+class HLSEncryptionConfig(BitcodinObject):
 
     def __init__(self, key, method, iv=None):
         self.key = key
@@ -222,7 +222,7 @@ class HLSEncrpytionConfig(BitcodinObject):
         if iv is not None:
             self.iv = iv
 
-        super(HLSEncrpytionConfig, self).__init__(self.__dict__)
+        super(HLSEncryptionConfig, self).__init__(self.__dict__)
 
 
 class EncodingProfile(BitcodinObject):
