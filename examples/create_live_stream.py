@@ -22,31 +22,31 @@ if output is None:
     print "No gcs output found!"
     sys.exit(-1)
 
-live_instance = bitcodin.LiveInstance("test live stream",
+live_stream = bitcodin.LiveStream("test live stream",
                                       "stream",
                                       encoding_profiles[0].encoding_profile_id,
                                       120,
                                       output.output_id)
 
-live_instance = bitcodin.create_live_instance(live_instance)
+live_stream = bitcodin.create_live_instance(live_stream)
 
-print vars(live_instance)
+print vars(live_stream)
 
-while live_instance.status != 'RUNNING':
-    live_instance = bitcodin.get_live_instance(live_instance.id)
-    print vars(live_instance)
-    if live_instance.status == 'ERROR':
+while live_stream.status != 'RUNNING':
+    live_stream = bitcodin.get_live_instance(live_stream.id)
+    print vars(live_stream)
+    if live_stream.status == 'ERROR':
         print "Error occurred during live stream creation!"
         sys.exit(-1)
     time.sleep(2)
 
 
-bitcodin.delete_live_instance(live_instance.id)
+bitcodin.delete_live_instance(live_stream.id)
 
-while live_instance.status != 'TERMINATED':
-    live_instance = bitcodin.get_live_instance(live_instance.id)
-    print vars(live_instance)
-    if live_instance.status == 'ERROR':
+while live_stream.status != 'TERMINATED':
+    live_stream = bitcodin.get_live_instance(live_stream.id)
+    print vars(live_stream)
+    if live_stream.status == 'ERROR':
         print "Error occurred during live stream deletion!"
         sys.exit(-1)
     time.sleep(2)

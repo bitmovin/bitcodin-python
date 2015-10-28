@@ -349,7 +349,7 @@ class FTPOutput(Output):
         super(FTPOutput, self).__init__(self.type, self.name)
 
 
-class LiveInstance(BitcodinObject):
+class LiveStream(BitcodinObject):
 
     def __init__(self, label, stream_key, encoding_profile_id, timeshift, output_id):
         self.label = label
@@ -358,7 +358,7 @@ class LiveInstance(BitcodinObject):
         self.timeshift = timeshift
         self.outputId = output_id
 
-        super(LiveInstance, self).__init__(self.__dict__)
+        super(LiveStream, self).__init__(self.__dict__)
         
         
 class GCSOutput(Output):
