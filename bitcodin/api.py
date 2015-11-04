@@ -321,3 +321,18 @@ def create_headers():
     }
     return headers
 
+
+def create_vtt_mpd(vtt_mpd_request):
+    """
+    Create a vtt MPD an retrieve URL of generated MPD
+    :param vtt_mpd_request: VttMpdRequest
+    :return: string
+    """
+
+    url = get_api_base() + '/manifest/mpd/vtt'
+    res = RestClient.post(url=url, headers=create_headers(),
+                          content=vtt_mpd_request.to_json())
+
+    vtt_mpd_response = BitcodinObject(res)
+    return vtt_mpd_response
+
