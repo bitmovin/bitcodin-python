@@ -68,8 +68,9 @@ live_profile = bitcodin.EncodingProfile('Live Stream profile', video_configs, au
 live_profile = bitcodin.create_encoding_profile(live_profile)
 
 # CREATE LIVE STREAM
+stream_key = "stream"
 live_stream = bitcodin.LiveStream("test live stream",
-                                  "stream",
+                                  stream_key,
                                   live_profile.encoding_profile_id,
                                   120,
                                   output.output_id)
