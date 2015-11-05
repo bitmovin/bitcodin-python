@@ -69,10 +69,11 @@ live_profile = bitcodin.create_encoding_profile(live_profile)
 
 # CREATE LIVE STREAM
 stream_key = "stream"
+time_shift = 120
 live_stream = bitcodin.LiveStream("test live stream",
                                   stream_key,
                                   live_profile.encoding_profile_id,
-                                  120,
+                                  time_shift,
                                   output.output_id)
 
 live_stream = bitcodin.create_live_instance(live_stream)
