@@ -388,3 +388,22 @@ class AzureOutput(Output):
         self.prefix = prefix
 
         super(AzureOutput, self).__init__(self.type, self.name)
+
+
+class VttSubTitle(BitcodinObject):
+
+    def __init__(self, lang_short, lang_long, url):
+        self.langLong = lang_long
+        self.langShort = lang_short
+        self.url = url
+
+        super(VttSubTitle, self).__init__(self.__dict__)
+
+
+class VttMpdRequest(BitcodinObject):
+
+    def __init__(self, job_id, subtitles):
+        self.jobId = job_id
+        self.subtitles = subtitles
+
+        super(VttMpdRequest, self).__init__(self.__dict__)

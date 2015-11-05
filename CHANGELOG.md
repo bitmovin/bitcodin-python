@@ -16,3 +16,5 @@
 ## 1.0.1
 * PEP8 style guide cosmetics
 
+## 1.0.2
+* Improved Live Stream example
