@@ -5,7 +5,7 @@ import sys
 import datetime
 
 # SET YOUR API KEY
-bitcodin.api_key = '111bb7f8cda23fb3fcc13fda03d13f91d9e41350f28b37c063426e577ae4ea3c'
+bitcodin.api_key = 'YOU API KEY'
 
 # CREATE OUTPUT FOR YOUR LIVE STREAM DATA
 date = datetime.datetime.today()

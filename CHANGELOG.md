@@ -18,3 +18,6 @@
 
 ## 1.0.2
 * Improved Live Stream example
+
+## 1.0.3
+* Removed wrong api key
