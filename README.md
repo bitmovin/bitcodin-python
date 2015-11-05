@@ -4,7 +4,7 @@
 
 The bitcodin API for Python is a seamless integration with the [bitcodin cloud transcoding system](http://www.bitcodin.com). It enables the generation of MPEG-DASH and HLS content in just some minutes.
 
-Installation
+Installation 
 ------------
 
 ### Install with pip ###
