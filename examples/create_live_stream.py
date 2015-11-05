@@ -88,7 +88,8 @@ while live_stream.status != 'RUNNING':
         sys.exit(-1)
     time.sleep(2)
 
-print("Ready to stream. RTMP URL: %s" % live_stream.rtmp_push_url)
+print("Ready to stream.\nRTMP URL: %s\n" % live_stream.rtmp_push_url)
+print("MPD URL: %s\nHLS URL: %s\nSTREAM KEY: %s\n" % (live_stream.mpd_url, live_stream.hls_url, live_stream.stream_key))
 
 ####################################################
 # AT THIS POINT YOU CAN STREAM TO YOUR LIVE STREAM #
