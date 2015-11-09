@@ -46,7 +46,7 @@ sub_eng = bitcodin.VttSubTitle('eng', 'English', 'http://your.url/to/eng_sub.vtt
 subtitles.append(sub_de)
 subtitles.append(sub_eng)
 
-vtt_mpd_request = bitcodin.VttMpdRequest(51, subtitles)
+vtt_mpd_request = bitcodin.VttMpdRequest(job_result.job_id, subtitles)
 
 res = bitcodin.create_vtt_mpd(vtt_mpd_request)
 print(res.mpd_url)
