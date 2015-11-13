@@ -336,3 +336,17 @@ def create_vtt_mpd(vtt_mpd_request):
     vtt_mpd_response = BitcodinObject(res)
     return vtt_mpd_response
 
+
+def create_thumbnail(thumbnail_request):
+    """
+    Create a thumbnail of a given job with a given height and position
+    :param thumbnail_request: ThumbnailRequest
+    :return: string
+    """
+
+    url = get_api_base() + '/thumbnail'
+    res = RestClient.post(url=url, headers=create_headers(),
+                          content=thumbnail_request.to_json())
+
+    thumbnail_response = BitcodinObject(res)
+    return thumbnail_response

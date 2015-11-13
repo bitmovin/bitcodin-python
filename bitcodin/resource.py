@@ -246,7 +246,7 @@ class EncodingProfile(BitcodinObject):
 
 class VideoStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, rate=None):
+    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, rate=None, codec=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
         self.profile = profile
@@ -256,6 +256,9 @@ class VideoStreamConfig(BitcodinObject):
 
         if rate is not None:
             self.rate = rate
+
+        if codec is not None:
+            self.codec = codec
 
         super(VideoStreamConfig, self).__init__(self.__dict__)
 
@@ -407,3 +410,16 @@ class VttMpdRequest(BitcodinObject):
         self.subtitles = subtitles
 
         super(VttMpdRequest, self).__init__(self.__dict__)
+
+
+class ThumbnailRequest(BitcodinObject):
+
+    def __init__(self, job_id, height, position, filename=None):
+        self.jobId = job_id
+        self.height = height
+        self.position = position
+
+        if filename is not None:
+            self.filename = filename
+
+        super(ThumbnailRequest, self).__init__(self.__dict__)
