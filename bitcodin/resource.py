@@ -410,3 +410,16 @@ class VttMpdRequest(BitcodinObject):
         self.subtitles = subtitles
 
         super(VttMpdRequest, self).__init__(self.__dict__)
+
+
+class ThumbnailRequest(BitcodinObject):
+
+    def __init__(self, job_id, height, position, filename=None):
+        self.jobId = job_id
+        self.height = height
+        self.position = position
+
+        if filename is not None:
+            self.filename = filename
+
+        super(ThumbnailRequest, self).__init__(self.__dict__)
