@@ -32,6 +32,7 @@ from .testcase_create_job_specific_video_audio_sample_rates import CreateJobWith
 from .testcase_create_job_watermarked import CreateJobWithWatermarkTestCase
 from .testcase_create_job_cropping_video import CreateJobWithVideoCroppingTestCase
 from .testcase_transfer_job_azure import TransferJobToAzureTestCase
+from .testcase_create_job_deinterlace import CreateJobWithDeinterlacing
 
 
 def get_test_suite():
@@ -68,5 +69,6 @@ def get_test_suite():
     test_suite.addTest(CreateJobWithWatermarkTestCase())
     test_suite.addTest(CreateJobWithVideoCroppingTestCase())
     test_suite.addTest(TransferJobToAzureTestCase())
+    test_suite.addTest(CreateJobWithDeinterlacing())
 
     return test_suite
