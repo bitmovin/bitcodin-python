@@ -28,3 +28,6 @@
 * Implemented thumbnail support
 * Added thumbnail examples
 * Updated Live stream example
+
+## 1.2.0
+* Added support for deinterlacing jobs
