@@ -25,11 +25,6 @@ class BitcodinBadRequestError(BitcodinError):
 class BitcodinNotFoundError(BitcodinError):
     pass
 
-
-class BitcodinUnknownApiRequestUrlError(BitcodinError):
-    pass
-
-
 class BitcodinApiKeyNotAuthorizedError(BitcodinError):
     pass
 

@@ -1,11 +1,9 @@
 __author__ = 'David Moser <david.moser@bitmovin.net>'
 
 import requests
-from requests.exceptions import HTTPError
 
 from .exceptions import BitcodinError
 from .exceptions import BitcodinInternalServerError
-from .exceptions import BitcodinUnknownApiRequestUrlError
 from .exceptions import BitcodinApiKeyNotAuthorizedError
 from .exceptions import BitcodinBadRequestError
 from .exceptions import BitcodinNotFoundError
@@ -26,7 +24,7 @@ class RestClient(object):
             raise BitcodinError('An error occured which response could not be JSON-decoded.', result.text)
 
         if result.status_code == 404:
-            raise BitcodinUnknownApiRequestUrlError(
+            raise BitcodinNotFoundError(
                 'The API URL you requested does not exist',
                 json_result
             )
