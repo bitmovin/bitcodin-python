@@ -1,17 +1,12 @@
 __author__ = 'David Moser <david.moser@bitmovin.net>'
 
 import requests
-from requests.exceptions import HTTPError
 
 from .exceptions import BitcodinError
 from .exceptions import BitcodinInternalServerError
-from .exceptions import BitcodinUnknownApiRequestUrlError
 from .exceptions import BitcodinApiKeyNotAuthorizedError
 from .exceptions import BitcodinBadRequestError
 from .exceptions import BitcodinNotFoundError
-
-from .api_messages import ApiMessages
-
 
 class RestClient(object):
 
@@ -28,20 +23,18 @@ class RestClient(object):
         except ValueError:
             raise BitcodinError('An error occured which response could not be JSON-decoded.', result.text)
 
-        if json_result == ApiMessages.UNKNOWN_API_REQUEST_URL:
-            raise BitcodinUnknownApiRequestUrlError(
+        if result.status_code == 404:
+            raise BitcodinNotFoundError(
                 'The API URL you requested does not exist',
                 json_result
             )
-        elif json_result == ApiMessages.API_KEY_NOT_AUTHORIZED:
+        elif result.status_code == 401:
             raise BitcodinApiKeyNotAuthorizedError(
                 'The API Key used in the request was not authorized to access the API.',
                 json_result
             )
         elif result.status_code == 400:
             raise BitcodinBadRequestError('The API received a invalid request.', json_result)
-        elif result.status_code == 404:
-            raise BitcodinNotFoundError('The API did not find a resource you requested.', json_result)
         else:
             raise BitcodinError('An error occured while communicating with the bitcodin API', json_result)
 
