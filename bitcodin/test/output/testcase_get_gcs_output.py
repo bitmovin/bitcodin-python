@@ -21,6 +21,7 @@ class GetGCSOutputTestCase(BitcodinTestCase):
             make_public=False
         )
         self.output = create_output(output)
+        self.output = get_output(self.output.output_id)
 
     def runTest(self):
         output = get_output(self.output.output_id)
