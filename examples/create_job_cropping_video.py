@@ -73,8 +73,8 @@ job = bitcodin.Job(
 try:
     job_result = bitcodin.create_job(job)
 except Exception, e:
-    print 'Could not start job: %s' % e.message
-    print 'API Response: %s' % e.error
+    print('Could not start job: %s' % e.message)
+    print('API Response: %s' % e.error)
     sys.exit()
 
 while job_result.status != 'Finished' and job_result.status != 'Error':

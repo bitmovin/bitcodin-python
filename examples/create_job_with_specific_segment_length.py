@@ -54,4 +54,4 @@ while job_result.status != 'Finished' and job_result.status != 'Error':
     sleep(5)
 
 print(vars(job_result))
-print "Job Finished!"
+print("Job Finished!")
