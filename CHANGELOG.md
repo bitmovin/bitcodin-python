@@ -33,4 +33,8 @@
 * Added support for deinterlacing jobs
 
 ## 1.2.2
-* Removed BitcodinUnknownApiRequestUrlError and refactored tests
+* Refactored tests
+
+## 1.2.3
+* Removed BitcodinUnknownApiRequestUrlError and refactored tests 
+* Updated examples
