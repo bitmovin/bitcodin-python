@@ -37,14 +37,15 @@ manifests = ['mpd', 'm3u8']
 job = bitcodin.Job(
     input_id=input_result.input_id,
     encoding_profile_id=encoding_profile_result.encoding_profile_id,
-    manifest_types=manifests
+    manifest_types=manifests,
+    speed='standard'
 )
 job_result = bitcodin.create_job(job)
 
 while job_result.status != 'Finished' and job_result.status != 'Error':
     job_result = bitcodin.get_job(job_result.job_id)
-    print vars(job_result)
+    print(vars(job_result))
     sleep(5)
 
-print vars(job_result)
-print "Job Finished!"
+print(vars(job_result))
+print("Job Finished!")

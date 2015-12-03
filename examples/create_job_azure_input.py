@@ -50,8 +50,8 @@ job_result = bitcodin.create_job(job)
 
 while job_result.status != 'Finished' and job_result.status != 'Error':
     job_result = bitcodin.get_job(job_result.job_id)
-    print vars(job_result)
+    print(vars(job_result))
     sleep(5)
 
-print vars(job_result)
-print "Job Finished!"
+print(vars(job_result))
+print("Job Finished!")
