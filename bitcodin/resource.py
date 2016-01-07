@@ -109,7 +109,7 @@ class Job(BitcodinObject):
 
     def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
                  hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None,
-                 location=None, output_id=None, deinterlace=None):
+                 location=None, output_id=None, deinterlace=None, merge_audio_channel_configs=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -131,6 +131,8 @@ class Job(BitcodinObject):
             self.outputId = output_id
         if deinterlace is not None:
             self.deinterlace = deinterlace
+        if merge_audio_channel_configs is not None:
+            self.mergeAudioChannelConfigs = merge_audio_channel_configs
 
         super(Job, self).__init__(self.__dict__)
 
@@ -425,3 +427,19 @@ class ThumbnailRequest(BitcodinObject):
             self.filename = filename
 
         super(ThumbnailRequest, self).__init__(self.__dict__)
+
+
+class TransmuxRequest(BitcodinObject):
+
+    def __init__(self, job_id):
+        self.jobId = job_id
+        super(TransmuxRequest, self).__init__(self.__dict__)
+
+
+class MergeAudioChannelConfig(BitcodinObject):
+
+    def __init__(self, audio_channels=None):
+        if not audio_channels:
+            audio_channels = []
+        self.audioChannels = audio_channels
+        super(MergeAudioChannelConfig, self).__init__(self.__dict__)

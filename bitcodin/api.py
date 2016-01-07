@@ -350,3 +350,33 @@ def create_thumbnail(thumbnail_request):
 
     thumbnail_response = BitcodinObject(res)
     return thumbnail_response
+
+
+def create_transmux_job(transmux_request):
+    """
+    Transmux a Job to several output files for progressive streaming
+    :param transmux_request:
+    :return: string
+    """
+
+    url = get_api_base() + '/transmuxjob'
+    res = RestClient.post(url=url, headers=create_headers(),
+                          content=transmux_request.to_json())
+
+    transmux_job_response = BitcodinObject(res)
+    return transmux_job_response
+
+
+def get_transmux_job(transmux_job_id):
+    """
+    Gets details about a transmuxing job
+    :param transmux_job_id: string
+    :return: string
+    """
+
+    url = get_api_base() + '/transmuxjob/' + transmux_job_id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    transmux_job_response = BitcodinObject(res)
+    return transmux_job_response
+
