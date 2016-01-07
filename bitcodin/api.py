@@ -380,3 +380,16 @@ def get_transmux_job(transmux_job_id):
     transmux_job_response = BitcodinObject(res)
     return transmux_job_response
 
+
+def get_manifest_info(job_id):
+    """
+    Gets manifest info of a job
+    :param job_id:
+    :return: string
+    """
+
+    url = get_api_base() + '/job/' + job_id + '/manifest-info'
+    res = RestClient.get(url=url, headers=create_headers())
+
+    manifest_info_response = BitcodinObject(res)
+    return manifest_info_response
