@@ -49,6 +49,6 @@ while job_result.status != 'Finished' and job_result.status != 'Error':
 
 print("Job Finished!")
 
-manifest_info = bitcodin.get_manifest_info(job.job_id)
+manifest_info = bitcodin.get_manifest_info(job_result.job_id)
 print("Manifest Information:")
 print(vars(manifest_info))

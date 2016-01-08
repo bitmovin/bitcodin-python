@@ -374,7 +374,7 @@ def get_transmux_job(transmux_job_id):
     :return: string
     """
 
-    url = get_api_base() + '/transmuxjob/' + transmux_job_id
+    url = get_api_base() + '/transmuxjob/%d' % transmux_job_id
     res = RestClient.get(url=url, headers=create_headers())
 
     transmux_job_response = BitcodinObject(res)
@@ -388,7 +388,7 @@ def get_manifest_info(job_id):
     :return: string
     """
 
-    url = get_api_base() + '/job/' + job_id + '/manifest-info'
+    url = get_api_base() + '/job/%d' % job_id + '/manifest-info'
     res = RestClient.get(url=url, headers=create_headers())
 
     manifest_info_response = BitcodinObject(res)
