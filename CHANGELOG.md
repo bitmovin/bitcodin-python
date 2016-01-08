@@ -38,3 +38,7 @@
 ## 1.2.3
 * Removed BitcodinUnknownApiRequestUrlError and refactored tests 
 * Updated examples
+
+## 1.2.4
+* Added audio merging feature example
+* Added manifest info example
