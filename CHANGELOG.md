@@ -42,3 +42,6 @@
 ## 1.2.4
 * Added audio merging feature example
 * Added manifest info example
+
+## 1.2.5
+* Fixed wrong api base url
