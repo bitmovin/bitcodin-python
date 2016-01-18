@@ -45,3 +45,6 @@
 
 ## 1.2.5
 * Fixed wrong api base url
+
+## 1.2.6
+* Adjusted endpoint url
