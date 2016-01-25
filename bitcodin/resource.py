@@ -46,20 +46,22 @@ class BitcodinObject(dict):
 
 class Input(BitcodinObject):
 
-    def __init__(self, url=None):
+    def __init__(self, url=None, skip_analysis=False):
         """
         :param url: string: Url to the source
+        :param skip_analysis: boolean: Skip analysis of video
         :return: Input
         """
         self.type = 'url'
         self.url = url
+        self.skipAnalysis = skip_analysis
 
         super(Input, self).__init__(self.__dict__)
 
 
 class S3Input(BitcodinObject):
 
-    def __init__(self, access_key, secret_key, bucket, region, object_key, host=None):
+    def __init__(self, access_key, secret_key, bucket, region, object_key, host=None, skip_analysis=False):
         """
 
         :param access_key: AWS Access Key ID
@@ -68,6 +70,7 @@ class S3Input(BitcodinObject):
         :param region: AWS Region
         :param object_key: Path to object/file
         :param host: AWS Host (optional)
+        :param skip_analysis: boolean: Skip analysis of video
         :return: S3Input
         """
 
@@ -80,19 +83,21 @@ class S3Input(BitcodinObject):
         self.bucket = bucket
         self.region = region
         self.objectKey = object_key
+        self.skipAnalysis = skip_analysis
 
         super(S3Input, self).__init__(self.__dict__)
 
 
 class AzureInput(BitcodinObject):
 
-    def __init__(self, account_name, account_key, container, url):
+    def __init__(self, account_name, account_key, container, url, skip_analysis=False):
         """
 
         :param account_name: Azure Account Name
         :param account_key: Azure Account Key
         :param container: Container Name
         :param url: URL to file/object
+        :param skip_analysis: boolean: Skip analysis of video
         :return: AzureInput
         """
 
@@ -101,6 +106,7 @@ class AzureInput(BitcodinObject):
         self.accountKey = account_key
         self.container = container
         self.url = url
+        self.skipAnalysis = skip_analysis
 
         super(AzureInput, self).__init__(self.__dict__)
 
