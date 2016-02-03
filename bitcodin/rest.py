@@ -8,6 +8,7 @@ from .exceptions import BitcodinApiKeyNotAuthorizedError
 from .exceptions import BitcodinBadRequestError
 from .exceptions import BitcodinNotFoundError
 
+
 class RestClient(object):
 
     def __init__(self):

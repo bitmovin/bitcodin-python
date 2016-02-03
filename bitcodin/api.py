@@ -15,7 +15,7 @@ def create_input(input_obj):
     """
 
     res = RestClient.post(url=get_api_base()+'/input/create', headers=create_headers(), content=input_obj.to_json())
-    input_obj = BitcodinObject(res)
+    input_obj = BitcodinObject(res, True)
     return input_obj
 
 
@@ -27,7 +27,7 @@ def get_input(input_id=None):
     """
     url = get_api_base()+'/input/%d' % input_id
     res = RestClient.get(url=url, headers=create_headers())
-    input_obj = BitcodinObject(res)
+    input_obj = BitcodinObject(res, True)
 
     return input_obj
 
@@ -45,7 +45,7 @@ def list_inputs(page=None):
         url = get_api_base()+'/inputs/%d' % page
 
     res = RestClient.get(url=url, headers=create_headers())
-    input_obj = BitcodinObject(res)
+    input_obj = BitcodinObject(res, True)
 
     return input_obj.inputs
 
@@ -68,7 +68,7 @@ def analyze_input(input_id=None):
     """
     url = get_api_base()+'/input/%d/analyze' % input_id
     res = RestClient.patch(url=url, headers=create_headers())
-    input_obj = BitcodinObject(res)
+    input_obj = BitcodinObject(res, True)
 
     return input_obj
 
@@ -94,7 +94,7 @@ def create_encoding_profile(encoding_profile):
     res = RestClient.post(url=get_api_base()+'/encoding-profile/create', headers=create_headers(),
                           content=encoding_profile.to_json())
 
-    encoding_profile = BitcodinObject(res)
+    encoding_profile = BitcodinObject(res, True)
 
     return encoding_profile
 
@@ -108,7 +108,7 @@ def get_encoding_profile(encoding_profile_id=None):
 
     url = get_api_base() + '/encoding-profile/%d' % encoding_profile_id
     res = RestClient.get(url=url, headers=create_headers())
-    encoding_profile = BitcodinObject(res)
+    encoding_profile = BitcodinObject(res, True)
 
     return encoding_profile
 
@@ -125,7 +125,7 @@ def list_encoding_profiles(page=None):
         url = get_api_base()+'/encoding-profiles/%d' % page
 
     res = RestClient.get(url=url, headers=create_headers())
-    encoding_profile_res = BitcodinObject(res)
+    encoding_profile_res = BitcodinObject(res, True)
 
     return encoding_profile_res.profiles
 
@@ -138,7 +138,7 @@ def create_job(job):
     """
 
     res = RestClient.post(url=get_api_base()+'/job/create', headers=create_headers(), content=job.to_json())
-    job = BitcodinObject(res)
+    job = BitcodinObject(res, True)
 
     return job
 
@@ -153,7 +153,7 @@ def get_job(job_id=None):
     url = get_api_base()+'/job/%d' % job_id
 
     res = RestClient.get(url=url, headers=create_headers())
-    job = BitcodinObject(res)
+    job = BitcodinObject(res, True)
 
     return job
 
@@ -168,7 +168,7 @@ def get_job_status(job_id=None):
     url = get_api_base()+'/job/%d/status' % job_id
 
     res = RestClient.get(url=url, headers=create_headers())
-    job_status = BitcodinObject(res)
+    job_status = BitcodinObject(res, True)
 
     return job_status
 
@@ -185,7 +185,7 @@ def list_jobs(page=None):
         url = get_api_base()+'/jobs/%d' % page
 
     res = RestClient.get(url=url, headers=create_headers())
-    jobs_res = BitcodinObject(res)
+    jobs_res = BitcodinObject(res, True)
 
     return jobs_res.jobs
 
@@ -194,7 +194,7 @@ def transfer_job(job_id, output_id):
     url = get_api_base() + '/job/transfer'
     transfer_config = TransferConfig(job_id, output_id)
     res = RestClient.post(url=url, headers=create_headers(), content=transfer_config.to_json())
-    #transfer = BitcodinObject(res)
+    #transfer = BitcodinObject(res, True)
     return True
 
 
@@ -206,7 +206,7 @@ def create_output(output):
     """
 
     res = RestClient.post(url=get_api_base()+'/output/create', headers=create_headers(), content=output.to_json())
-    output_response = BitcodinObject(res)
+    output_response = BitcodinObject(res, True)
 
     return output_response
 
@@ -221,7 +221,7 @@ def get_output(output_id=None):
     url = get_api_base()+'/output/%d' % output_id
 
     res = RestClient.get(url=url, headers=create_headers())
-    output_response = BitcodinObject(res)
+    output_response = BitcodinObject(res, True)
 
     return output_response
 
@@ -238,7 +238,7 @@ def list_outputs(page=None):
         url = get_api_base()+'/outputs/%d' % page
 
     res = RestClient.get(url=url, headers=create_headers())
-    output_response = BitcodinObject(res)
+    output_response = BitcodinObject(res, True)
 
     return output_response.outputs
 
@@ -263,7 +263,7 @@ def create_live_instance(live_instance_obj):
 
     res = RestClient.post(url=get_api_base() + '/livestream', headers=create_headers(),
                           content=live_instance_obj.to_json())
-    live_instance_response = BitcodinObject(res)
+    live_instance_response = BitcodinObject(res, True)
 
     return live_instance_response
 
@@ -289,7 +289,7 @@ def get_live_instance(live_instance_id=None):
     url = get_api_base() + '/livestream/%d' % live_instance_id
     res = RestClient.get(url=url, headers=create_headers())
 
-    live_instance_response = BitcodinObject(res)
+    live_instance_response = BitcodinObject(res, True)
 
     return live_instance_response
 
@@ -333,7 +333,7 @@ def create_vtt_mpd(vtt_mpd_request):
     res = RestClient.post(url=url, headers=create_headers(),
                           content=vtt_mpd_request.to_json())
 
-    vtt_mpd_response = BitcodinObject(res)
+    vtt_mpd_response = BitcodinObject(res, True)
     return vtt_mpd_response
 
 
@@ -348,7 +348,7 @@ def create_thumbnail(thumbnail_request):
     res = RestClient.post(url=url, headers=create_headers(),
                           content=thumbnail_request.to_json())
 
-    thumbnail_response = BitcodinObject(res)
+    thumbnail_response = BitcodinObject(res, True)
     return thumbnail_response
 
 
@@ -363,7 +363,7 @@ def create_transmux_job(transmux_request):
     res = RestClient.post(url=url, headers=create_headers(),
                           content=transmux_request.to_json())
 
-    transmux_job_response = BitcodinObject(res)
+    transmux_job_response = BitcodinObject(res, True)
     return transmux_job_response
 
 
@@ -377,7 +377,7 @@ def get_transmux_job(transmux_job_id):
     url = get_api_base() + '/transmuxjob/%d' % transmux_job_id
     res = RestClient.get(url=url, headers=create_headers())
 
-    transmux_job_response = BitcodinObject(res)
+    transmux_job_response = BitcodinObject(res, True)
     return transmux_job_response
 
 
@@ -391,5 +391,5 @@ def get_manifest_info(job_id):
     url = get_api_base() + '/job/%d' % job_id + '/manifest-info'
     res = RestClient.get(url=url, headers=create_headers())
 
-    manifest_info_response = BitcodinObject(res)
+    manifest_info_response = BitcodinObject(res, True)
     return manifest_info_response

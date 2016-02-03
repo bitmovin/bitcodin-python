@@ -44,11 +44,11 @@ job_result = bitcodin.create_job(job)
 
 while job_result.status != 'Finished' and job_result.status != 'Error':
     job_result = bitcodin.get_job(job_result.job_id)
-    print(vars(job_result))
+    print(job_result.to_json())
     sleep(5)
 
 print("Job Finished!")
 
 manifest_info = bitcodin.get_manifest_info(job_result.job_id)
 print("Manifest Information:")
-print(vars(manifest_info))
+print(manifest_info.to_json())
