@@ -48,3 +48,8 @@
 
 ## 1.2.6
 * Adjusted endpoint url
+
+## 1.3.0
+* Improved to_json() method for better debugging
+* Added fairplay hls encryptino job support
+* Adjusted examples
