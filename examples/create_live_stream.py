@@ -78,13 +78,13 @@ live_stream = bitcodin.LiveStream("test live stream",
 
 live_stream = bitcodin.create_live_instance(live_stream)
 
-print(vars(live_stream))
+print(live_stream.to_json())
 
 # Wait until live stream is running and ready
 
 while live_stream.status != 'RUNNING':
     live_stream = bitcodin.get_live_instance(live_stream.id)
-    print(vars(live_stream))
+    print(live_stream.to_json())
     if live_stream.status == 'ERROR':
         print("Error occurred during live stream creation!")
         sys.exit(-1)
@@ -106,7 +106,7 @@ print("MPD URL: %s\nHLS URL: %s\nSTREAM KEY: %s\n" % (live_stream.mpd_url, live_
 #
 # while live_stream.status != 'TERMINATED':
 #     live_stream = bitcodin.get_live_instance(live_stream.id)
-#     print(vars(live_stream))
+#     print(live_stream.to_json())
 #     if live_stream.status == 'ERROR':
 #         print("Error occurred during live stream deletion!")
 #         sys.exit(-1)

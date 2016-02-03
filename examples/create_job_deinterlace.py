@@ -74,8 +74,8 @@ except Exception, e:
 
 while job_result.status != 'Finished' and job_result.status != 'Error':
     job_result = bitcodin.get_job(job_result.job_id)
-    print(vars(job_result))
+    print(job_result.to_json())
     sleep(5)
 
-print(vars(job_result))
+print(job_result.to_json())
 print("Job Finished!")

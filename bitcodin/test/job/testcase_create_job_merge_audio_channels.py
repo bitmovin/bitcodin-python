@@ -61,7 +61,7 @@ class CreateJobTestCase(BitcodinTestCase):
 
         while self.job.status != 'Finished' and self.job.status != 'Error':
             self.job = bitcodin.get_job(self.job.job_id)
-            print(vars(self.job))
+            print(self.job.to_json())
             sleep(5)
 
     def tearDown(self):

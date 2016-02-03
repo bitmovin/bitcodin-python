@@ -6,36 +6,39 @@ from .util import convert_dict
 
 class BitcodinObject(dict):
 
-    def __init__(self, dictionary):
+    def __init__(self, dictionary, convert=False):
         """
-        :param dictionary: Result-Dictionary got from the bitcodin API
-
         Converts all dictionaries to BitcodinObject objects.
         """
         super(BitcodinObject, self).__init__()
-        dictionary = convert_dict(dictionary)
-        self.__dict__.update(dictionary)
-        for k, v in dictionary.items():
-            if isinstance(v, dict):
-                self.__dict__[k] = BitcodinObject(v)
+        if convert:
+            self.__dict__.update(convert_dict(dictionary))
+        else:
+            self.__dict__.update(dictionary)
+
+    def to_dict(self):
+        for k, v in self.__dict__.items():
+            if isinstance(v, BitcodinObject):
+                setattr(self, k, v.to_dict())
+
             if isinstance(v, list):
                 index = 0
                 for d in v:
-                    v[index] = BitcodinObject(d)
+                    if isinstance(d, BitcodinObject):
+                        v[index] = d.to_dict()
                     index += 1
                 del index
 
+        return self.__dict__
+
     def to_json(self):
-        return json.dumps(self)
+        return json.dumps(self.to_dict())
 
     def __getattr__(self, name):
         if name in self:
             return self[name]
         else:
             raise AttributeError('No such attribute: ' + name)
-
-    def __setattr__(self, name, value):
-        self[name] = value
 
     def __delattr__(self, name):
         if name in self:
@@ -46,20 +49,22 @@ class BitcodinObject(dict):
 
 class Input(BitcodinObject):
 
-    def __init__(self, url=None):
+    def __init__(self, url=None, skip_analysis=False):
         """
         :param url: string: Url to the source
+        :param skip_analysis: boolean: Skip analysis of video
         :return: Input
         """
         self.type = 'url'
         self.url = url
+        self.skipAnalysis = skip_analysis
 
-        super(Input, self).__init__(self.__dict__)
+        super(Input, self).__init__(self.to_dict())
 
 
 class S3Input(BitcodinObject):
 
-    def __init__(self, access_key, secret_key, bucket, region, object_key, host=None):
+    def __init__(self, access_key, secret_key, bucket, region, object_key, host=None, skip_analysis=False):
         """
 
         :param access_key: AWS Access Key ID
@@ -68,6 +73,7 @@ class S3Input(BitcodinObject):
         :param region: AWS Region
         :param object_key: Path to object/file
         :param host: AWS Host (optional)
+        :param skip_analysis: boolean: Skip analysis of video
         :return: S3Input
         """
 
@@ -80,19 +86,21 @@ class S3Input(BitcodinObject):
         self.bucket = bucket
         self.region = region
         self.objectKey = object_key
+        self.skipAnalysis = skip_analysis
 
-        super(S3Input, self).__init__(self.__dict__)
+        super(S3Input, self).__init__(self.to_dict())
 
 
 class AzureInput(BitcodinObject):
 
-    def __init__(self, account_name, account_key, container, url):
+    def __init__(self, account_name, account_key, container, url, skip_analysis=False):
         """
 
         :param account_name: Azure Account Name
         :param account_key: Azure Account Key
         :param container: Container Name
         :param url: URL to file/object
+        :param skip_analysis: boolean: Skip analysis of video
         :return: AzureInput
         """
 
@@ -101,15 +109,17 @@ class AzureInput(BitcodinObject):
         self.accountKey = account_key
         self.container = container
         self.url = url
+        self.skipAnalysis = skip_analysis
 
-        super(AzureInput, self).__init__(self.__dict__)
+        super(AzureInput, self).__init__(self.to_dict())
 
 
 class Job(BitcodinObject):
 
     def __init__(self, input_id, encoding_profile_id, manifest_types, speed=None, drm_config=None,
                  hls_encryption_config=None, extract_closed_captions=False, audio_meta_data=None, video_meta_data=None,
-                 location=None, output_id=None, deinterlace=None, merge_audio_channel_configs=None):
+                 location=None, output_id=None, deinterlace=None, merge_audio_channel_configs=None, duration=None,
+                 start_time=None):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
@@ -133,8 +143,12 @@ class Job(BitcodinObject):
             self.deinterlace = deinterlace
         if merge_audio_channel_configs is not None:
             self.mergeAudioChannelConfigs = merge_audio_channel_configs
+        if duration is not None:
+            self.duration = duration
+        if start_time is not None:
+            self.startTime = start_time
 
-        super(Job, self).__init__(self.__dict__)
+        super(Job, self).__init__(self.to_dict())
 
 
 class DrmConfig(BitcodinObject):
@@ -143,7 +157,7 @@ class DrmConfig(BitcodinObject):
         self.system = system
         self.method = method
 
-        super(DrmConfig, self).__init__(self.__dict__)
+        super(DrmConfig, self).__init__(self.to_dict())
 
 
 class AudioMetaData(BitcodinObject):
@@ -153,7 +167,7 @@ class AudioMetaData(BitcodinObject):
         self.language = language
         self.label = label
 
-        super(BitcodinObject, self).__init__(self.__dict__)
+        super(BitcodinObject, self).__init__(self.to_dict())
 
 
 class VideoMetaData(BitcodinObject):
@@ -163,7 +177,7 @@ class VideoMetaData(BitcodinObject):
         self.language = language
         self.label = label
 
-        super(BitcodinObject, self).__init__(self.__dict__)
+        super(BitcodinObject, self).__init__(self.to_dict())
 
 
 class WidevineDrmConfig(DrmConfig):
@@ -221,13 +235,15 @@ class PlayreadyWidevineCombinedDrmConfig(DrmConfig):
 
 class HLSEncryptionConfig(BitcodinObject):
 
-    def __init__(self, key, method, iv=None):
+    def __init__(self, key, method, iv=None, uri=None):
         self.key = key
         self.method = method
         if iv is not None:
             self.iv = iv
+        if uri is not None:
+            self.uri = uri
 
-        super(HLSEncryptionConfig, self).__init__(self.__dict__)
+        super(HLSEncryptionConfig, self).__init__(self.to_dict())
 
 
 class EncodingProfile(BitcodinObject):
@@ -245,7 +261,7 @@ class EncodingProfile(BitcodinObject):
         if cropping_config is not None:
             self.croppingConfig = cropping_config
 
-        super(EncodingProfile, self).__init__(self.__dict__)
+        super(EncodingProfile, self).__init__(self.to_dict())
 
 
 class VideoStreamConfig(BitcodinObject):
@@ -264,7 +280,7 @@ class VideoStreamConfig(BitcodinObject):
         if codec is not None:
             self.codec = codec
 
-        super(VideoStreamConfig, self).__init__(self.__dict__)
+        super(VideoStreamConfig, self).__init__(self.to_dict())
 
 
 class AudioStreamConfig(BitcodinObject):
@@ -276,7 +292,7 @@ class AudioStreamConfig(BitcodinObject):
         if rate is not None:
             self.rate = rate
 
-        super(AudioStreamConfig, self).__init__(self.__dict__)
+        super(AudioStreamConfig, self).__init__(self.to_dict())
 
 
 class WatermarkConfig(BitcodinObject):
@@ -292,7 +308,7 @@ class WatermarkConfig(BitcodinObject):
         if right is not None:
             self.right = right
 
-        super(WatermarkConfig, self).__init__(self.__dict__)
+        super(WatermarkConfig, self).__init__(self.to_dict())
 
 
 class CroppingConfig(BitcodinObject):
@@ -307,7 +323,7 @@ class CroppingConfig(BitcodinObject):
         if right is not None:
             self.right = right
 
-        super(CroppingConfig, self).__init__(self.__dict__)
+        super(CroppingConfig, self).__init__(self.to_dict())
 
 
 class TransferConfig(BitcodinObject):
@@ -316,7 +332,7 @@ class TransferConfig(BitcodinObject):
         self.jobId = job_id
         self.outputId = output_id
 
-        super(TransferConfig, self).__init__(self.__dict__)
+        super(TransferConfig, self).__init__(self.to_dict())
 
 
 class Output(BitcodinObject):
@@ -325,7 +341,7 @@ class Output(BitcodinObject):
         self.type = type
         self.name = name
 
-        super(Output, self).__init__(self.__dict__)
+        super(Output, self).__init__(self.to_dict())
 
 
 class S3Output(Output):
@@ -366,7 +382,7 @@ class LiveStream(BitcodinObject):
         self.timeshift = timeshift
         self.outputId = output_id
 
-        super(LiveStream, self).__init__(self.__dict__)
+        super(LiveStream, self).__init__(self.to_dict())
         
         
 class GCSOutput(Output):
@@ -404,7 +420,7 @@ class VttSubTitle(BitcodinObject):
         self.langShort = lang_short
         self.url = url
 
-        super(VttSubTitle, self).__init__(self.__dict__)
+        super(VttSubTitle, self).__init__(self.to_dict())
 
 
 class VttMpdRequest(BitcodinObject):

@@ -49,10 +49,10 @@ print("Job created!\n")
 # Wait until job is finished
 while job_result.status != 'Finished' and job_result.status != 'Error':
     job_result = bitcodin.get_job(job_result.job_id)
-    print(vars(job_result))
+    print(job_result.to_json())
     sleep(5)
 
-print(vars(job_result))
+print(job_result.to_json())
 print("Job Finished!\n")
 
 # Create a transmuxing job to generate files for progressive streaming
@@ -61,10 +61,10 @@ transmux_job = bitcodin.create_transmux_job(transmux_request)
 
 while transmux_job.status != 'Finished' and transmux_job.status != 'Error':
     transmux_job = bitcodin.get_transmux_job(transmux_job.id)
-    print(vars(transmux_job))
+    print(transmux_job.to_json())
     sleep(5)
 
-print(vars(transmux_job))
+print(transmux_job.to_json())
 print("Transmuxing succeeded!\nURLs of output files:")
 for url in transmux_job.files:
     print("%s\n" % url)
