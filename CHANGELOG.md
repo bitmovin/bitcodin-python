@@ -51,5 +51,9 @@
 
 ## 1.3.0
 * Improved to_json() method for better debugging
-* Added fairplay hls encryptino job support
+* Added fairplay hls encryption job support
+* Added create job skip analysis
 * Adjusted examples
+
+## 1.3.1
+* Added example to show how to use start time and duration
