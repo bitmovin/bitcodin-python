@@ -58,11 +58,7 @@ class CreateJobTestCase(BitcodinTestCase):
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
-
-        while self.job.status != 'Finished' and self.job.status != 'Error':
-            self.job = bitcodin.get_job(self.job.job_id)
-            print(self.job.to_json())
-            sleep(5)
+        self.wait_until_job_finished(self.job.job_id)
 
     def tearDown(self):
         bitcodin.delete_input(self.input.input_id)

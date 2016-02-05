@@ -63,6 +63,7 @@ class CreateJobWithWatermarkTestCase(BitcodinTestCase):
         self.assertEquals(self.encoding_profile.watermark_config.bottom, 200)
         self.assertEquals(self.encoding_profile.watermark_config.right, 100)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
+        self.wait_until_job_finished(self.job.job_id)
 
     def tearDown(self):
         delete_input(self.input.input_id)

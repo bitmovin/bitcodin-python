@@ -57,3 +57,11 @@
 
 ## 1.3.1
 * Added example to show how to use start time and duration
+
+## 1.4.0
+* Improved camel case to snake case conversion (Fixed wrong conversion of lists)
+* Adjusted tests to wait for jobs to finish
+* Added some tests
+
+## 1.4.1
+* Fixed bug that to_json() converts BitcodinObject to dict

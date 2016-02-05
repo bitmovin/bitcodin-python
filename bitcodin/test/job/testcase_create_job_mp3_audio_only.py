@@ -1,7 +1,9 @@
-__author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
+from time import sleep
+
+__author__ = 'David Moser <david.moser@bitmovin.com>'
 
 import unittest
-from bitcodin import create_job
+from bitcodin import create_job, get_job
 from bitcodin import create_input
 from bitcodin import create_encoding_profile
 from bitcodin import delete_input
@@ -9,36 +11,18 @@ from bitcodin import delete_encoding_profile
 from bitcodin import Job
 from bitcodin import Input
 from bitcodin import AudioStreamConfig
-from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
-from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class CreateJobWithRotationTestCase(BitcodinTestCase):
+class CreateJobTestCase(BitcodinTestCase):
     def setUp(self):
-        super(CreateJobWithRotationTestCase, self).setUp()
-        input_url = test_video_url
+        super(CreateJobTestCase, self).setUp()
+        input_url = "http://bitbucketireland.s3.amazonaws.com/audiosample.mp3"
         input = Input(input_url)
         self.input = create_input(input)
-        audio_stream_config = AudioStreamConfig(
-            default_stream_id=0,
-            bitrate=192000
-        )
-        video_stream_config = VideoStreamConfig(
-            default_stream_id=0,
-            bitrate=512000,
-            profile='Main',
-            preset='standard',
-            height=480,
-            width=640
-        )
-        encoding_profile = EncodingProfile(
-            name='API Test Profile',
-            video_stream_configs=[video_stream_config],
-            audio_stream_configs=[audio_stream_config],
-            rotation=45
-        )
+        audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
+        encoding_profile = EncodingProfile('Audio Only Test Profile', [], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
 
@@ -58,7 +42,7 @@ class CreateJobWithRotationTestCase(BitcodinTestCase):
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(CreateJobWithRotationTestCase, self).tearDown()
+        super(CreateJobTestCase, self).tearDown()
 
 
 if __name__ == '__main__':
