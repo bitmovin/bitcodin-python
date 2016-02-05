@@ -65,6 +65,7 @@ class CreateJobWithVideoCroppingTestCase(BitcodinTestCase):
         self.assertEquals(self.encoding_profile.cropping_config.bottom, 100)
         self.assertEquals(self.encoding_profile.cropping_config.left, 5)
         self.assertEquals(self.encoding_profile.cropping_config.right, 50)
+        self.wait_until_job_finished(self.job.id)
 
     def tearDown(self):
         delete_input(self.input.input_id)

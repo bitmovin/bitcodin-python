@@ -5,7 +5,7 @@ import bitcodin
 
 bitcodin.api_key = 'YOUR API KEY'
 
-input_obj = bitcodin.Input(url='http://download.wavetlan.com/SVV/Media/HTTP/MP3/Helix_Mobile_Producer/HelixMobileProducer_test6_MPEG1_Stereo_CBR_160kbps_44100Hz.mp3')
+input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/audiosample.mp3')
 print("INPUT REQUEST: %s\n\n" % input_obj.to_json())
 input_result = bitcodin.create_input(input_obj)
 print("INPUT RESULT: %s\n\n" % input_result.to_json())
