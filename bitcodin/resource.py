@@ -1,7 +1,7 @@
-__author__ = 'David Moser <david.moser@bitmovin.net>'
-
 import json
 from .util import convert_dict
+
+__author__ = 'David Moser <david.moser@bitmovin.net>'
 
 
 class BitcodinObject(dict):
@@ -16,6 +16,9 @@ class BitcodinObject(dict):
         else:
             self.__dict__.update(dictionary)
 
+        self.to_object(convert)
+
+    def to_object(self, convert=False):
         for k, v in self.__dict__.items():
             if isinstance(v, dict):
                 self.__dict__[k] = BitcodinObject(v, convert)
@@ -39,7 +42,7 @@ class BitcodinObject(dict):
             if isinstance(v, BitcodinObject):
                 setattr(self, k, v.to_dict())
 
-            if isinstance(v, list):
+            elif isinstance(v, list):
                 index = 0
                 for d in v:
                     if isinstance(d, BitcodinObject):
@@ -50,7 +53,9 @@ class BitcodinObject(dict):
         return self.__dict__
 
     def to_json(self):
-        return json.dumps(self.to_dict())
+        json_string = json.dumps(self.to_dict())
+        self.to_object()
+        return json_string
 
     def __getattr__(self, name):
         if name in self:
