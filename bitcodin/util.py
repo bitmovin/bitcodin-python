@@ -7,6 +7,7 @@ def convert_dict(d):
     """
     Converts all camelCase styles attributes in the dictionary d to snake_case attributes.
     Returns the new dictionary which contains the snake_case attributes.
+    :param d
     """
     if d is None:
         return
