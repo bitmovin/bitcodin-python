@@ -67,7 +67,7 @@ class AutoTransferJobToS3TestCase(BitcodinTestCase):
             output_id=self.output.output_id
         )
         self.job = create_job(job)
-        self.wait_until_job_finished(self.job.id)
+        self.wait_until_job_finished(self.job.job_id)
 
     def tearDown(self):
         delete_input(self.input.input_id)

@@ -46,7 +46,7 @@ class CreateJobS3InputTestCase(BitcodinTestCase):
         self.job = create_job(job)
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
-        self.wait_until_job_finished(self.job.id)
+        self.wait_until_job_finished(self.job.job_id)
 
     def tearDown(self):
         delete_input(self.input.input_id)

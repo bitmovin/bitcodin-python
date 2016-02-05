@@ -16,6 +16,24 @@ class BitcodinObject(dict):
         else:
             self.__dict__.update(dictionary)
 
+        for k, v in self.__dict__.items():
+            if isinstance(v, dict):
+                self.__dict__[k] = BitcodinObject(v, convert)
+
+            elif isinstance(v, list):
+                index = 0
+                for d in v:
+                    if isinstance(d, dict):
+                        v[index] = BitcodinObject(d, convert)
+                    else:
+                        v[index] = d
+                    index += 1
+                del index
+                self.__dict__[k] = v
+
+            else:
+                self.__dict__[k] = v
+
     def to_dict(self):
         for k, v in self.__dict__.items():
             if isinstance(v, BitcodinObject):
@@ -38,7 +56,7 @@ class BitcodinObject(dict):
         if name in self:
             return self[name]
         else:
-            raise AttributeError('No such attribute: ' + name)
+            raise AttributeError('No such attribute: %s' % name)
 
     def __delattr__(self, name):
         if name in self:

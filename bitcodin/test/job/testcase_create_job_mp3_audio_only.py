@@ -30,13 +30,14 @@ class CreateJobTestCase(BitcodinTestCase):
         job = Job(
             input_id=self.input.input_id,
             encoding_profile_id=self.encoding_profile.encoding_profile_id,
-            manifest_types=self.manifests
+            manifest_types=self.manifests,
+            speed='standard'
         )
         self.job = create_job(job)
         self.assertEquals(self.job.input.input_id, job.inputId)
         self.assertEquals(self.job.input.url, self.input.url)
         self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
-        self.wait_until_job_finished(self.job.id)
+        self.wait_until_job_finished(self.job.job_id)
 
     def tearDown(self):
         delete_input(self.input.input_id)
