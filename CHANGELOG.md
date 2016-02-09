@@ -65,3 +65,6 @@
 
 ## 1.4.1
 * Fixed bug that to_json() converts BitcodinObject to dict
+
+## 1.4.2
+* Fixed wrong conversion of int and float of dictionary
