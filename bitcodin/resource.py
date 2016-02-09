@@ -146,7 +146,7 @@ class Job(BitcodinObject):
         self.inputId = input_id
         self.encodingProfileId = encoding_profile_id
         self.manifestTypes = manifest_types
-        self.extract_closed_captions = extract_closed_captions
+        self.extractClosedCaptions = extract_closed_captions
 
         if speed is not None:
             self.speed = speed

@@ -15,9 +15,9 @@ from bitcodin import EncodingProfile
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class CreateJobTestCase(BitcodinTestCase):
+class CreateJobAudioOnlyTestCase(BitcodinTestCase):
     def setUp(self):
-        super(CreateJobTestCase, self).setUp()
+        super(CreateJobAudioOnlyTestCase, self).setUp()
         input_url = "http://bitbucketireland.s3.amazonaws.com/audiosample.mp3"
         input = Input(input_url)
         self.input = create_input(input)
@@ -42,7 +42,7 @@ class CreateJobTestCase(BitcodinTestCase):
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(CreateJobTestCase, self).tearDown()
+        super(CreateJobAudioOnlyTestCase, self).tearDown()
 
 
 if __name__ == '__main__':

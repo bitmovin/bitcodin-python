@@ -14,7 +14,15 @@ def convert_dict(d):
 
     new_d = {}
     for k, v in d.items():
-        new_d[convert(k)] = convert_dict(v) if isinstance(v, dict) else v
+        if isinstance(v, str):
+            try:
+                v = int(v)
+            except ValueError:
+                try:
+                    v = float(v)
+                except ValueError:
+                    v = v
+
         if isinstance(v, list):
             index = 0
             for d in v:
@@ -22,6 +30,8 @@ def convert_dict(d):
                     v[index] = convert_dict(d)
                 index += 1
             del index
+
+        new_d[convert(k)] = convert_dict(v) if isinstance(v, dict) else v
 
     return new_d
 
