@@ -2,7 +2,7 @@ __author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
 
 import unittest
 from time import sleep, time
-from bitcodin import create_job
+from bitcodin import create_job, list_transfer_jobs
 from bitcodin import create_input
 from bitcodin import create_encoding_profile
 from bitcodin import delete_input
@@ -40,7 +40,8 @@ class TransferJobToS3TestCase(BitcodinTestCase):
         job = Job(
             input_id=self.input.input_id,
             encoding_profile_id=self.encoding_profile.encoding_profile_id,
-            manifest_types=self.manifests
+            manifest_types=self.manifests,
+            speed='standard'
         )
         self.job = create_job(job)
         self.s3_configuration = {
@@ -68,16 +69,19 @@ class TransferJobToS3TestCase(BitcodinTestCase):
     def runTest(self):
         start_time = time()
         time_limit = 1200
-        while(True):
+        while True:
             job_status = get_job_status(self.job.job_id)
-            if(job_status.status.lower() == 'finished'):
+            if job_status.status.lower() == 'finished':
                 break
-            elif(job_status.status.lower() == 'error'):
+            elif job_status.status.lower() == 'error':
                 raise BitcodinError('An error occured while waiting for job to be FINISHED', 'Job status changed to ERROR!')
-            elif(time() - start_time > time_limit):
+            elif time() - start_time > time_limit:
                 raise BitcodinError('Timeout of job duration exceeded!', 'Job took too long!')
             sleep(2)
-        transfer = transfer_job(self.job.job_id, self.output.output_id)
+        transfer_started = transfer_job(self.job.job_id, self.output.output_id)
+        self.assertEqual(transfer_started, True)
+        transfer_jobs = list_transfer_jobs(self.job.job_id)
+        self.assertEqual(len(transfer_jobs), 1)
 
     def tearDown(self):
         delete_input(self.input.input_id)

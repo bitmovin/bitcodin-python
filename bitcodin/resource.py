@@ -11,6 +11,7 @@ class BitcodinObject(dict):
         Converts all dictionaries to BitcodinObject objects.
         """
         super(BitcodinObject, self).__init__()
+
         if convert:
             self.__dict__.update(convert_dict(dictionary))
         else:

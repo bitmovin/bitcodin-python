@@ -70,3 +70,8 @@ output_result = bitcodin.create_output(output_obj)
 
 print("Transferring job...")
 bitcodin.transfer_job(job_result.job_id, output_result.output_id)
+
+print("Show transfer jobs...")
+transfer_jobs = bitcodin.list_transfer_jobs(job_result.job_id)
+for transfer in transfer_jobs:
+    print("Transfer Job: %s" % transfer.to_json())
