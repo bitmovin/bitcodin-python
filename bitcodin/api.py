@@ -193,15 +193,27 @@ def list_jobs(page=None):
 def transfer_job(job_id, output_id):
     url = get_api_base() + '/job/transfer'
     transfer_config = TransferConfig(job_id, output_id)
-    res = RestClient.post(url=url, headers=create_headers(), content=transfer_config.to_json())
-    #transfer = BitcodinObject(res, True)
+    RestClient.post(url=url, headers=create_headers(), content=transfer_config.to_json())
     return True
+
+
+def list_transfer_jobs(job_id):
+    url = get_api_base() + '/job/%d/transfers' % job_id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    transfer_jobs = list()
+    if isinstance(res, list):
+        for item in res:
+            transfer = BitcodinObject(item, True)
+            transfer_jobs.append(transfer)
+
+    return transfer_jobs
 
 
 def create_output(output):
     """
     Create an output for bitcodin
-    :param: Output: A Output object to create
+    :param output: A Output object to create
     :return: BitcodinObject
     """
 

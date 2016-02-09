@@ -68,3 +68,8 @@
 
 ## 1.4.2
 * Fixed wrong conversion of int and float of dictionary
+
+## 1.4.3
+* Fixed wrong conversion of int and float with python 2.7 support
+* Added list_transfer_jobs() method
+* Adjusted tests and example
