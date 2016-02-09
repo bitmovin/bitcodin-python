@@ -42,7 +42,7 @@ class CreateJobAudioOnlyTestCase(BitcodinTestCase):
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(CreateJobTestCase, self).tearDown()
+        super(CreateJobAudioOnlyTestCase, self).tearDown()
 
 
 if __name__ == '__main__':
