@@ -15,9 +15,9 @@ from bitcodin import EncodingProfile
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class CreateJobTestCase(BitcodinTestCase):
+class CreateJobAudioOnlyTestCase(BitcodinTestCase):
     def setUp(self):
-        super(CreateJobTestCase, self).setUp()
+        super(CreateJobAudioOnlyTestCase, self).setUp()
         input_url = "http://bitbucketireland.s3.amazonaws.com/audiosample.mp3"
         input = Input(input_url)
         self.input = create_input(input)
