@@ -73,3 +73,6 @@
 * Fixed wrong conversion of int and float with python 2.7 support
 * Added list_transfer_jobs() method
 * Adjusted tests and example
+
+## 1.4.4
+* Changed to return object instead of boolean in transfer_job()
