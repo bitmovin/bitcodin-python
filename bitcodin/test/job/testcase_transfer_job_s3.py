@@ -78,8 +78,8 @@ class TransferJobToS3TestCase(BitcodinTestCase):
             elif time() - start_time > time_limit:
                 raise BitcodinError('Timeout of job duration exceeded!', 'Job took too long!')
             sleep(2)
-        transfer_started = transfer_job(self.job.job_id, self.output.output_id)
-        self.assertEqual(transfer_started, True)
+        transfer = transfer_job(self.job.job_id, self.output.output_id)
+        self.assertEqual(transfer.job_id, self.job.job_id)
         transfer_jobs = list_transfer_jobs(self.job.job_id)
         self.assertEqual(len(transfer_jobs), 1)
 

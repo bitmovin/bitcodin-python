@@ -193,8 +193,9 @@ def list_jobs(page=None):
 def transfer_job(job_id, output_id):
     url = get_api_base() + '/job/transfer'
     transfer_config = TransferConfig(job_id, output_id)
-    RestClient.post(url=url, headers=create_headers(), content=transfer_config.to_json())
-    return True
+    res = RestClient.post(url=url, headers=create_headers(), content=transfer_config.to_json())
+    transfer_res = BitcodinObject(res, True)
+    return transfer_res
 
 
 def list_transfer_jobs(job_id):

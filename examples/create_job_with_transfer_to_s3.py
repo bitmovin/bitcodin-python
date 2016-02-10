@@ -69,7 +69,8 @@ output_obj = bitcodin.S3Output(
 output_result = bitcodin.create_output(output_obj)
 
 print("Transferring job...")
-bitcodin.transfer_job(job_result.job_id, output_result.output_id)
+transfer_job = bitcodin.transfer_job(job_result.job_id, output_result.output_id)
+print("Transfer Job created: %s" % transfer_job)
 
 print("Show transfer jobs...")
 transfer_jobs = bitcodin.list_transfer_jobs(job_result.job_id)
