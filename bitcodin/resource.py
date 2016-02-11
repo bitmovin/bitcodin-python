@@ -361,18 +361,18 @@ class TransferConfig(BitcodinObject):
 
 class Output(BitcodinObject):
 
-    def __init__(self, type, name):
+    def __init__(self, type, name, create_sub_directory=True):
         self.type = type
         self.name = name
+        self.createSubDirectory = create_sub_directory
 
         super(Output, self).__init__(self.to_dict())
 
 
 class S3Output(Output):
 
-    def __init__(self, name, host, access_key, secret_key, bucket, prefix, region, make_public):
-        self.type = 's3'
-        self.name = name
+    def __init__(self, name, host, access_key, secret_key, bucket, prefix, region, make_public,
+                 create_sub_directory=True):
         self.host = host
         self.accessKey = access_key
         self.secretKey = secret_key
@@ -381,20 +381,41 @@ class S3Output(Output):
         self.region = region
         self.makePublic = make_public
 
-        super(S3Output, self).__init__(self.type, self.name)
+        super(S3Output, self).__init__('s3', name, create_sub_directory)
 
 
 class FTPOutput(Output):
 
-    def __init__(self, name, host, basic_auth_user, basic_auth_password, passive=True):
-        self.type = 'ftp'
-        self.name = name
+    def __init__(self, name, host, basic_auth_user, basic_auth_password, passive=True, create_sub_directory=True):
         self.host = host
         self.username = basic_auth_user
         self.password = basic_auth_password
         self.passive = passive
 
-        super(FTPOutput, self).__init__(self.type, self.name)
+        super(FTPOutput, self).__init__('ftp', name, create_sub_directory)
+
+
+class GCSOutput(Output):
+
+    def __init__(self, name, access_key, secret_key, bucket, prefix, make_public=False, create_sub_directory=True):
+        self.accessKey = access_key
+        self.secretKey = secret_key
+        self.bucket = bucket
+        self.prefix = prefix
+        self.makePublic = make_public
+
+        super(GCSOutput, self).__init__('gcs', name, create_sub_directory)
+
+
+class AzureOutput(Output):
+
+    def __init__(self, name, account_name, account_key, container, prefix, create_sub_directory=True):
+        self.accountName = account_name
+        self.accountKey = account_key
+        self.container = container
+        self.prefix = prefix
+
+        super(AzureOutput, self).__init__('azure', name, create_sub_directory)
 
 
 class LiveStream(BitcodinObject):
@@ -407,34 +428,6 @@ class LiveStream(BitcodinObject):
         self.outputId = output_id
 
         super(LiveStream, self).__init__(self.to_dict())
-        
-        
-class GCSOutput(Output):
-
-    def __init__(self, name, access_key, secret_key, bucket, prefix, make_public=False):
-        self.type = 'gcs'
-        self.name = name
-        self.accessKey = access_key
-        self.secretKey = secret_key
-        self.bucket = bucket
-        self.prefix = prefix
-        self.makePublic = make_public
-
-        super(GCSOutput, self).__init__(self.type, self.name)
-
-
-class AzureOutput(Output):
-
-    def __init__(self, name, account_name, account_key, container, prefix):
-
-        self.type = 'azure'
-        self.name = name
-        self.accountName = account_name
-        self.accountKey = account_key
-        self.container = container
-        self.prefix = prefix
-
-        super(AzureOutput, self).__init__(self.type, self.name)
 
 
 class VttSubTitle(BitcodinObject):
