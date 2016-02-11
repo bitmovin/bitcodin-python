@@ -76,3 +76,6 @@
 
 ## 1.4.4
 * Changed to return object instead of boolean in transfer_job()
+
+## 1.4.5
+* Added flag create_sub_directory to outputs
