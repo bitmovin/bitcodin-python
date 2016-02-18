@@ -30,7 +30,7 @@ class CreateJobWithVideoCroppingTestCase(BitcodinTestCase):
             default_stream_id=0,
             bitrate=512000,
             profile='Main',
-            preset='standard',
+            preset='premium',
             height=480,
             width=640
         )

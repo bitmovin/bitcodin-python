@@ -79,3 +79,7 @@
 
 ## 1.4.5
 * Added flag create_sub_directory to outputs
+
+## 1.4.6
+* Changed preset to premium
+* Adjusted encoding profile quality o examples

@@ -1,33 +1,23 @@
 __author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
 
 import unittest
-from time import sleep, time
-from bitcodin import create_job
+from bitcodin import create_job, ThumbnailRequest, create_thumbnail
 from bitcodin import create_input
 from bitcodin import create_encoding_profile
 from bitcodin import delete_input
 from bitcodin import delete_encoding_profile
-from bitcodin import transfer_job
-from bitcodin import create_output
-from bitcodin import delete_output
-from bitcodin import get_job_status
 from bitcodin import Job
 from bitcodin import Input
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
-from bitcodin import FTPOutput
-from bitcodin.exceptions import BitcodinError
-from bitcodin.test.settings import ftp_output_config
 from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
 
-class AutoTransferJobToFTPTestCase(BitcodinTestCase):
+class CreateThumbnailTestCase(BitcodinTestCase):
     def setUp(self):
-        super(AutoTransferJobToFTPTestCase, self).setUp()
-        self.maxDiff = None
-
+        super(CreateThumbnailTestCase, self).setUp()
         input_url = test_video_url
         input = Input(input_url)
         self.input = create_input(input)
@@ -37,36 +27,25 @@ class AutoTransferJobToFTPTestCase(BitcodinTestCase):
         encoding_profile = EncodingProfile('API Test Profile', [video_stream_config], [audio_stream_config])
         self.encoding_profile = create_encoding_profile(encoding_profile)
         self.manifests = ['m3u8', 'mpd']
-        self.ftp_configuration = {
-            'name': 'Python API Test FTP Output',
-            'host': ftp_output_config.get('host', None),
-            'username': ftp_output_config.get('username', None),
-            'password': ftp_output_config.get('password', None),
-            'passive': True
-        }
-        output = FTPOutput(
-            name=self.ftp_configuration.get('name'),
-            host=self.ftp_configuration.get('host'),
-            basic_auth_user=self.ftp_configuration.get('username'),
-            basic_auth_password=self.ftp_configuration.get('password'),
-            passive=self.ftp_configuration.get('passive')
-        )
-        self.output = create_output(output)
 
     def runTest(self):
         job = Job(
             input_id=self.input.input_id,
             encoding_profile_id=self.encoding_profile.encoding_profile_id,
-            manifest_types=self.manifests,
-            output_id=self.output.output_id
+            manifest_types=self.manifests
         )
         self.job = create_job(job)
-        self.wait_until_job_finished(self.job.job_id)
+        self.assertEquals(self.job.input.input_id, job.inputId)
+        self.assertEquals(self.job.input.url, self.input.url)
+        self.assertEquals(self.job.encoding_profiles[0].encoding_profile_id, job.encodingProfileId)
+        thumbnail_request = ThumbnailRequest(job_id=self.job.job_id, height=320, position=30)
+        thumbnail = create_thumbnail(thumbnail_request)
+        self.assertNotEqual(thumbnail.thumbnail_url, None)
 
     def tearDown(self):
         delete_input(self.input.input_id)
         delete_encoding_profile(self.encoding_profile.encoding_profile_id)
-        super(AutoTransferJobToFTPTestCase, self).tearDown()
+        super(CreateThumbnailTestCase, self).tearDown()
 
 
 if __name__ == '__main__':
