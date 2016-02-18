@@ -20,7 +20,7 @@ video_configs.append(bitcodin.VideoStreamConfig(
     default_stream_id=0,
     bitrate=1024000,
     profile='Main',
-    preset='standard',
+    preset='premium',
     height=768,
     width=1024
 ))
@@ -28,7 +28,7 @@ video_configs.append(bitcodin.VideoStreamConfig(
     default_stream_id=1,
     bitrate=512000,
     profile='Main',
-    preset='standard',
+    preset='premium',
     height=480,
     width=640
 ))

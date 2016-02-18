@@ -16,7 +16,7 @@ class CreateEncodingProfileWithRotationTestCase(BitcodinTestCase):
     def runTest(self):
         audio_stream_config = AudioStreamConfig(default_stream_id=0, bitrate=192000)
         video_stream_config = VideoStreamConfig(default_stream_id=1, bitrate=512000,
-                                                profile='Main', preset='standard', height=480, width=640)
+                                                profile='Main', preset='premium', height=480, width=640)
         encoding_profile = EncodingProfile(
             name='API Test Profile',
             video_stream_configs=[video_stream_config],

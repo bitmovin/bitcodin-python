@@ -9,7 +9,7 @@ input_result = bitcodin.create_input(input_obj)
 
 video_configs = []
 video_stream_config = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=512000,
-                                                 profile='Main', preset='standard', height=480, width=640)
+                                                 profile='Main', preset='premium', height=480, width=640)
 video_configs.append(video_stream_config)
 
 audio_configs = []
