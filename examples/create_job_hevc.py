@@ -12,21 +12,27 @@ video_configs = list()
 
 video_configs.append(bitcodin.VideoStreamConfig(
     default_stream_id=0,
-    bitrate=1024000,
+    bitrate=4800000,
     profile='Main',
     preset='premium',
-    height=768,
-    width=1024,
-    codec='hevc'
+    height=1080,
+    width=1920
 ))
 video_configs.append(bitcodin.VideoStreamConfig(
     default_stream_id=0,
-    bitrate=512000,
+    bitrate=2400000,
+    profile='Main',
+    preset='premium',
+    height=768,
+    width=1024
+))
+video_configs.append(bitcodin.VideoStreamConfig(
+    default_stream_id=0,
+    bitrate=1200000,
     profile='Main',
     preset='premium',
     height=480,
-    width=640,
-    codec='hevc'
+    width=854
 ))
 
 audio_configs = [bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)]

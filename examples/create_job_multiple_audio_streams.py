@@ -7,12 +7,34 @@ bitcodin.api_key = 'YOUR API KEY'
 input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/Sintel-two-audio-streams-short.mkv')
 input_result = bitcodin.create_input(input_obj)
 
-video_configs = []
-video_stream_config = bitcodin.VideoStreamConfig(default_stream_id=0, bitrate=512000,
-                                                 profile='Main', preset='premium', height=480, width=640)
-video_configs.append(video_stream_config)
+video_configs = list()
 
-audio_configs = []
+video_configs.append(bitcodin.VideoStreamConfig(
+    default_stream_id=0,
+    bitrate=4800000,
+    profile='Main',
+    preset='premium',
+    height=1080,
+    width=1920
+))
+video_configs.append(bitcodin.VideoStreamConfig(
+    default_stream_id=0,
+    bitrate=2400000,
+    profile='Main',
+    preset='premium',
+    height=768,
+    width=1024
+))
+video_configs.append(bitcodin.VideoStreamConfig(
+    default_stream_id=0,
+    bitrate=1200000,
+    profile='Main',
+    preset='premium',
+    height=480,
+    width=854
+))
+
+audio_configs = list()
 audio_stream_config_0 = bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)
 audio_stream_config_1 = bitcodin.AudioStreamConfig(default_stream_id=1, bitrate=192000)
 audio_configs.append(audio_stream_config_0)
