@@ -290,13 +290,17 @@ class EncodingProfile(BitcodinObject):
 
 class VideoStreamConfig(BitcodinObject):
 
-    def __init__(self, default_stream_id, bitrate, profile, preset, height, width, rate=None, codec=None):
+    def __init__(self, default_stream_id, bitrate, profile, preset, height=None, width=None, rate=None, codec=None):
         self.defaultStreamId = default_stream_id
         self.bitrate = bitrate
         self.profile = profile
         self.preset = preset
-        self.height = height
-        self.width = width
+
+        if height is not None:
+            self.height = height
+
+        if width is not None:
+            self.width = width
 
         if rate is not None:
             self.rate = rate

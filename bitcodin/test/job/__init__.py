@@ -35,6 +35,7 @@ from .testcase_transfer_job_azure import TransferJobToAzureTestCase
 from .testcase_create_job_deinterlace import CreateJobWithDeinterlacing
 from .testcase_create_job_mp3_audio_only import CreateJobAudioOnlyTestCase
 from bitcodin.test.job.testcase_create_thumbnail import CreateThumbnailTestCase
+from bitcodin.test.job.testcase_create_job_keep_aspect_ratio import CreateJobKeepAspectRatioTestCase
 
 
 def get_test_suite():
@@ -74,5 +75,6 @@ def get_test_suite():
     test_suite.addTest(CreateJobWithDeinterlacing())
     test_suite.addTest(CreateJobAudioOnlyTestCase)
     test_suite.addTest(CreateThumbnailTestCase)
+    test_suite.addTest(CreateJobKeepAspectRatioTestCase)
 
     return test_suite
