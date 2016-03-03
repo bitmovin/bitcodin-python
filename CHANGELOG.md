@@ -83,3 +83,6 @@
 ## 1.4.6
 * Changed preset to premium
 * Adjusted encoding profile quality o examples
+
+## 1.4.7
+* Added keep aspect ratio feature and test
