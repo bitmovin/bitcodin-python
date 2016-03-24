@@ -89,6 +89,25 @@ class Input(BitcodinObject):
         super(Input, self).__init__(self.to_dict())
 
 
+class FTPInput(BitcodinObject):
+
+    def __init__(self, url, skip_analysis=False, username=None, password=None):
+        """
+        :param url: string: Url to the source (Allowed protocols: (s)ftp)
+        :param skip_analysis: boolean: Skip analysis of video
+        :param username: string: (s)ftp username
+        :param password: string: (s)ftp password
+        :return: Input
+        """
+        self.type = 'ftp'
+        self.url = url
+        self.skipAnalysis = skip_analysis
+        self.username = username
+        self.password = password
+
+        super(FTPInput, self).__init__(self.to_dict())
+
+
 class S3Input(BitcodinObject):
 
     def __init__(self, access_key, secret_key, bucket, region, object_key, host=None, skip_analysis=False):
