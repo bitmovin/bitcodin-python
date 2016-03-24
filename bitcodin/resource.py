@@ -58,6 +58,9 @@ class BitcodinObject(dict):
         self.to_object()
         return json_string
 
+    def __repr__(self):
+        return repr(self.__dict__)
+
     def __getattr__(self, name):
         if name in self:
             return self[name]
