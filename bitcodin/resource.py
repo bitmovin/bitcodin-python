@@ -58,6 +58,9 @@ class BitcodinObject(dict):
         self.to_object()
         return json_string
 
+    def __repr__(self):
+        return repr(self.__dict__)
+
     def __getattr__(self, name):
         if name in self:
             return self[name]
@@ -73,17 +76,40 @@ class BitcodinObject(dict):
 
 class Input(BitcodinObject):
 
-    def __init__(self, url=None, skip_analysis=False):
+    def __init__(self, url, skip_analysis=False, username=None, password=None):
         """
-        :param url: string: Url to the source
+        :param url: string: Url to the source (Allowed protocols: http(s))
         :param skip_analysis: boolean: Skip analysis of video
+        :param username: string: HTTP Basic Auth username
+        :param password: string: HTTP Basic Auth password
         :return: Input
         """
         self.type = 'url'
         self.url = url
         self.skipAnalysis = skip_analysis
+        self.username = username
+        self.password = password
 
         super(Input, self).__init__(self.to_dict())
+
+
+class FTPInput(BitcodinObject):
+
+    def __init__(self, url, skip_analysis=False, username=None, password=None):
+        """
+        :param url: string: Url to the source (Allowed protocols: (s)ftp)
+        :param skip_analysis: boolean: Skip analysis of video
+        :param username: string: (s)ftp username
+        :param password: string: (s)ftp password
+        :return: Input
+        """
+        self.type = 'ftp'
+        self.url = url
+        self.skipAnalysis = skip_analysis
+        self.username = username
+        self.password = password
+
+        super(FTPInput, self).__init__(self.to_dict())
 
 
 class S3Input(BitcodinObject):
@@ -397,6 +423,17 @@ class FTPOutput(Output):
         self.passive = passive
 
         super(FTPOutput, self).__init__('ftp', name, create_sub_directory)
+
+
+class SFTPOutput(Output):
+
+    def __init__(self, name, host, usename, password, passive=True, create_sub_directory=True):
+        self.host = host
+        self.username = usename
+        self.password = password
+        self.passive = passive
+
+        super(SFTPOutput, self).__init__('sftp', name, create_sub_directory)
 
 
 class GCSOutput(Output):
