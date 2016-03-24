@@ -86,3 +86,10 @@
 
 ## 1.4.7
 * Added keep aspect ratio feature and test
+
+## 1.4.8
+* Added basic authentication
+* Added sftp output
+* Added ftp input
+* Added repr to BitcodinObject base class
+* Removed testtools from setup.py
