@@ -73,15 +73,19 @@ class BitcodinObject(dict):
 
 class Input(BitcodinObject):
 
-    def __init__(self, url=None, skip_analysis=False):
+    def __init__(self, url, skip_analysis=False, username=None, password=None):
         """
-        :param url: string: Url to the source
+        :param url: string: Url to the source (Allowed protocols: http(s))
         :param skip_analysis: boolean: Skip analysis of video
+        :param username: string: HTTP Basic Auth username
+        :param password: string: HTTP Basic Auth password
         :return: Input
         """
         self.type = 'url'
         self.url = url
         self.skipAnalysis = skip_analysis
+        self.username = username
+        self.password = password
 
         super(Input, self).__init__(self.to_dict())
 
