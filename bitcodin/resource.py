@@ -399,6 +399,17 @@ class FTPOutput(Output):
         super(FTPOutput, self).__init__('ftp', name, create_sub_directory)
 
 
+class SFTPOutput(Output):
+
+    def __init__(self, name, host, usename, password, passive=True, create_sub_directory=True):
+        self.host = host
+        self.username = usename
+        self.password = password
+        self.passive = passive
+
+        super(SFTPOutput, self).__init__('sftp', name, create_sub_directory)
+
+
 class GCSOutput(Output):
 
     def __init__(self, name, access_key, secret_key, bucket, prefix, make_public=False, create_sub_directory=True):
