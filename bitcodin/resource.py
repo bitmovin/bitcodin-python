@@ -517,3 +517,19 @@ class MergeAudioChannelConfig(BitcodinObject):
             audio_channels = []
         self.audioChannels = audio_channels
         super(MergeAudioChannelConfig, self).__init__(self.__dict__)
+
+
+class TransmuxingConfig(BitcodinObject):
+
+    def __init__(self, job_id=None, video_representation_id=None, audio_representation_ids=None, filename=None):
+        if not audio_representation_ids:
+            audio_representation_ids = []
+
+        self.audioRepresentationIds = audio_representation_ids
+        self.videoRepresentationId = video_representation_id
+        self.jobId = job_id
+
+        if filename is not None:
+            self.filename = filename
+
+        super(TransmuxingConfig, self).__init__(self.__dict__)

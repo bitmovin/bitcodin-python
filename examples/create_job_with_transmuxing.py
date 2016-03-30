@@ -3,14 +3,13 @@ from time import sleep
 
 import bitcodin
 
-# Set your API key
-bitcodin.api_key = 'YOUR API KEY'
+bitcodin.api_key = 'INSERT YOUR API KEY HERE'
 
-# Create an input
 input_obj = bitcodin.Input(url='http://bitbucketireland.s3.amazonaws.com/Sintel-original-short.mkv')
+print("INPUT REQUEST: %s\n\n" % input_obj.to_json())
 input_result = bitcodin.create_input(input_obj)
+print("INPUT RESULT: %s\n\n" % input_result.to_json())
 
-# Create encoding profile
 video_configs = list()
 
 video_configs.append(bitcodin.VideoStreamConfig(
@@ -41,39 +40,44 @@ video_configs.append(bitcodin.VideoStreamConfig(
 audio_configs = [bitcodin.AudioStreamConfig(default_stream_id=0, bitrate=192000)]
 
 encoding_profile_obj = bitcodin.EncodingProfile('API Test Profile', video_configs, audio_configs)
+print("ENCODING PROFILE REQUEST %s\n\n" % encoding_profile_obj.to_json())
+
 encoding_profile_result = bitcodin.create_encoding_profile(encoding_profile_obj)
+print("ENCODING PROFILE RESULT %s\n\n" % encoding_profile_result.to_json())
 
 manifests = ['mpd', 'm3u8']
 
-# Create a job
 job = bitcodin.Job(
     input_id=input_result.input_id,
     encoding_profile_id=encoding_profile_result.encoding_profile_id,
     manifest_types=manifests,
-    speed='standard'
+    speed='premium'
 )
-job_result = bitcodin.create_job(job)
-print("Job created!\n")
+print("JOB: %s" % job.to_json())
 
-# Wait until job is finished
+job_result = bitcodin.create_job(job)
 while job_result.status != 'Finished' and job_result.status != 'Error':
     job_result = bitcodin.get_job(job_result.job_id)
     print(job_result.to_json())
     sleep(5)
 
 print(job_result.to_json())
-print("Job Finished!\n")
+print("Job Finished!")
 
-# Create a transmuxing job to generate files for progressive streaming
-transmux_request = bitcodin.TransmuxRequest(job_result.job_id)
-transmux_job = bitcodin.create_transmux_job(transmux_request)
+print("Create transmuxing job!")
+transmuxing_config = bitcodin.TransmuxingConfig(
+    job_result.job_id,
+    job_result.encoding_profiles[0].video_stream_configs[0].representation_id,
+    [job_result.encoding_profiles[0].audio_stream_configs[0].representation_id]
+)
 
-while transmux_job.status != 'Finished' and transmux_job.status != 'Error':
-    transmux_job = bitcodin.get_transmux_job(transmux_job.id)
-    print(transmux_job.to_json())
+transmuxing_result = bitcodin.create_transmuxing(transmuxing_config)
+print("TRANSMUXING_JOB: %s\n\n" % transmuxing_result.to_json())
+
+while transmuxing_result.status != 'finished' and transmuxing_result.status != 'error':
+    transmuxing_result = bitcodin.get_transmuxing(transmuxing_result.id)
+    print(transmuxing_result.to_json())
     sleep(5)
 
-print(transmux_job.to_json())
-print("Transmuxing succeeded!\nURLs of output files:")
-for url in transmux_job.files:
-    print("%s\n" % url)
+print ("Transmuxing finished!\nUrl to file: %s" % transmuxing_result.output_url)
+
