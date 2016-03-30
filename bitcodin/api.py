@@ -365,35 +365,6 @@ def create_thumbnail(thumbnail_request):
     return thumbnail_response
 
 
-def create_transmux_job(transmux_request):
-    """
-    Transmux a Job to several output files for progressive streaming
-    :param transmux_request:
-    :return: string
-    """
-
-    url = get_api_base() + '/transmuxjob'
-    res = RestClient.post(url=url, headers=create_headers(),
-                          content=transmux_request.to_json())
-
-    transmux_job_response = BitcodinObject(res, True)
-    return transmux_job_response
-
-
-def get_transmux_job(transmux_job_id):
-    """
-    Gets details about a transmuxing job
-    :param transmux_job_id: string
-    :return: string
-    """
-
-    url = get_api_base() + '/transmuxjob/%d' % transmux_job_id
-    res = RestClient.get(url=url, headers=create_headers())
-
-    transmux_job_response = BitcodinObject(res, True)
-    return transmux_job_response
-
-
 def get_manifest_info(job_id):
     """
     Gets manifest info of a job
@@ -406,3 +377,32 @@ def get_manifest_info(job_id):
 
     manifest_info_response = BitcodinObject(res, True)
     return manifest_info_response
+
+
+def create_transmuxing(transmuxing_config):
+    """
+    Creates a transmuxing job
+    :param transmuxing_config:
+    :return:
+    """
+
+    url = get_api_base() + '/transmux'
+    res = RestClient.post(url=url, headers=create_headers(),
+                          content=transmuxing_config.to_json())
+
+    transmuxing_response = BitcodinObject(res, True)
+    return transmuxing_response
+
+
+def get_transmuxing(transmux_id):
+    """
+    Gets details about a transmuxing job
+    :param transmux_job_id: string
+    :return: string
+    """
+
+    url = get_api_base() + '/transmux/%s' % transmux_id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    transmux_job_response = BitcodinObject(res, True)
+    return transmux_job_response

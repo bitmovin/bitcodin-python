@@ -93,3 +93,7 @@
 * Added ftp input
 * Added repr to BitcodinObject base class
 * Removed testtools from setup.py
+
+## 1.5.0
+* Added transmux support
+* Added transmux example
