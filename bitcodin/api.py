@@ -159,6 +159,17 @@ def get_job(job_id=None):
     return job
 
 
+def delete_job(job_id=None):
+    """
+    Delete an output
+    :param output_id: The id of the job to delete
+    :return: boolean
+    """
+
+    url = get_api_base() + '/job/%d' % job_id
+    return RestClient.delete(url=url, headers=create_headers())
+
+
 def get_job_status(job_id=None):
     """
     Get status information about a job with the given job_id
@@ -260,7 +271,7 @@ def list_outputs(page=None):
 def delete_output(output_id=None):
     """
     Delete an output
-    :param output_id: The id of the job to delete
+    :param output_id: The id of the output to delete
     :return: boolean
     """
 
