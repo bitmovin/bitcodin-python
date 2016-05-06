@@ -5,6 +5,7 @@ from .rest import RestClient
 from .resource import BitcodinObject
 from .exceptions import BitcodinApiKeyNotSetError
 import os
+import time
 
 
 def create_input(input_obj):
@@ -361,9 +362,26 @@ def create_thumbnail(thumbnail_request):
     res = RestClient.post(url=url, headers=create_headers(),
                           content=thumbnail_request.to_json())
 
-    thumbnail_response = BitcodinObject(res, True)
+    create_thumbnail_response = BitcodinObject(res, True)
+
+    while get_thumbnail(create_thumbnail_response.id).state.lower() != 'finished':
+        time.sleep(5)
+
+    thumbnail_response = get_thumbnail(create_thumbnail_response.id)
     return thumbnail_response
 
+def get_thumbnail(id):
+    """
+    Gets thumbnail
+    :param id:
+    :return: string
+    """
+
+    url = get_api_base() + '/thumbnail/%s' % id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    thumbnail_response = BitcodinObject(res, True)
+    return thumbnail_response
 
 def get_manifest_info(job_id):
     """
