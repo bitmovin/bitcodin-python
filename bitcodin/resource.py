@@ -496,6 +496,7 @@ class ThumbnailRequest(BitcodinObject):
         self.jobId = job_id
         self.height = height
         self.position = position
+        self.async = True
 
         if filename is not None:
             self.filename = filename
