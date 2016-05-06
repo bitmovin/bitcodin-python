@@ -97,3 +97,10 @@
 ## 1.5.0
 * Added transmux support
 * Added transmux example
+
+## 1.6.0
+* Added get_thumbnail() method
+* Thumbnail generation call now asynchronous
+
+## 1.6.1
+* Updated version names
