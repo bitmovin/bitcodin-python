@@ -370,14 +370,14 @@ def create_thumbnail(thumbnail_request):
     thumbnail_response = get_thumbnail(create_thumbnail_response.id)
     return thumbnail_response
 
-def get_thumbnail(job_id):
+def get_thumbnail(id):
     """
     Gets thumbnail
-    :param job_id:
+    :param id:
     :return: string
     """
 
-    url = get_api_base() + '/thumbnail/%s' % job_id
+    url = get_api_base() + '/thumbnail/%s' % id
     res = RestClient.get(url=url, headers=create_headers())
 
     thumbnail_response = BitcodinObject(res, True)
