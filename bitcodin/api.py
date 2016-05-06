@@ -364,10 +364,10 @@ def create_thumbnail(thumbnail_request):
 
     create_thumbnail_response = BitcodinObject(res, True)
 
-    while get_thumbnail(create_thumbnail_response.jobId).state.lower() != 'finished':
+    while get_thumbnail(create_thumbnail_response.id).state.lower() != 'finished':
         time.sleep(5)
 
-    thumbnail_response = get_thumbnail(create_thumbnail_response.jobId)
+    thumbnail_response = get_thumbnail(create_thumbnail_response.id)
     return thumbnail_response
 
 def get_thumbnail(job_id):
