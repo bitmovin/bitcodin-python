@@ -161,8 +161,8 @@ def get_job(job_id=None):
 
 def delete_job(job_id=None):
     """
-    Delete an output
-    :param output_id: The id of the job to delete
+    Delete a job
+    :param job_id: The id of the job to delete
     :return: boolean
     """
 
