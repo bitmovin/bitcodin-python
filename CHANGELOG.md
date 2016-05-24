@@ -110,3 +110,6 @@
 
 ## 1.6.3
 * Fixed get_test_suite()
+
+## 1.6.4
+* Fixed tests

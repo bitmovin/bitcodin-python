@@ -24,7 +24,7 @@ class CreateEncodingProfileTestCase(BitcodinTestCase):
         self.assertEquals(result.video_stream_configs[0].default_stream_id, 1)
         self.assertEquals(result.video_stream_configs[0].bitrate, 512000)
         self.assertEquals(result.video_stream_configs[0].profile, 'Main')
-        self.assertEquals(result.video_stream_configs[0].preset.lower(), 'standard')
+        self.assertEquals(result.video_stream_configs[0].preset.lower(), 'premium')
         self.assertEquals(result.video_stream_configs[0].height, 480)
         self.assertEquals(result.video_stream_configs[0].width, 640)
         self.assertEquals(result.audio_stream_configs[0].default_stream_id, 0)

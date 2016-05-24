@@ -1,7 +1,8 @@
 __author__ = 'Dominic Miglar <dominic.miglar@bitmovin.net>'
 
 import unittest
-from bitcodin import create_job
+from time import sleep, time
+from bitcodin import create_job, get_job_status
 from bitcodin import create_input
 from bitcodin import create_encoding_profile
 from bitcodin import delete_input
@@ -12,7 +13,7 @@ from bitcodin import Input
 from bitcodin import AudioStreamConfig
 from bitcodin import VideoStreamConfig
 from bitcodin import EncodingProfile
-from bitcodin.exceptions import BitcodinNotFoundError
+from bitcodin.exceptions import BitcodinNotFoundError, BitcodinError
 from bitcodin.test.config import test_video_url
 from bitcodin.test.bitcodin_test_case import BitcodinTestCase
 
@@ -39,6 +40,19 @@ class TransferJobToNonExistentOutputTestCase(BitcodinTestCase):
         self.job = create_job(job)
 
     def runTest(self):
+        start_time = time()
+        time_limit = 1200
+
+        while True:
+            job_status = get_job_status(self.job.job_id)
+            if job_status.status.lower() == 'finished':
+                break
+            elif job_status.status.lower() == 'error':
+                raise BitcodinError('An error occured while waiting for job to be FINISHED', 'Job status changed to ERROR!')
+            elif time() - start_time > time_limit:
+                raise BitcodinError('Timeout of job duration exceeded!', 'Job took too long!')
+            sleep(2)
+
         with self.assertRaises(BitcodinNotFoundError):
             transfer = transfer_job(self.job.job_id, 0)
 
