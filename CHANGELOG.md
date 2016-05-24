@@ -111,5 +111,5 @@
 ## 1.6.3
 * Fixed get_test_suite()
 
-## 1.6.4
+## 1.6.5
 * Fixed tests
