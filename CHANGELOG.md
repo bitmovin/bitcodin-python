@@ -104,3 +104,6 @@
 
 ## 1.6.1
 * Updated version names
+
+## 1.6.2
+* Added delete job method
