@@ -364,8 +364,12 @@ def create_thumbnail(thumbnail_request):
 
     create_thumbnail_response = BitcodinObject(res, True)
 
-    while get_thumbnail(create_thumbnail_response.id).state.lower() != 'finished':
+    while True:
         time.sleep(5)
+        if get_thumbnail(create_thumbnail_response.id).state == 'FINISHED':
+            break
+        if get_thumbnail(create_thumbnail_response.id).state == 'ERROR':
+            break
 
     thumbnail_response = get_thumbnail(create_thumbnail_response.id)
     return thumbnail_response
@@ -382,6 +386,42 @@ def get_thumbnail(id):
 
     thumbnail_response = BitcodinObject(res, True)
     return thumbnail_response
+
+def create_sprite(sprite_request):
+    """
+    Create a sprite of a given job with a given height, width, position and distance
+    :param sprite_request: SpriteRequest
+    :return: string
+    """
+
+    url = get_api_base() + '/sprite'
+    res = RestClient.post(url=url, headers=create_headers(),
+                          content=sprite_request.to_json())
+
+    create_sprite_response = BitcodinObject(res, True)
+
+    while True:
+        time.sleep(5)
+        if get_sprite(create_sprite_response.id).state == 'FINISHED':
+            break
+        if get_sprite(create_sprite_response.id).state == 'ERROR':
+            break
+
+    sprite_response = get_sprite(create_sprite_response.id)
+    return sprite_response
+
+def get_sprite(id):
+    """
+    Gets sprite
+    :param id:
+    :return: string
+    """
+
+    url = get_api_base() + '/sprite/%s' % id
+    res = RestClient.get(url=url, headers=create_headers())
+
+    sprite_response = BitcodinObject(res, True)
+    return sprite_response
 
 def get_manifest_info(job_id):
     """
