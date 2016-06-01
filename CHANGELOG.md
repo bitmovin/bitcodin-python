@@ -110,3 +110,6 @@
 
 ## 1.6.5
 * Fixed tests
+
+## 1.6.6
+* Updated readme
