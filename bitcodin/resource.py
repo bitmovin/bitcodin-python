@@ -503,6 +503,19 @@ class ThumbnailRequest(BitcodinObject):
 
         super(ThumbnailRequest, self).__init__(self.__dict__)
 
+class SpriteRequest(BitcodinObject):
+
+    def __init__(self, job_id, height, width, distance, filename=None):
+        self.jobId = job_id
+        self.height = height
+        self.width = width
+        self.distance = distance
+        self.async = True
+
+        if filename is not None:
+            self.filename = filename
+
+        super(SpriteRequest, self).__init__(self.__dict__)
 
 class TransmuxRequest(BitcodinObject):
 

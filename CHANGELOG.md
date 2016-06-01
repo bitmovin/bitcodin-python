@@ -108,8 +108,8 @@
 ## 1.6.2
 * Added delete job method
 
-## 1.6.3
-* Fixed get_test_suite()
-
 ## 1.6.5
 * Fixed tests
+
+## 1.6.6
+* Updated readme
