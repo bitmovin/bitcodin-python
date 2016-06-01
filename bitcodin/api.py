@@ -159,6 +159,17 @@ def get_job(job_id=None):
     return job
 
 
+def delete_job(job_id=None):
+    """
+    Delete a job
+    :param job_id: The id of the job to delete
+    :return: boolean
+    """
+
+    url = get_api_base() + '/job/%d' % job_id
+    return RestClient.delete(url=url, headers=create_headers())
+
+
 def get_job_status(job_id=None):
     """
     Get status information about a job with the given job_id
@@ -260,7 +271,7 @@ def list_outputs(page=None):
 def delete_output(output_id=None):
     """
     Delete an output
-    :param output_id: The id of the job to delete
+    :param output_id: The id of the output to delete
     :return: boolean
     """
 
@@ -374,6 +385,7 @@ def create_thumbnail(thumbnail_request):
     thumbnail_response = get_thumbnail(create_thumbnail_response.id)
     return thumbnail_response
 
+
 def get_thumbnail(id):
     """
     Gets thumbnail
@@ -386,6 +398,7 @@ def get_thumbnail(id):
 
     thumbnail_response = BitcodinObject(res, True)
     return thumbnail_response
+
 
 def create_sprite(sprite_request):
     """
@@ -410,6 +423,7 @@ def create_sprite(sprite_request):
     sprite_response = get_sprite(create_sprite_response.id)
     return sprite_response
 
+
 def get_sprite(id):
     """
     Gets sprite
@@ -422,6 +436,7 @@ def get_sprite(id):
 
     sprite_response = BitcodinObject(res, True)
     return sprite_response
+
 
 def get_manifest_info(job_id):
     """

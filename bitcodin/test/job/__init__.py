@@ -73,8 +73,8 @@ def get_test_suite():
     test_suite.addTest(CreateJobWithVideoCroppingTestCase())
     test_suite.addTest(TransferJobToAzureTestCase())
     test_suite.addTest(CreateJobWithDeinterlacing())
-    test_suite.addTest(CreateJobAudioOnlyTestCase)
-    test_suite.addTest(CreateThumbnailTestCase)
-    test_suite.addTest(CreateJobKeepAspectRatioTestCase)
+    test_suite.addTest(CreateJobAudioOnlyTestCase())
+    test_suite.addTest(CreateThumbnailTestCase())
+    test_suite.addTest(CreateJobKeepAspectRatioTestCase())
 
     return test_suite
