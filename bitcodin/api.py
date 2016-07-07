@@ -8,14 +8,17 @@ import os
 import time
 
 
-def create_input(input_obj):
+def create_input(input_obj, async=False):
     """
     Create an Input for bitcodin
     :param input_obj: Input object to create
     :return: Input
     """
-
-    res = RestClient.post(url=get_api_base()+'/input/create', headers=create_headers(), content=input_obj.to_json())
+    if async is False:
+        url = get_api_base()+'/input/create'
+    else:
+        url = get_api_base()+'/input/createasync'
+    res = RestClient.post(url=url, headers=create_headers(), content=input_obj.to_json())
     input_obj = BitcodinObject(res, True)
     return input_obj
 
@@ -28,6 +31,20 @@ def get_input(input_id=None):
     """
     url = get_api_base()+'/input/%d' % input_id
     res = RestClient.get(url=url, headers=create_headers())
+    input_obj = BitcodinObject(res, True)
+
+    return input_obj
+
+
+def get_async_input_status(async_input_id=None):
+    """
+    Get asynchronous created Input status
+    :param async_input_id: The id of the asynchronous created Input
+    :return: BitcodinObject
+    """
+    url = get_api_base()+'/input/%d' % async_input_id + '/asyncstatus'
+    res = RestClient.get(url=url, headers=create_headers())
+
     input_obj = BitcodinObject(res, True)
 
     return input_obj
