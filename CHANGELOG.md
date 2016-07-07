@@ -113,3 +113,6 @@
 
 ## 1.6.6
 * Updated readme
+
+## 1.6.7
+* Implemented asynchronous input generation
