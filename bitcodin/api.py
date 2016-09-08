@@ -496,3 +496,23 @@ def get_transmuxing(transmux_id):
 
     transmux_job_response = BitcodinObject(res, True)
     return transmux_job_response
+
+
+def list_events():
+    """
+    List of all available notification-events
+    :return: list
+    """
+
+    url = get_api_base() + '/notifications/events'
+
+    res = RestClient.get(url=url, headers=create_headers())
+
+    events = list()
+    if isinstance(res, list):
+        for item in res:
+            event = BitcodinObject(item, True)
+            events.append(event)
+
+    return events
+
