@@ -516,3 +516,61 @@ def list_events():
 
     return events
 
+
+def create_subscription(subscription):
+    """
+    Create an subsription for bitcodin
+    :param subscription: A Subscription object to create
+    :return: BitcodinObject
+    """
+
+    url = get_api_base() + '/notifications/subscriptions'
+
+    res = RestClient.post(url=url, headers=create_headers(), content=subscription.to_json())
+    output_response = BitcodinObject(res, True)
+
+    return output_response
+
+
+def get_subscription(subscription_id):
+    """
+    Get information of a subscription
+    :param subscription_id: The id of the subscription to retrieve information from
+    :return: BitcodinObject
+    """
+
+    url = get_api_base() + '/notifications/subscriptions/%s' % subscription_id
+
+    res = RestClient.get(url=url, headers=create_headers())
+    output_response = BitcodinObject(res, True)
+
+    return output_response
+
+
+def list_subscriptions():
+    """
+    List of all subscriptions
+    :return: list
+    """
+
+    url = get_api_base() + '/notifications/subscriptions'
+
+    res = RestClient.get(url=url, headers=create_headers())
+    subscriptions = list()
+    if isinstance(res, list):
+        for item in res:
+            subscription = BitcodinObject(item, True)
+            subscriptions.append(subscription)
+
+    return subscriptions
+
+
+def delete_subscription(subscription_id):
+    """
+    Delete an subscription
+    :param subscription_id: The id of the subscription to delete
+    :return: boolean
+    """
+
+    url = get_api_base() + '/notifications/subscriptions/%s' % subscription_id
+    return RestClient.delete(url=url, headers=create_headers())
