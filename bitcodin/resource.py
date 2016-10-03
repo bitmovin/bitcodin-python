@@ -547,3 +547,11 @@ class TransmuxingConfig(BitcodinObject):
             self.filename = filename
 
         super(TransmuxingConfig, self).__init__(self.__dict__)
+
+
+class Subscription(BitcodinObject):
+    def __init__(self, event_id, url):
+        self.eventId = event_id
+        self.url = url
+
+        super(Subscription, self).__init__(self.__dict__)

@@ -116,3 +116,8 @@
 
 ## 1.6.7
 * Implemented asynchronous input generation
+
+## 1.6.8
+* Added list events method
+* Added to create/delete/list subscriptions
+* Added tests
