@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='bitcodin',
     description='Python interface for bitcodin API',
-    version='1.6.7',
+    version='1.6.8',
     author='David Moser, Dominic Miglar',
     author_email='david.moser@bitmovin.net, dominic.miglar@bitmovin.net',
     packages=['bitcodin'],
