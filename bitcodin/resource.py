@@ -73,6 +73,12 @@ class BitcodinObject(dict):
         else:
             raise AttributeError('No such attribute: ' + name)
 
+    def __bool__(self):
+        return bool(self.__dict__)
+
+    def __len__(self):
+        return len(self.__dict__)
+
 
 class Input(BitcodinObject):
 
