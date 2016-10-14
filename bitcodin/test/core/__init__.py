@@ -8,6 +8,8 @@ from .testcase_create_headers import CreateHttpHeadersTestCase
 from .testcase_convert import ConvertTestCase
 from .testcase_convert_dict import ConvertDictTestCase
 from .testcase_get_api_base import GetApiBaseTestCase
+from .testcase_bitcodinobject import BitcodinObjectBooleanTestCase
+from .testcase_bitcodinobject import BitcodinObjectLengthTestCase
 
 
 def get_test_suite():
@@ -18,4 +20,6 @@ def get_test_suite():
     test_suite.addTest(CreateHttpHeadersTestCase())
     test_suite.addTest(ApiKeyAuthorizedTestCase())
     test_suite.addTest(ApiKeyUnauthorizedTestCase())
+    test_suite.addTest(BitcodinObjectBooleanTestCase())
+    test_suite.addTest(BitcodinObjectLengthTestCase())
     return test_suite

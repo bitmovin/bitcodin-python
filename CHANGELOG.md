@@ -121,3 +121,6 @@
 * Added list events method
 * Added to create/delete/list subscriptions
 * Added tests
+
+## 1.6.9
+* Added methods for boolean and length representations to BitcodinObject
